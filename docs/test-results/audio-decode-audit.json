@@ -1,0 +1,107 @@
+[
+  {
+    "file": "assets/audio/game/practice.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/game/concert.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/game/guitar.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/game/concerto-no1-finale-excerpt.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/moses-fantasy.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/andantino.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/caprices-excerpt.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/cantabile.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/le-streghe.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/Valtz in C Major, MS 92.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/ghiribizzi-01.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/concerto-no1-finale.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/i-palpiti.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/nel-cor.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/sonata-01.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/works/la-campanella.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/samples/violin/A4.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/samples/violin/C4.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/samples/guitar/C4.mp3",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/samples/mandolin/C4.wav",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "file": "assets/audio/samples/mandolin/C5.wav",
+    "passed": true,
+    "error": ""
+  }
+]

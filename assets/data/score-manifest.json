@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "description": "Recording-aligned dynamic score manifest. Null entries mean no verified score has been supplied. Never infer notation accuracy from waveform or rhythm-game analysis.",
+  "recordings": {
+    "la-campanella.mp3": null,
+    "caprices-excerpt.mp3": null,
+    "i-palpiti.mp3": null,
+    "nel-cor.mp3": null,
+    "cantabile.mp3": null,
+    "concerto-no1-finale.mp3": null,
+    "moses-fantasy.mp3": null,
+    "le-streghe.mp3": null,
+    "sonata-01.mp3": null,
+    "andantino.mp3": null,
+    "ghiribizzi-01.mp3": null,
+    "Valtz in C Major, MS 92.mp3": null
+  },
+  "schema": {
+    "version": 1,
+    "verified": "must be true after human validation",
+    "source": "citation or licensed score source, including edition / bar reference",
+    "recording": "exact file name the timestamps were checked against",
+    "timeUnit": "seconds from the start of the MP3",
+    "notes": [
+      {
+        "time": "nonnegative number",
+        "duration": "positive number",
+        "midi": "integer 21–108"
+      }
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "page": "beihou/extra.html",
+    "title": "深入了解帕格尼尼｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "effects/effects.html",
+    "title": "对后世的影响｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "index.html",
+    "title": "关于帕格尼尼｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "instrument/instrument.html",
+    "title": "乐器体验平台｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 3,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/begining.html",
+    "title": "人生体验 · 序幕｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 1,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene02.html",
+    "title": "人生体验 · 我的出生｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 1,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene03.html",
+    "title": "人生体验 · 苦练小提琴｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 2,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene04.html",
+    "title": "人生体验 · 少年成名｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 2,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene05.html",
+    "title": "人生体验 · 成年后的巡演｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 1,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene06.html",
+    "title": "人生体验 · 老年｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 1,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/scene07.html",
+    "title": "人生体验 · 临终｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 1,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "life/story.html",
+    "title": "帕格尼尼人生体验（文字介绍）｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "music/style.html",
+    "title": "帕格尼尼的作曲风格｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "music/works.html",
+    "title": "著名作品｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 12,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  },
+  {
+    "page": "reflection.sumber.html",
+    "title": "感想与资料来源｜帕格尼尼",
+    "status": 200,
+    "webgl2": true,
+    "canvas_count": 0,
+    "horizontal_overflow": false,
+    "errors": [],
+    "local_failures": []
+  }
+]

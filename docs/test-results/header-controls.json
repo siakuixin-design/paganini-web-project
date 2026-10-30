@@ -1,0 +1,17 @@
+[
+  {
+    "route": "life/story.html",
+    "saved_first_click_motion_and_mute": "passed",
+    "pageerrors": []
+  },
+  {
+    "route": "music/style.html",
+    "saved_first_click_motion_and_mute": "passed",
+    "pageerrors": []
+  },
+  {
+    "route": "index.html",
+    "silent_intro_focus_trap_and_escape": "passed",
+    "pageerrors": []
+  }
+]

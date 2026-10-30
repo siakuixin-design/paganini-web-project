@@ -2411,7 +2411,10 @@ section[id]{scroll-margin-top:98px}
 .pg-instrument-challenge .rg-wrap{max-width:100%}
 @media(prefers-reduced-motion:reduce){.rg-canvas{scroll-behavior:auto}}
 </style>
-  </head>
+
+<link rel="stylesheet" href="../assets/css/theatre-shell.css">
+<link rel="stylesheet" href="../assets/css/theatre-3d.css">
+</head>
   <body data-page="instrument" data-enter="instrument">
     <a class="skip" href="#main">跳到主要内容</a>
     <header class="site-header">
@@ -2599,6 +2602,8 @@ section[id]{scroll-margin-top:98px}
               <label>音量 <input id="instrument-volume" type="range" min="0" max="80" value="48" aria-label="乐器音量"></label>
               <label>八度 <select id="instrument-octave"><option value="-12">低一组 C3–C4</option><option value="0" selected>中央 C4–C5</option><option value="12">高一组 C5–C6</option></select></label>
               <button class="btn subtle" type="button" id="stop-instrument">停止所有音符</button>
+<button class="btn subtle" type="button" id="play-scale">听一遍音阶</button>
+<label class="small">替换真实采样 <input id="sample-upload" type="file" accept="audio/*" multiple aria-label="上传以 C4、A4 等音名命名的采样"></label>
               <span class="small">当前音符 <span id="voice-count">0</span> / 12</span>
               <div id="signal-meter" class="signal-meter" aria-hidden="true">
                 <i></i>
@@ -2614,7 +2619,8 @@ section[id]{scroll-margin-top:98px}
               </div>
             </div>
             <p class="small">先点击启用演奏，再按电脑键盘。按住发声，松手收音；可连续演奏或同时按几个键。Esc、静音、切换乐器、离开页面或切出窗口都会停止声音。</p>
-            <div class="piano-keys" role="group" aria-label="可演奏的半音音阶">
+            <p id="instrument-log" class="small" role="status" aria-live="polite">等待启用演奏 · 当前没有发声</p>
+<div class="piano-keys" role="group" aria-label="可演奏的半音音阶">
               <button type="button" class="note-key" data-note="0" aria-label="演奏音符，键盘 A">
                 <kbd>A</kbd>
                 <small></small>
@@ -2714,10 +2720,10 @@ section[id]{scroll-margin-top:98px}
         <p class="eyebrow">VIOLIN RHYTHM · LIVE MUSIC</p>
         <h3>小提琴音乐游戏 · 第一小提琴协奏曲第三乐章（终乐章）</h3>
         <p>本关使用你提供的《第一小提琴协奏曲》第三乐章（终乐章）录音的节选。音符按录音中的节奏起音排列；按键和点击会播放小提琴式音效。</p>
-        <p class="small">每个正确音符可获得 Perfect 120 分 / Good 90 分。总音符 58 个，最高得分 6960 分。过关线为最高分的 80%，即 5568 分；需在金色判定线上跟随录音点击或按 J、K、L。</p>
+        <p class="small">PERFECT 100 分 / GREAT 80 分 / GOOD 50 分 / MISS 0 分。总音符 58 个，最高得分 5800 分。过关线为最高分的 80%，即 4640 分；需在金色判定线上跟随录音点击或按 J、K、L。</p>
         <div class="rg-wrap" data-storage-key="pg_violin_concerto_game_pass">
           <div class="rg-header"><div><p class="eyebrow">PIECE</p><strong class="rg-piece">Paganini Violin Concerto No. 1 · Finale</strong></div>
-          <div class="meta"><span>过关分数：<strong class="rg-goal">5568</strong></span><span>当前：<strong class="rg-score">0</strong></span><span>连击：<strong class="rg-combo">0</strong></span><span>最高分：<strong class="rg-maximum">6960</strong></span></div></div>
+          <div class="meta"><span>过关分数：<strong class="rg-goal">4640</strong></span><span>当前：<strong class="rg-score">0</strong></span><span>连击：<strong class="rg-combo">0</strong></span><span>最高分：<strong class="rg-maximum">5800</strong></span></div></div>
           <canvas class="rg-canvas" width="900" height="380" aria-label="小提琴音乐游戏"></canvas>
           <div class="rg-keys"><button type="button" data-rg-lane="0">J · 左音轨</button><button type="button" data-rg-lane="1">K · 中音轨</button><button type="button" data-rg-lane="2">L · 右音轨</button></div>
           <div class="rg-toolbar"><button class="btn primary rg-start" type="button">开始挑战</button><button class="btn rg-retry" type="button" hidden>重新挑战</button></div>
@@ -2730,10 +2736,10 @@ section[id]{scroll-margin-top:98px}
         <p class="eyebrow">GUITAR RHYTHM · LIVE MUSIC</p>
         <h3>吉他音乐游戏 · 《C大调小行板》</h3>
         <p>本关使用帕格尼尼《C大调小行板》吉他作品录音。J、K、L 分别发出 E3、A3、D4 三种不同的真实木吉他采样移调音高。</p>
-        <p class="small">每个正确音符可获得 Perfect 120 分 / Good 90 分。总音符 46 个，最高得分 5520 分。过关线为最高分的 80%，即 4416 分；需在金色判定线上跟随录音点击或按 J、K、L。</p>
+        <p class="small">PERFECT 100 分 / GREAT 80 分 / GOOD 50 分 / MISS 0 分。总音符 46 个，最高得分 4600 分。过关线为最高分的 80%，即 3680 分；需在金色判定线上跟随录音点击或按 J、K、L。</p>
         <div class="rg-wrap" data-storage-key="pg_guitar_game_pass_80">
           <div class="rg-header"><div><p class="eyebrow">PIECE</p><strong class="rg-piece">Andantino in C Major · Guitar</strong></div>
-          <div class="meta"><span>过关分数：<strong class="rg-goal">4416</strong></span><span>当前：<strong class="rg-score">0</strong></span><span>连击：<strong class="rg-combo">0</strong></span><span>最高分：<strong class="rg-maximum">5520</strong></span></div></div>
+          <div class="meta"><span>过关分数：<strong class="rg-goal">3680</strong></span><span>当前：<strong class="rg-score">0</strong></span><span>连击：<strong class="rg-combo">0</strong></span><span>最高分：<strong class="rg-maximum">4600</strong></span></div></div>
           <canvas class="rg-canvas" width="900" height="380" aria-label="吉他音乐游戏"></canvas>
           <div class="rg-keys"><button type="button" data-rg-lane="0">J · E3（低音）</button><button type="button" data-rg-lane="1">K · A3（中音）</button><button type="button" data-rg-lane="2">L · D4（高音）</button></div>
           <div class="rg-toolbar"><button class="btn primary rg-start" type="button">开始挑战</button><button class="btn rg-retry" type="button" hidden>重新挑战</button></div>
@@ -12390,34 +12396,10 @@ window.pgGuitarGame = PaganiniRhythmGame.create(document.querySelector('.rg-wrap
   })();
 </script>
 
-<script>
-(() => {
-'use strict';
-const routes=[['封页','index.html','𝄞','score'],['人生·文字介绍','life/story.html','▤','manuscript'],['人生·沉浸体验','life/begining.html','♟','stage'],['背后','beihou/extra.html','◈','manuscript'],['音乐作品','music/works.html','♫','score'],['作曲风格','music/style.html','♬','violin'],['后世影响','effects/effects.html','✦','legacy'],['乐器体验','instrument/instrument.html','♩','instrument'],['资料与感想','reflection.sumber.html','✎','reflect']];
-const path = decodeURI(location.pathname), isSub=/(?:\/life\/|\/beihou\/|\/music\/|\/effects\/|\/instrument\/)/.test(path), prefix=isSub?'../':'';
-function ownRoute(href){try{const u=new URL(href,location.href);if(u.origin!==location.origin||u.hash && u.pathname===location.pathname)return null;if(!u.pathname.endsWith('.html'))return null;let p=u.pathname;let row=routes.find(r=>p.endsWith('/'+r[1]));if(!row){if(/\/life\/scene\d+\.html$/.test(p))return ['人生·沉浸体验',p,'♟','stage'];return ['下一章节',p,'♫','score'];}return row;}catch{return null}}
-const shell=document.createElement('div');shell.className='cinema-portal';shell.setAttribute('aria-live','polite');shell.setAttribute('aria-label','页面切换');shell.innerHTML='<div class="portal-blur"></div><div class="portal-sheet"></div><div class="portal-symbol"></div><div class="portal-copy"><span class="portal-small">PAGANINI · CHAPTER TRANSITION</span><div class="portal-title"></div><div class="portal-subtitle">请听见下一段旋律</div></div>';document.body.appendChild(shell);
-function activate(row){shell.dataset.theme=row[3];shell.querySelector('.portal-symbol').textContent=row[2];shell.querySelector('.portal-title').textContent=row[0];shell.classList.add('is-active');}
-let leaving=false;
-document.addEventListener('click',e=>{
-  if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
-  const anchor=e.target.closest('a[href]');if(!anchor||anchor.target==='_blank'||anchor.hasAttribute('download'))return;
-  if(anchor.classList.contains('locked-link')||anchor.getAttribute('aria-disabled')==='true'){e.preventDefault();e.stopImmediatePropagation();return;}
-  const row=ownRoute(anchor.getAttribute('href'));
-  if(!row||leaving)return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  e.preventDefault();e.stopImmediatePropagation();leaving=true;activate(row);
-  try{sessionStorage.setItem('pgn_transition',JSON.stringify({title:row[0],sym:row[2],theme:row[3]}))}catch{}
-  setTimeout(()=>{location.href=anchor.href;},700);
-},true);
-try{const pending=sessionStorage.getItem('pgn_transition');if(pending&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.removeItem('pgn_transition');const obj=JSON.parse(pending);activate([obj.title,'',obj.sym,obj.theme]);setTimeout(()=>shell.classList.remove('is-active'),550)}}catch{}
-const bar=document.createElement('div');bar.className='cinema-progress';document.body.appendChild(bar);
-let scrollPending=false;
-window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{let h=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);bar.style.width=Math.min(100,scrollY/h*100)+'%';scrollPending=false;});},{passive:true});
-const watch=document.querySelectorAll('.period,.feature,.track,.portal-card,.cta-inner,.story-interlude,.style-break');
-if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');obs.unobserve(entry.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});watch.forEach(el=>{el.classList.add('scroll-reveal-extra');obs.observe(el)})}
-})();
-</script>
+
 <script src="../assets/js/floating-directory.js"></script>
+
+<script src="../assets/js/theatre-shell.js"></script>
+<script src="../assets/js/instrument-3d.js"></script>
 </body>
 </html>

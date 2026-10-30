@@ -1,0 +1,53 @@
+/* A shared paper / dark theatre treatment. All enhancements are progressive. */
+.work-score-panel{margin:24px 0 4px;padding:22px;border:1px solid #c6a66d55;border-radius:8px;background:linear-gradient(130deg,#211a10ee,#100d0b);box-shadow:inset 0 0 38px #0004}
+.work-score-panel[hidden]{display:none!important}
+.score-panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.score-panel-heading h3{font-size:27px!important;margin:0!important;color:#ebd3aa}
+.score-panel-heading label{font:12px/1.6 sans-serif;color:#b1a797;display:flex;gap:9px;align-items:center}
+.score-panel-heading select{background:#1d1811;color:#ebdfc6;border:1px solid #c6a66d66;border-radius:4px;padding:5px;font:inherit}
+.score-pending{font-size:13px;line-height:1.8;color:#bfb39f;margin:16px 0}
+.score-notation svg{display:block;width:100%;height:auto;max-height:140px;overflow:visible}
+.score-notation small{display:block;color:#b1a797;font-size:11px;line-height:1.6}
+.work-spectrum{display:block;width:100%;height:116px;background:linear-gradient(180deg,#c6a66d05,transparent);border-top:1px solid #c6a66d22;border-bottom:1px solid #c6a66d22}
+.score-panel-footer{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;margin-top:10px;font-size:11px;line-height:1.7;color:#aaa08e}
+.score-clock{font-variant-numeric:tabular-nums;color:#dec494;white-space:nowrap}
+/* Remove the old decorative pseudo-spectrum: the canvas uses real audio data. */
+body:has(.work-score-panel) .play-indicator{display:none!important}
+.story-scroll-layout{max-width:1400px;margin:0 auto 72px;padding:0 34px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start;gap:38px}
+.story-scroll-layout .timeline{width:100%;max-width:none;display:block;margin:0;padding:0;min-width:0}
+.story-scroll-layout .period,.story-scroll-layout .period:nth-child(even){display:block;min-height:70vh;margin-bottom:40px;padding:32px;border-radius:6px;border-color:#c6a66d30;transition:border-color .4s,box-shadow .4s;background:linear-gradient(145deg,#211a13cc,#120f0ce6)}
+.story-scroll-layout .period:hover{transform:none}
+.story-scroll-layout .period .photo{display:none}
+.story-scroll-layout .period:last-child .photo{display:block;margin-bottom:24px}
+.story-scroll-layout .period:last-child .photo img{height:120px}
+.story-scroll-layout .period .copy h2{font-size:clamp(32px,3.1vw,49px);line-height:1.35}
+.story-scroll-layout .period .copy p{font-size:16px;line-height:2.05}
+.story-scroll-layout .period.story-chapter-current{border-color:#c6a66d99;box-shadow:0 24px 60px #0004,inset 3px 0 #c6a66d}
+.story-cinema{position:sticky;top:170px;min-width:0;padding-top:1px}
+.story-frame{position:relative;height:min(65vh,680px);min-height:320px;overflow:hidden;border:1px solid #c6a66d66;border-radius:5px;background:#100c09;box-shadow:0 24px 70px #0007}
+.story-frame::after{content:'';position:absolute;inset:12px;border:1px solid #d9b77d44;pointer-events:none}
+.story-scene-image{height:100%;width:100%;object-fit:cover;filter:sepia(.2) brightness(.83);transition:object-position .3s}
+.story-frame-shade{position:absolute;inset:0;background:linear-gradient(180deg,#0001 30%,#0b0907ed 100%);pointer-events:none}
+.story-scene-caption{position:absolute;bottom:27px;left:28px;right:28px;text-shadow:0 3px 15px #000}
+.story-scene-year{font:14px/1.4 Georgia,serif;letter-spacing:.2em;color:#ddbd80}
+.story-scene-caption h2{margin:10px 0;font-size:clamp(31px,3vw,44px);color:#f4e5cc}
+.story-scene-caption p{font-size:14px;margin:8px 0;color:#e3d1b7}
+.story-scene-caption small{font-size:10px;color:#b5a68f}
+.story-cinema[data-chapter="5"] .story-scene-image{filter:sepia(.12) brightness(.62)}
+.story-cinema[data-chapter="6"] .story-scene-image{filter:sepia(.05) brightness(.4)}
+.story-chapter-progress{height:2px;margin-top:18px;background:#c6a66d30;overflow:hidden}
+.story-chapter-progress i{display:block;width:0;height:100%;background:#d1ac6b;transition:width .2s}
+.story-reading-status{font-size:12px;color:#b8a991;letter-spacing:.08em;margin-top:12px}
+.story-year-nav{position:sticky;top:80px;z-index:20;padding:10px 24px;background:#0d0b09f0;border-block:1px solid #c6a66d33;backdrop-filter:blur(14px)}
+.story-year-nav>div{max-width:1330px;margin:auto;display:flex;gap:5px;overflow:auto;scrollbar-width:thin}
+.story-year-nav a{flex:1;min-width:95px;padding:9px 10px;border-bottom:2px solid transparent;line-height:1.45;transition:background .2s,border-color .2s}
+.story-year-nav strong{display:block;font:15px Georgia,serif;color:#d5b278;white-space:nowrap}
+.story-year-nav span{font-size:11px;color:#b7ab98;white-space:nowrap}
+.story-year-nav a[aria-current]{border-color:#d5b278;background:#c6a66d13}
+.story-year-nav a:focus-visible{outline:2px solid #ddbd80;outline-offset:-2px}
+.story-chronology-note{max-width:1330px;margin:20px auto 28px;padding:0 34px;font-size:12px;line-height:1.9;color:#a69a87}
+.story-scroll-layout .period{scroll-margin-top:180px}
+@media(max-width:950px){.story-scroll-layout{padding:0 20px;gap:20px;grid-template-columns:minmax(0,1fr) minmax(0,.75fr)}.story-scroll-layout .period,.story-scroll-layout .period:nth-child(even){padding:23px}.story-scroll-layout .period .copy p{font-size:15px}.story-frame{height:55vh;min-height:280px}.story-scene-caption{left:20px;right:20px;bottom:24px}.story-year-nav{top:72px}.story-cinema{top:160px}}
+@media(max-width:700px){.story-scroll-layout{display:flex;flex-direction:column-reverse;gap:24px}.story-cinema{position:relative;top:auto;width:100%}.story-frame{height:340px}.story-scroll-layout .period,.story-scroll-layout .period:nth-child(even){min-height:0}.story-scroll-layout .period .photo{display:block;margin-bottom:20px}.story-scroll-layout .period .photo img{height:230px}.story-year-nav{top:68px;padding-inline:10px}.story-year-nav a{min-width:95px}.story-chronology-note{padding-inline:20px}.score-panel-heading{align-items:flex-start}.work-score-panel{padding:16px}.story-scroll-layout .period .copy h2{font-size:36px}}
+@media(prefers-reduced-motion:reduce){.story-scroll-layout *,.story-year-nav *,.story-cinema *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.reduce-motion .story-scroll-layout *,.less-motion .story-scroll-layout *{animation:none!important;transition:none!important}

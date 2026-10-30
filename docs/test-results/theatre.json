@@ -1,0 +1,25 @@
+{
+  "opening_navigation": {
+    "no_autoplay": true,
+    "skip_unblocks_content": true,
+    "record_transition": true,
+    "back_restores_controls": true,
+    "intro_once_per_session": true
+  },
+  "direct_gate": true,
+  "practice_3d": {
+    "webgl_canvas": true,
+    "canvas_raycast_selects_object": true,
+    "instrument_hotspot_opens_game": true
+  },
+  "instruments": {
+    "three_models_switch": true,
+    "games_match_instrument": true,
+    "sampled_keyboard_voice_starts_and_releases": true
+  },
+  "webgl_unavailable": {
+    "fallback_visible": true,
+    "hotspot_navigation_remains": true
+  },
+  "errors": []
+}

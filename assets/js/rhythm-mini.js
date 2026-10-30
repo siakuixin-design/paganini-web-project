@@ -1,179 +1,176 @@
-(function(){
+/* Paganini rhythm engine: decoded recording, AudioContext clock, editable onset charts. */
+(function (global) {
   'use strict';
-  const AC=window.AudioContext||window.webkitAudioContext;
-  const NOTE_FREQ=[261.63,293.66,329.63,392,440,493.88];
-  const KEYCODE=key=>'Key'+key.toUpperCase();
-  function create(root,options){
-    if(!root)return null;
-    const cfg=Object.assign({piece:'帕格尼尼 · 音乐节奏挑战',goalRatio:.8,keys:['J','K','L'],instrument:'violin',hitWindowPerfect:.135,hitWindowGood:.34,audioSrc:'',chart:[]},options||{});
-    const $=sel=>root.querySelector(sel), $$=sel=>[...root.querySelectorAll(sel)];
-    const canvas=$('.rg-canvas');if(!canvas)return null;const ctx=canvas.getContext('2d');
-    const scoreEl=$('.rg-score'),comboEl=$('.rg-combo'),goalEl=$('.rg-goal'),status=$('.rg-status'),result=$('.rg-result');
-    const btnStart=$('.rg-start'),btnRetry=$('.rg-retry'),progress=$('.rg-progress'),piece=$('.rg-piece'),keys=cfg.keys.map(x=>x.toUpperCase());
-    const storage=root.dataset.storageKey||'';const unlockSelector=root.dataset.unlockTarget||'';const unlockLink=unlockSelector?document.querySelector(unlockSelector):null;
-    const buttons=$$('[data-rg-lane]');
-    let audio=null,audioCtx=null,guitarBuffer=null,notes=[],active=false,raf=0,score=0,combo=0,best=0,time=0,width=900,height=380,dpr=1,hasFinished=false,instrument=cfg.instrument,runToken=0;
-    const chart=cfg.chart.map(p=>({t:Number(p.t),lane:Number(p.lane)})).sort((a,b)=>a.t-b.t);
-    const duration=chart.length?chart.at(-1).t+1.2:40;
-    const maxScore=chart.length*120;
-    const goal=Math.ceil(maxScore*(cfg.goalRatio??0.8));
-    const guitarPitches=cfg.guitarPitches||[{label:'E3 · 低音',semitones:-8},{label:'A3 · 中音',semitones:-3},{label:'D4 · 高音',semitones:2}];
-    if(goalEl)goalEl.textContent=String(goal)+'（满分 '+maxScore+' 的 80%）';
-    if(piece)piece.textContent=cfg.piece;
-    if(root.querySelector('.rg-maximum'))root.querySelector('.rg-maximum').textContent=maxScore;
-    function message(txt){if(status)status.textContent=txt;}
-    function resultMessage(txt,ok){if(result){result.hidden=!txt;result.dataset.ok=ok?'true':'false';result.textContent=txt||'';}}
-    function isSaved(){try{return storage&&localStorage.getItem(storage)==='passed-v2'}catch{return false}}
-    function save(){try{if(storage)localStorage.setItem(storage,'passed-v2')}catch{}}
-    function unlock(ok){if(!unlockLink)return;unlockLink.classList.toggle('locked-link',!ok);unlockLink.setAttribute('aria-disabled',String(!ok));unlockLink.tabIndex=ok?0:-1;}
-    function hud(){if(scoreEl)scoreEl.textContent=score;if(comboEl)comboEl.textContent=combo;if(progress)progress.style.width=(Math.min(1,time/duration)*100).toFixed(1)+'%';}
-    function resize(){const r=canvas.getBoundingClientRect();width=Math.max(300,Math.round(r.width||900));height=Math.max(270,Math.round(r.height||380));dpr=Math.min(2,devicePixelRatio||1);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
+  const POINTS = Object.freeze({PERFECT:100, GREAT:80, GOOD:50, MISS:0});
+  const WINDOWS = Object.freeze({PERFECT:.075, GREAT:.15, GOOD:.24});
+  function judge(delta) {
+    const d = Math.abs(delta);
+    return d <= WINDOWS.PERFECT ? 'PERFECT' : d <= WINDOWS.GREAT ? 'GREAT' : d <= WINDOWS.GOOD ? 'GOOD' : 'MISS';
+  }
+  function normalizeChart(events, lanes, duration = Infinity) {
+    return events.map(n => ({t:Number(n.t), lane:Number(n.lane)}))
+      .filter(n => Number.isFinite(n.t) && n.t >= 0 && n.t < duration && Number.isInteger(n.lane) && n.lane >= 0 && n.lane < lanes)
+      .sort((a,b) => a.t-b.t);
+  }
+  function summarize(counts, total, best) {
+    const maximum = total * POINTS.PERFECT;
+    const score = Object.keys(POINTS).reduce((n,k) => n + (counts[k] || 0)*POINTS[k], 0);
+    const goal = Math.ceil(maximum*.8);
+    return {score, maximum, goal, percentage:maximum ? score/maximum*100 : 0, passed:maximum > 0 && score >= goal, counts:{...counts}, best};
+  }
+  const core = {POINTS, WINDOWS, judge, normalizeChart, summarize};
+  if (typeof module !== 'undefined' && module.exports) module.exports = core;
+  if (!global.document) return;
+  const instances = new Set();
+  const scriptURL = document.currentScript?.src || new URL('assets/js/rhythm-mini.js', location.href).href;
+  const sheet = document.createElement('link'); sheet.rel='stylesheet'; sheet.href=new URL('../css/rhythm-upgrade.css',scriptURL).href; document.head.append(sheet);
+  const sampleURLs = {guitar:new URL('../audio/samples/guitar/C4.mp3',scriptURL).href, violin:new URL('../audio/samples/violin/C4.mp3',scriptURL).href};
+  let sequence=0;
+  function create(root, options) {
+    if (!root || root.paganiniGame) return root?.paganiniGame || null;
+    const cfg = Object.assign({piece:'帕格尼尼 · 音乐挑战',keys:['J','K','L'],instrument:'violin',audioSrc:'',chart:[]}, options);
+    const $=s=>root.querySelector(s), $$=s=>[...root.querySelectorAll(s)];
+    const canvas=$('.rg-canvas'), ctx=canvas?.getContext('2d'); if(!ctx) return null;
+    const keys=cfg.keys.map(k=>k.toUpperCase()), storage=root.dataset.storageKey || '';
+    root.id ||= storage.includes('scene03') ? 'pg-scene03-rhythm' : storage.includes('scene04') ? 'pg-scene04-rhythm' : 'paganini-rhythm-'+(++sequence);
+    const unlockLink = root.dataset.unlockTarget ? document.querySelector(root.dataset.unlockTarget) : null;
+    const startButton=$('.rg-start'), retryButton=$('.rg-retry'), result=$('.rg-result'), status=$('.rg-status');
+    if(status){status.setAttribute('role','status');status.setAttribute('aria-live','polite')}
+    const toolbar=$('.rg-toolbar');
+    const pauseButton=document.createElement('button'); pauseButton.type='button'; pauseButton.className='btn rg-pause';pauseButton.textContent='暂停';pauseButton.disabled=true;toolbar?.append(pauseButton);
+    const intro=document.createElement('div'); intro.className='rg-brief';
+    intro.innerHTML='<p><b>NICCOLÒ PAGANINI</b> · <span class="rg-instrument-name"></span> · MEDIUM</p><p>J / K / L 或触控琴弦。PERFECT 100 · GREAT 80 · GOOD 50 · MISS 0。过关须达理论最高分的 80%。</p><p class="rg-chart-note">简化起音谱面：时间取自录音起音分析，三条音轨为人工游戏编排，并非原曲准确音高谱。</p>';
+    intro.querySelector('.rg-instrument-name').textContent=cfg.instrument==='guitar'?'木吉他':'小提琴';
+    canvas.before(intro);
+    const calibration=document.createElement('label');calibration.className='rg-calibration';
+    calibration.innerHTML='谱面时间校正 <input type="range" min="-200" max="200" step="10" value="0" aria-label="谱面时间校正（毫秒）"><output>0 ms</output><small>负值提前，正值延后；开始前按 J/K/L 试音。蓝牙耳机会增加延迟。</small>';
+    toolbar?.after(calibration);
+    const offsetInput=calibration.querySelector('input'), offsetOutput=calibration.querySelector('output');
+    let chart=normalizeChart(cfg.chart,keys.length), notes=[], ac=null, song=null, sample=null, loading=null;
+    let source=null, songGain=null, effects=new Set(), active=false, paused=false, finished=false, resumePending=false, token=0, previewGeneration=0, raf=0;
+    let offset=0, startedAt=0, position=0, duration=0, counts={}, combo=0, best=0, perfectRun=0, width=900,height=380,dpr=1, feedback='', feedbackAt=0;
+    const pitches=cfg.instrument==='guitar'?[52,57,62]:[60,64,67];
+    function message(text){if(status)status.textContent=text}
+    function saved(){try{return !!storage && localStorage.getItem(storage)==='passed-v3-100'}catch{return false}}
+    function unlock(ok){if(unlockLink){unlockLink.classList.toggle('locked-link',!ok);unlockLink.setAttribute('aria-disabled',String(!ok));unlockLink.tabIndex=ok?0:-1}}
+    function clock(){return active && ac ? Math.min(duration,Math.max(0,offset+ac.currentTime-startedAt)) : position}
+    function event(name,detail){window.dispatchEvent(new CustomEvent(name,{detail:{rootId:root.id,sectionId:root.closest('section')?.id,instrument:cfg.instrument,...detail}}))}
+    function summary(){return summarize(counts,notes.length,best)}
+    function hud(){const s=summary(); if($('.rg-score'))$('.rg-score').textContent=s.score;if($('.rg-combo'))$('.rg-combo').textContent=combo;
+      if($('.rg-goal'))$('.rg-goal').textContent=s.goal+'（满分 '+s.maximum+' 的 80%）';if($('.rg-maximum'))$('.rg-maximum').textContent=s.maximum;
+      if($('.rg-piece'))$('.rg-piece').textContent=cfg.piece;
+      if($('.rg-progress'))$('.rg-progress').style.width=(duration?Math.min(100,clock()/duration*100):0)+'%';
+      root.dataset.combo=combo>=30?'30':combo>=20?'20':combo>=10?'10':'0';
+    }
     function draw(){
-      if(!width)return;ctx.clearRect(0,0,width,height);
-      const laneW=width/keys.length,hitY=height-58;
-      const bg=ctx.createLinearGradient(0,0,0,height);bg.addColorStop(0,instrument==='guitar'?'#26180f':'#17120f');bg.addColorStop(1,'#090807');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
-      for(let i=0;i<keys.length;i++){
-        const x=i*laneW;ctx.fillStyle=i%2?'rgba(229,190,128,.055)':'rgba(189,142,72,.035)';ctx.fillRect(x,0,laneW,height);ctx.strokeStyle='rgba(230,188,114,.18)';ctx.lineWidth=1;ctx.strokeRect(x+.5,.5,laneW-1,height-1);
-        ctx.textAlign='center';ctx.fillStyle='#eaddc8';ctx.font='700 20px sans-serif';ctx.fillText(keys[i],x+laneW/2,height-18);
-        if(instrument==='guitar'){ctx.font='14px serif';ctx.fillStyle='#d3af7a';ctx.fillText(guitarPitches[i]?.label||'Guitar',x+laneW/2,24)}
+      ctx.clearRect(0,0,width,height);const time=clock(), laneW=width/keys.length, hitY=height-58;
+      const bg=ctx.createLinearGradient(0,0,0,height);bg.addColorStop(0,cfg.instrument==='guitar'?'#38271a':'#251c18');bg.addColorStop(1,'#0b0908');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
+      // Three string-like lanes and a restrained theatre light.
+      for(let lane=0;lane<keys.length;lane++){
+        const x=(lane+.5)*laneW;const glow=ctx.createRadialGradient(x,0,0,x,0,height*.9);glow.addColorStop(0,'rgba(207,171,102,'+(combo>=30?'.18':'.07')+')');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(lane*laneW,0,laneW,height);
+        ctx.strokeStyle='rgba(211,179,126,.4)';ctx.lineWidth=lane===1?2:1;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,height-40);ctx.stroke();
+        ctx.fillStyle='#dec69a';ctx.font='bold 19px Georgia';ctx.textAlign='center';ctx.fillText(keys[lane],x,height-18);
+        if(cfg.instrument==='guitar'){ctx.font='13px Georgia';ctx.fillText(['E3','A3','D4'][lane],x,24)}
       }
-      ctx.strokeStyle='#f0ce93';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,hitY);ctx.lineTo(width,hitY);ctx.stroke();
-      for(const n of notes){if(n.judged)continue;
-        const y=hitY+(time-n.t)*240;if(y < -25 || y > height+30)continue;
-        const x=n.lane*laneW+laneW/2;
-        const halo=ctx.createRadialGradient(x,y,0,x,y,27);halo.addColorStop(0,'rgba(245,213,155,.38)');halo.addColorStop(1,'rgba(245,213,155,0)');ctx.fillStyle=halo;ctx.fillRect(x-27,y-27,54,54);
-        ctx.fillStyle=instrument==='guitar'?'#f3bd7e':'#f2d99b';ctx.beginPath();ctx.roundRect(x-19,y-12,38,24,9);ctx.fill();ctx.strokeStyle='#5b3d21';ctx.stroke();
+      ctx.strokeStyle='#e7c68a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,hitY);ctx.lineTo(width,hitY);ctx.stroke();
+      const shift=Number(offsetInput.value)/1000;
+      for(const n of notes){if(n.judged)continue;const y=hitY+(time-n.t-shift)*190;if(y< -20 || y>height+20)continue;const x=(n.lane+.5)*laneW;
+        ctx.shadowColor='#cba76b';ctx.shadowBlur=12;ctx.fillStyle='#e8ca8d';ctx.beginPath();ctx.ellipse(x,y,18,9,-.2,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
       }
+      if(feedback && performance.now()-feedbackAt<650){ctx.font='bold 22px Georgia';ctx.fillStyle='#f1dfb9';ctx.textAlign='center';ctx.fillText(feedback,width/2,height*.28)}
+      if(combo>=10 && !(window.Paganini?.isReduced?.())){ctx.fillStyle='rgba(217,183,118,.45)';for(let i=0;i<8;i++){const x=(Math.sin(i*73+time*.4)+1)*width*.5,y=(time*24+i*49)%height;ctx.fillRect(x,y,2,2)}}
     }
-    function stopAudio(){if(audio){audio.pause();try{audio.currentTime=0}catch{}}}
-    function reset(){runToken++;cancelAnimationFrame(raf);active=false;hasFinished=false;stopAudio();score=0;combo=0;best=0;time=0;notes=chart.map(n=>({...n,judged:false}));hud();draw();message('点击开始播放作品录音。音符对应原曲音响起的时间，在金色线条上按相应按键。');resultMessage('',false);if(btnRetry)btnRetry.hidden=true;unlock(isSaved());}
-    // The original <audio playbackRate> approach kept the pitch unchanged in
-    // browsers with pitch correction enabled. AudioBufferSourceNode plays
-    // C4 at different *rates*, so J / K / L genuinely sound E3 / A3 / D4.
-    const defaultGuitarMidi = 60; // The bundled acoustic guitar sample is C4.
-    let guitarLoadPromise = null;
-    function initAudioContext(){
-      if(!AC)return null;
-      if(!audioCtx)audioCtx=new AC();
-      if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});
-      return audioCtx;
-    }
-    async function prepareGuitarSample(){
-      if(instrument!=='guitar')return null;
-      const ac=initAudioContext();if(!ac)return null;
-      if(guitarBuffer)return guitarBuffer;
-      if(guitarLoadPromise)return guitarLoadPromise;
-      guitarLoadPromise=(async()=>{
-        try{
-          // This embedded sample also works when index.html is opened offline.
-          const sample=window.PAGANINI_SAMPLE_BANK?.guitar?.find(x=>x.midi===defaultGuitarMidi);
-          let raw;
-          if(sample?.data){
-            const binary=atob(sample.data.split(',')[1]);
-            const bytes=new Uint8Array(binary.length);
-            for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-            raw=bytes.buffer;
-          } else if(cfg.guitarSample){
-            const response=await fetch(cfg.guitarSample);
-            if(!response.ok)throw new Error('Sample unavailable');
-            raw=await response.arrayBuffer();
-          }
-          if(raw)guitarBuffer=await ac.decodeAudioData(raw);
-        }catch(e){/* Keep the pitched plucked-string fallback available. */}
-        return guitarBuffer;
+    function resize(){const r=canvas.getBoundingClientRect();width=Math.max(300,r.width||900);height=Math.max(280,r.height||380);dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw()}
+    function stopSource(){if(source){source.onended=null;try{source.stop()}catch{}source.disconnect();source=null}if(songGain){songGain.disconnect();songGain=null}}
+    function stopEffects(){for(const node of effects){try{node.stop()}catch{}node.disconnect()}effects.clear()}
+    function reset(){token++;previewGeneration++;cancelAnimationFrame(raf);stopSource();stopEffects();active=false;paused=false;finished=false;resumePending=false;position=offset=0;
+      counts={PERFECT:0,GREAT:0,GOOD:0,MISS:0};notes=chart.map(n=>({...n,judged:false}));combo=best=perfectRun=0;feedback='';if(result)result.hidden=true;
+      startButton.disabled=false;startButton.textContent='开始挑战';if(retryButton)retryButton.hidden=true;pauseButton.disabled=true;pauseButton.textContent='暂停';offsetInput.disabled=false;
+      root.dataset.state='ready';unlock(saved());hud();draw();message('准备就绪 · 点击开始。音频只在你操作后播放，判定与下落共用录音播放时钟。')}
+    async function prepare(){
+      if(!ac){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error('浏览器不支持 Web Audio');ac=new AC({latencyHint:'interactive'})}
+      const context=ac;
+      await context.resume();
+      // Song decoding alone is not readiness: concurrent preview/start calls must
+      // also await the editable chart and sample. Publish all resources together.
+      if(loading){await loading;return}
+      if(song)return;
+      const pending=(async()=>{
+        const response=await fetch(cfg.audioSrc);if(!response.ok)throw new Error('录音请求失败 '+response.status);const decodedSong=await context.decodeAudioData(await response.arrayBuffer());
+        let events=cfg.chart, decodedSample=null;
+        if(cfg.chartSrc!==false){
+          const chartResponse=await fetch(cfg.chartSrc||cfg.audioSrc.replace(/\.mp3(?=$|\?)/,'.json'));
+          if(!chartResponse.ok)throw new Error('谱面请求失败 '+chartResponse.status);
+          const data=await chartResponse.json();if(!Array.isArray(data.events))throw new Error('谱面格式不正确');
+          const adjustment=Number(data.manualOffsetSeconds||0);if(!Number.isFinite(adjustment))throw new Error('谱面时间偏移无效');
+          events=data.events.map(n=>({...n,t:Number(n.t)+adjustment}));
+        }
+        const decodedChart=normalizeChart(events,keys.length,decodedSong.duration);if(!decodedChart.length || decodedChart.length!==events.length)throw new Error('谱面存在无效或超出录音时长的音符');
+        try{const r=await fetch(cfg.instrument==='guitar'?(cfg.guitarSample||sampleURLs.guitar):sampleURLs.violin);if(r.ok)decodedSample=await context.decodeAudioData(await r.arrayBuffer())}catch{/* Frequency-correct fallback below. */}
+        if(ac!==context || context.state==='closed')throw new Error('音频会话已关闭，请重新开始');
+        song=decodedSong;duration=song.duration;sample=decodedSample;chart=decodedChart;
       })();
-      return guitarLoadPromise;
-    }
-    function pluckedFallback(ac,midi){
-      // Clearly different fundamental frequencies even if a sample cannot decode.
-      const now=ac.currentTime, frequency=440*Math.pow(2,(midi-69)/12);
-      const env=ac.createGain();env.gain.setValueAtTime(.001,now);
-      env.gain.exponentialRampToValueAtTime(.15,now+.006);
-      env.gain.exponentialRampToValueAtTime(.0001,now+.72);
-      const filter=ac.createBiquadFilter();filter.type='lowpass';
-      filter.frequency.setValueAtTime(2400,now);
-      filter.frequency.exponentialRampToValueAtTime(650,now+.6);
-      filter.connect(env).connect(ac.destination);
-      [1,2,3].forEach((multiplier,index)=>{
-        const osc=ac.createOscillator(),partial=ac.createGain();
-        osc.type='triangle';osc.frequency.value=frequency*multiplier;
-        partial.gain.value=[.9,.22,.09][index];
-        osc.connect(partial).connect(filter);osc.start(now);osc.stop(now+.74);
-        osc.onended=()=>{osc.disconnect();partial.disconnect();};
-      });
-      setTimeout(()=>{filter.disconnect();env.disconnect();},850);
+      loading=pending;
+      try{await pending}finally{if(loading===pending)loading=null}
     }
     function sampleTap(lane){
-      try{
-        const ac=initAudioContext();if(!ac)return;
-        if(instrument==='guitar'){
-          const semitones=guitarPitches[lane]?.semitones ?? 0;
-          const midi=defaultGuitarMidi+semitones;
-          // Kick off decoding on demand; this is also preloaded at game start.
-          if(!guitarBuffer)void prepareGuitarSample();
-          if(guitarBuffer){
-            const now=ac.currentTime;
-            const source=ac.createBufferSource(),level=ac.createGain();
-            source.buffer=guitarBuffer;
-            source.playbackRate.value=Math.pow(2,semitones/12);
-            level.gain.setValueAtTime(.001,now);
-            level.gain.exponentialRampToValueAtTime(.31,now+.008);
-            level.gain.exponentialRampToValueAtTime(.0001,now+.86);
-            source.connect(level).connect(ac.destination);
-            source.start(now);source.stop(now+.89);
-            source.onended=()=>{source.disconnect();level.disconnect();};
-          }else{pluckedFallback(ac,midi);}
-          return;
-        }
-        const osc=ac.createOscillator(),gain=ac.createGain(),now=ac.currentTime;
-        osc.type='triangle';osc.frequency.value=NOTE_FREQ[(lane+3)%NOTE_FREQ.length];gain.gain.setValueAtTime(.001,now);gain.gain.exponentialRampToValueAtTime(.06,now+.01);gain.gain.exponentialRampToValueAtTime(.0001,now+.22);osc.connect(gain).connect(ac.destination);osc.start();osc.stop(now+.24);
-      }catch{}
+      if(!ac || ac.state!=='running')return;
+      const now=ac.currentTime,midi=pitches[lane],level=ac.createGain();level.gain.setValueAtTime(.001,now);level.gain.exponentialRampToValueAtTime(cfg.instrument==='guitar'?.23:.07,now+.008);level.gain.exponentialRampToValueAtTime(.0001,now+.58);level.connect(ac.destination);
+      const node=sample?ac.createBufferSource():ac.createOscillator();if(sample){node.buffer=sample;node.playbackRate.value=Math.pow(2,(midi-60)/12)}else{node.type='triangle';node.frequency.value=440*Math.pow(2,(midi-69)/12)}
+      node.connect(level);effects.add(node);node.onended=()=>{effects.delete(node);node.disconnect();level.disconnect()};node.start(now);node.stop(now+.62);
+      event('paganini:note',{lane,midi});
     }
+    async function preview(lane){const generation=previewGeneration;try{if(window.Paganini?.audio?.isMuted?.()){message('请先解除右上角的静音。');return}await prepare();if(generation!==previewGeneration || active || paused || window.Paganini?.audio?.isMuted?.())return;sampleTap(lane);message('试音 · '+(cfg.instrument==='guitar'?['E3 · 164.81 Hz','A3 · 220 Hz','D4 · 293.66 Hz'][lane]:['C4','E4','G4'][lane])+(sample?' · 真实采样':' · 合成备用'))}catch(e){if(generation===previewGeneration)message('音频尚未就绪：'+e.message)}}
+    function mark(note,verdict){note.judged=true;counts[verdict]++;if(verdict==='MISS'){combo=perfectRun=0}else{combo++;best=Math.max(best,combo);perfectRun=verdict==='PERFECT'?perfectRun+1:0}}
+    function overdue(time){const shift=Number(offsetInput.value)/1000;for(const n of notes)if(!n.judged && time>n.t+shift+WINDOWS.GOOD)mark(n,'MISS')}
     function hit(lane){
-      if(root.closest('[data-instrument-game]')?.hidden)return;
-      if(!active||!audio||audio.paused){
-        if(instrument==='guitar'){
-          sampleTap(lane);
-          message('吉他试音：'+(guitarPitches[lane]?.label||'木吉他')+'。点击「开始挑战」后跟随音符计分。');
-        }
-        return;
-      }
-      time=audio.currentTime;
-      const button=buttons.find(x=>Number(x.dataset.rgLane)===lane);if(button){button.classList.remove('hit');void button.offsetWidth;button.classList.add('hit')}
-      sampleTap(lane);
-      const choice=notes.filter(x=>!x.judged&&x.lane===lane).sort((a,b)=>Math.abs(a.t-time)-Math.abs(b.t-time))[0];
-      if(choice&&Math.abs(choice.t-time)<=cfg.hitWindowGood){choice.judged=true;const perfect=Math.abs(choice.t-time)<=cfg.hitWindowPerfect;score+=perfect?120:90;combo++;best=Math.max(best,combo);message(perfect?'PERFECT ✦ 和原曲同拍！':'GOOD ♪ 跟上节奏！');}
-      else{combo=0;message('MISS · 注意听音乐，等音符靠近判定线再按。');}
-      hud();draw();
+      if(root.closest('[data-instrument-game]')?.hidden || lane<0 || lane>=keys.length)return;
+      if(!active){if(!paused)void preview(lane);return}
+      const time=clock();overdue(time);const shift=Number(offsetInput.value)/1000;
+      sampleTap(lane);const button=$$('[data-rg-lane]').find(b=>Number(b.dataset.rgLane)===lane);if(button){button.classList.remove('hit');void button.offsetWidth;button.classList.add('hit')}
+      const choice=notes.filter(n=>!n.judged&&n.lane===lane).sort((a,b)=>Math.abs(a.t+shift-time)-Math.abs(b.t+shift-time))[0];
+      const verdict=choice?judge(time-choice.t-shift):'MISS';
+      if(choice && verdict!=='MISS')mark(choice,verdict);else{combo=perfectRun=0;/* Empty taps break combo, but cannot invent extra chart misses. */}
+      feedback=perfectRun>=5?'EXCELLENT PERFORMANCE!':verdict;feedbackAt=performance.now();message(feedback);hud();draw();
     }
-    function finish(){if(hasFinished)return;hasFinished=true;active=false;cancelAnimationFrame(raf);if(audio)audio.pause();const ok=score>=goal;
-      if(ok){save();unlock(true);resultMessage(`★ 通关成功！得分 ${score} / ${goal}，最高连击 ${best}。`,true);message('恭喜达到本曲满分的 80%，作品节奏挑战已通过。');}
-      else{unlock(isSaved());resultMessage(`本次得分 ${score} / ${goal}；请再挑战一次，听准原曲节奏。`,false);message('未达到本曲满分的 80%，可点击「重新挑战」再试。');}
-      if(btnRetry)btnRetry.hidden=false;if(btnStart)btnStart.textContent='再次挑战';
+    function finish(){if(finished)return;finished=true;active=paused=false;position=duration;cancelAnimationFrame(raf);stopSource();stopEffects();for(const n of notes)if(!n.judged)mark(n,'MISS');
+      const s=summary();if(s.passed){try{if(storage)localStorage.setItem(storage,'passed-v3-100')}catch{}}unlock(saved()||s.passed);
+      result.hidden=false;result.dataset.ok=String(s.passed);result.replaceChildren();
+      const heading=document.createElement('h4');heading.textContent=s.passed?'PERFORMANCE COMPLETED · PASS':'PERFORMANCE FAILED — TRY AGAIN';result.append(heading);
+      const line=document.createElement('p');line.textContent=`最终 ${s.score} / 理论最高 ${s.maximum} · ${s.percentage.toFixed(1)}% · 过关线 ${s.goal}（80%）`;result.append(line);
+      const stats=document.createElement('p');stats.textContent=`PERFECT ${counts.PERFECT}　GREAT ${counts.GREAT}　GOOD ${counts.GOOD}　MISS ${counts.MISS}　最高连击 ${best}`;result.append(stats);
+      message(s.passed?'演出完成，下一幕已解锁。':'未达到最高分的 80%，可以重新挑战。');pauseButton.disabled=true;startButton.disabled=false;startButton.textContent='再次挑战';if(retryButton)retryButton.hidden=false;offsetInput.disabled=false;root.dataset.state='finished';hud();draw();event('paganini:game-result',s)
     }
-    function frame(){if(!active)return;if(!audio||audio.paused){raf=requestAnimationFrame(frame);return;}
-      time=audio.currentTime;for(const note of notes){if(!note.judged && time>note.t+cfg.hitWindowGood){note.judged=true;combo=0;}}
-      hud();draw();if(time>=duration||audio.ended){finish();return;}raf=requestAnimationFrame(frame);
-    }
+    function frame(){if(!active)return;position=clock();overdue(position);hud();draw();if(position>=duration){finish();return}raf=requestAnimationFrame(frame)}
+    function launch(){source=ac.createBufferSource();source.buffer=song;songGain=ac.createGain();songGain.gain.value=cfg.songVolume??.48;source.connect(songGain).connect(ac.destination);offset=position;startedAt=ac.currentTime;source.start(startedAt,offset);active=true;paused=false;root.dataset.state='playing';source.onended=()=>{if(active)finish()};pauseButton.disabled=false;pauseButton.textContent='暂停';raf=requestAnimationFrame(frame)}
     async function start(){
-      reset();const token=runToken;
-      if(instrument==='guitar')void prepareGuitarSample();
-      if(!cfg.audioSrc){message('缺少作品录音，无法启动与音乐同步的关卡。');return;}
-      audio=audio||new Audio();audio.src=cfg.audioSrc;audio.preload='auto';audio.volume=cfg.songVolume ?? .48;
-      try{await audio.play();if(token!==runToken){audio.pause();return;}}
-      catch(e){message('音频加载失败：请检查素材文件路径，并使用 Chrome/Edge 打开网站。');resultMessage('未成功播放作品录音；为了保证节奏判定准确，未开始挑战。',false);return;}
-      active=true;if(btnStart)btnStart.textContent='重新开始';message('音乐已开始！跟随原曲的音响落点按键，目标：最高分的 80%。');raf=requestAnimationFrame(frame);
+      if(window.Paganini?.audio?.isMuted?.()){message('请先解除右上角静音，再开始有声挑战。');return}
+      reset();const current=token;startButton.disabled=true;root.dataset.state='loading';message('正在解码录音与真实乐器采样…');
+      try{for(const game of instances)if(game!==api)game.stop();window.Paganini?.audio?.stopAll?.();window.dispatchEvent(new CustomEvent('paganini:audio-start',{detail:{owner:'rhythm',rootId:root.id}}));const generation=previewGeneration;await prepare();if(current!==token)return;
+        if(generation!==previewGeneration || window.Paganini?.audio?.isMuted?.() || document.hidden){reset();message('声音会话已变化，准备好后请重新开始。');return}
+        notes=chart.map(n=>({...n,judged:false}));offsetInput.disabled=true;hud();launch();message('MEDIUM · 听准音乐，在金线按 J / K / L。空按会中断连击。')
+      }catch(e){if(current===token){message('无法开始：'+e.message+'。请使用本地 HTTP 服务器，检查录音路径后重试。');startButton.disabled=false;root.dataset.state='error'}}
     }
-    function setInstrument(name){instrument=name;$$('[data-rg-instrument]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.rgInstrument===name)));const b=$('.rg-instrument-current');if(b)b.textContent={guitar:'吉他',violin:'小提琴',mandolin:'曼陀林'}[name]||name;draw();}
-    btnStart?.addEventListener('click',start);btnRetry?.addEventListener('click',start);
-    buttons.forEach(btn=>btn.addEventListener('pointerdown',e=>{e.preventDefault();hit(Number(btn.dataset.rgLane))}));
-    $$('[data-rg-instrument]').forEach(b=>b.addEventListener('click',()=>setInstrument(b.dataset.rgInstrument)));
-    document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;const lane=keys.findIndex(k=>KEYCODE(k)===e.code);if(lane<0)return;if(active){e.preventDefault();e.stopImmediatePropagation();hit(lane);}},true);
-    if(unlockLink)unlockLink.addEventListener('click',e=>{if(unlockLink.classList.contains('locked-link')){e.preventDefault();message('请先在本页取得最高分的 80%，才能继续下一幕。')}});
-    window.addEventListener('resize',resize);
-    document.addEventListener('visibilitychange',()=>{if(document.hidden&&active){reset();message('页面切到后台，挑战已停止；请重新开始，保持音乐与判定同步。')}});
-    resize();reset();if(isSaved()){resultMessage('你在这个新版音乐游戏中已经通关，可以继续。',true);unlock(true)}
-    return {start,hit,reset,stop:()=>{if(active||audio)reset()}};
+    function pause(){if(!active)return;position=clock();active=false;paused=true;stopSource();stopEffects();cancelAnimationFrame(raf);pauseButton.textContent='继续';root.dataset.state='paused';message('已暂停 · 录音与音符同时冻结。');draw()}
+    async function resume(){if(!paused||resumePending)return;if(window.Paganini?.audio?.isMuted?.()){message('请先解除静音，再继续。');return}const current=token,context=ac;resumePending=true;try{await context.resume();if(current!==token||!paused||context!==ac||document.hidden||window.Paganini?.audio?.isMuted?.())return;for(const game of instances)if(game!==api)game.stop();window.Paganini?.audio?.stopAll?.();launch();message('继续演奏 · 与暂停位置同步。')}catch(e){if(current===token)message('恢复失败：'+e.message)}finally{if(current===token)resumePending=false}}
+    const api={start,hit,reset,stop:reset,pause,resume,getState:()=>({state:root.dataset.state,time:clock(),duration,sampleReady:!!sample,feedbackMidi:[...pitches],...summary()})};root.paganiniGame=api;instances.add(api);
+    startButton?.addEventListener('click',start);retryButton?.addEventListener('click',start);pauseButton.addEventListener('click',()=>paused?resume():pause());
+    $$('[data-rg-lane]').forEach(b=>{
+      b.addEventListener('pointerdown',e=>{e.preventDefault();hit(Number(b.dataset.rgLane))});
+      // Keyboard and assistive activation emit click without a pointer event.
+      b.addEventListener('click',e=>{if(e.detail===0)hit(Number(b.dataset.rgLane))});
+    });
+    offsetInput.addEventListener('input',()=>{offsetOutput.textContent=offsetInput.value+' ms';draw()});
+    document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;const lane=keys.findIndex(k=>'Key'+k===e.code);if(active&&lane>=0){e.preventDefault();e.stopImmediatePropagation();hit(lane)}else if(e.code==='Space'&&(active||paused)&&root.contains(document.activeElement)&&!document.activeElement.matches('button,a,input')){e.preventDefault();paused?resume():pause()}},true);
+    if(unlockLink)document.addEventListener('click',e=>{if(e.target.closest?.('a')===unlockLink && !saved()){e.preventDefault();e.stopImmediatePropagation();message('请先取得理论最高分的 80%，再继续下一幕。');root.scrollIntoView({behavior:'smooth',block:'center'})}},true);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden){previewGeneration++;pause()}});document.addEventListener('play',()=>{previewGeneration++;pause()},true);
+    document.querySelectorAll('[data-mute-toggle]').forEach(b=>b.addEventListener('click',()=>{previewGeneration++;pause();stopEffects()}));
+    window.addEventListener('paganini:audio-start',e=>{if(e.detail?.owner!=='rhythm'){previewGeneration++;pause()}});
+    window.addEventListener('paganini:audio-stop',()=>{previewGeneration++;pause();stopEffects()});
+    window.addEventListener('pagehide',()=>{reset();ac?.close().catch(()=>{});ac=null;song=sample=loading=null});
+    document.addEventListener('click',e=>{if(e.target.closest?.('a[href]')){previewGeneration++;pause();stopEffects()}});
+    window.addEventListener('resize',resize);if(window.ResizeObserver)new ResizeObserver(resize).observe(canvas);
+    reset();resize();return api;
   }
-  window.PaganiniRhythmGame={create};
-})();
+  global.PaganiniRhythmGame={create,...core};
+})(typeof window === 'undefined' ? globalThis : window);

@@ -1,0 +1,17 @@
+{
+  "listening": {
+    "tracks": 12,
+    "live_canvas_changes": true,
+    "paused_time": 1.131973,
+    "seek_fraction": 0.4499999997602177,
+    "active_after_switch": 1,
+    "mute_stops": true,
+    "verified_score_available": false
+  },
+  "story": {
+    "chapters": 8,
+    "timeline_navigation": true,
+    "active_chapter": "3"
+  },
+  "errors": []
+}

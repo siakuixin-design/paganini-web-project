@@ -1,0 +1,27 @@
+{
+  "state": "finished",
+  "time": 38,
+  "duration": 38,
+  "sampleReady": true,
+  "feedbackMidi": [
+    60,
+    64,
+    67
+  ],
+  "score": 0,
+  "maximum": 4000,
+  "goal": 3200,
+  "percentage": 0,
+  "passed": false,
+  "counts": {
+    "PERFECT": 0,
+    "GREAT": 0,
+    "GOOD": 0,
+    "MISS": 40
+  },
+  "best": 0,
+  "paused_time": 1.90984126984127,
+  "frozen_time": 1.90984126984127,
+  "errors": [],
+  "input": "none"
+}

@@ -1,0 +1,18 @@
+{
+  "concurrent_preview_start": {
+    "state": "playing",
+    "maximum": 4600,
+    "sampleReady": true
+  },
+  "mute_during_pending_start": {
+    "sources": [],
+    "state": "ready",
+    "muted": true
+  },
+  "mute_during_pending_preview": {
+    "sources": [],
+    "state": "ready",
+    "muted": true
+  },
+  "errors": []
+}

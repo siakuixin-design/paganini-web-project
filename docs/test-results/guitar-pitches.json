@@ -1,0 +1,29 @@
+{
+  "actual_sample_sources": [
+    {
+      "rate": 0.6299605369567871,
+      "duration": 3.500408163265306
+    },
+    {
+      "rate": 0.8408964276313782,
+      "duration": 3.500408163265306
+    },
+    {
+      "rate": 1.1224620342254639,
+      "duration": 3.500408163265306
+    }
+  ],
+  "expected_midi": [
+    52,
+    57,
+    62
+  ],
+  "expected_hz": [
+    164.81377845643496,
+    220.0,
+    293.6647679174076
+  ],
+  "sample_decoded": true,
+  "instrument_switch_stops_previous_game": true,
+  "errors": []
+}

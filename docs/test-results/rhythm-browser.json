@@ -1,0 +1,21 @@
+{
+  "state": "finished",
+  "time": 38,
+  "duration": 38,
+  "score": 3880,
+  "maximum": 4000,
+  "goal": 3200,
+  "percentage": 97,
+  "passed": true,
+  "counts": {
+    "PERFECT": 38,
+    "GREAT": 1,
+    "GOOD": 0,
+    "MISS": 1
+  },
+  "best": 39,
+  "paused_time": 2.0607709750566894,
+  "frozen_time": 2.0607709750566894,
+  "errors": [],
+  "input": "keyboard events scheduled against real audio clock"
+}

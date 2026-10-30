@@ -2378,7 +2378,10 @@ section[id]{scroll-margin-top:98px}
     @media(max-width:700px){.cinematic-memory-shell{min-height:370px}.cinematic-memory-caption{padding:22px 24px}}
     
 </style>
-  </head>
+
+<link rel="stylesheet" href="../assets/css/theatre-shell.css">
+<link rel="stylesheet" href="../assets/css/theatre-3d.css">
+</head>
   <body data-page="scene06" data-enter="curtain">
     <a class="skip" href="#main">跳到主要内容</a>
     <header class="site-header">
@@ -2934,34 +2937,10 @@ section[id]{scroll-margin-top:98px}
     </script>
   
 
-<script>
-(() => {
-'use strict';
-const routes=[['封页','index.html','𝄞','score'],['人生·文字介绍','life/story.html','▤','manuscript'],['人生·沉浸体验','life/begining.html','♟','stage'],['背后','beihou/extra.html','◈','manuscript'],['音乐作品','music/works.html','♫','score'],['作曲风格','music/style.html','♬','violin'],['后世影响','effects/effects.html','✦','legacy'],['乐器体验','instrument/instrument.html','♩','instrument'],['资料与感想','reflection.sumber.html','✎','reflect']];
-const path = decodeURI(location.pathname), isSub=/(?:\/life\/|\/beihou\/|\/music\/|\/effects\/|\/instrument\/)/.test(path), prefix=isSub?'../':'';
-function ownRoute(href){try{const u=new URL(href,location.href);if(u.origin!==location.origin||u.hash && u.pathname===location.pathname)return null;if(!u.pathname.endsWith('.html'))return null;let p=u.pathname;let row=routes.find(r=>p.endsWith('/'+r[1]));if(!row){if(/\/life\/scene\d+\.html$/.test(p))return ['人生·沉浸体验',p,'♟','stage'];return ['下一章节',p,'♫','score'];}return row;}catch{return null}}
-const shell=document.createElement('div');shell.className='cinema-portal';shell.setAttribute('aria-live','polite');shell.setAttribute('aria-label','页面切换');shell.innerHTML='<div class="portal-blur"></div><div class="portal-sheet"></div><div class="portal-symbol"></div><div class="portal-copy"><span class="portal-small">PAGANINI · CHAPTER TRANSITION</span><div class="portal-title"></div><div class="portal-subtitle">请听见下一段旋律</div></div>';document.body.appendChild(shell);
-function activate(row){shell.dataset.theme=row[3];shell.querySelector('.portal-symbol').textContent=row[2];shell.querySelector('.portal-title').textContent=row[0];shell.classList.add('is-active');}
-let leaving=false;
-document.addEventListener('click',e=>{
-  if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
-  const anchor=e.target.closest('a[href]');if(!anchor||anchor.target==='_blank'||anchor.hasAttribute('download'))return;
-  if(anchor.classList.contains('locked-link')||anchor.getAttribute('aria-disabled')==='true'){e.preventDefault();e.stopImmediatePropagation();return;}
-  const row=ownRoute(anchor.getAttribute('href'));
-  if(!row||leaving)return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  e.preventDefault();e.stopImmediatePropagation();leaving=true;activate(row);
-  try{sessionStorage.setItem('pgn_transition',JSON.stringify({title:row[0],sym:row[2],theme:row[3]}))}catch{}
-  setTimeout(()=>{location.href=anchor.href;},700);
-},true);
-try{const pending=sessionStorage.getItem('pgn_transition');if(pending&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.removeItem('pgn_transition');const obj=JSON.parse(pending);activate([obj.title,'',obj.sym,obj.theme]);setTimeout(()=>shell.classList.remove('is-active'),550)}}catch{}
-const bar=document.createElement('div');bar.className='cinema-progress';document.body.appendChild(bar);
-let scrollPending=false;
-window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{let h=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);bar.style.width=Math.min(100,scrollY/h*100)+'%';scrollPending=false;});},{passive:true});
-const watch=document.querySelectorAll('.period,.feature,.track,.portal-card,.cta-inner,.story-interlude,.style-break');
-if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');obs.unobserve(entry.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});watch.forEach(el=>{el.classList.add('scroll-reveal-extra');obs.observe(el)})}
-})();
-</script>
+
 <script src="../assets/js/floating-directory.js"></script>
+
+<script src="../assets/js/theatre-shell.js"></script>
+<script src="../assets/js/theatre-3d.js"></script>
 </body>
 </html>
