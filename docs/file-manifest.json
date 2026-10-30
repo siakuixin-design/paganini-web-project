@@ -1,0 +1,314 @@
+{
+  "README.md": {
+    "size": 7252,
+    "sha256": "d3e49b0f9e8c1849612ff3ab769f730190ea37a88dc8306ad1a1f0f4bd94789d"
+  },
+  "assets/audio/samples/guitar/C4.mp3": {
+    "size": 83916,
+    "sha256": "594c98aa8f9d1a426078e91899525f143e0bc82218b7b2c3f4cea2c54c181925"
+  },
+  "assets/audio/samples/mandolin/C4.wav": {
+    "size": 19622,
+    "sha256": "8e35422e95d79b954d21465813b31518454db55128239b88f00a23c538747624"
+  },
+  "assets/audio/samples/mandolin/C5.wav": {
+    "size": 46800,
+    "sha256": "6bdabb2704362c34d21068a329c8143e72c6968ec2568f0e47a383998618a3fe"
+  },
+  "assets/audio/samples/violin/A4.mp3": {
+    "size": 339950,
+    "sha256": "b51bab05788a078a1ab8480acae9aa96bf2072aafe237991e414759fb0005243"
+  },
+  "assets/audio/samples/violin/C4.mp3": {
+    "size": 318666,
+    "sha256": "47a86f01f5a9f978e3328d72ecc3d12ad72cc18852676f655090e68c34b87d8c"
+  },
+  "assets/audio/works/andantino.mp3": {
+    "size": 2203901,
+    "sha256": "137d4944b3abbca0268fbd65b6f9d0528e728f21ec067e0c941ef13feaee6153"
+  },
+  "assets/audio/works/caprices-excerpt.mp3": {
+    "size": 4640644,
+    "sha256": "395114e192db153af89d696ffee521e6216baf6686c813c37b4712844ca24c76"
+  },
+  "assets/audio/works/ghiribizzi-01.mp3": {
+    "size": 622362,
+    "sha256": "413af6ae6f00591a00ab0d2818b0194edefb17b35254b8c5f13cf1e63b211237"
+  },
+  "assets/audio/works/i-palpiti.mp3": {
+    "size": 9630625,
+    "sha256": "004249fadf7d272b572fde9e015690cc9fa60115c586f53f531227a0d78f646b"
+  },
+  "assets/audio/works/la-campanella.mp3": {
+    "size": 6673598,
+    "sha256": "e3ca28cfec0d92af5a6d22ee4e32bd63cdaf0e09c3b3856d9bb776083531bebf"
+  },
+  "assets/audio/works/nel-cor.mp3": {
+    "size": 6999761,
+    "sha256": "59d727479bf8de4b6e40f7679a88ebf50900966781c574f73a5f042bf14b6bd2"
+  },
+  "assets/audio/works/sonata-01.mp3": {
+    "size": 3143746,
+    "sha256": "754ad0b3c28a42350d761439031731a5eba53d201c44a74b75a614609a67bc78"
+  },
+  "assets/audio/works/waltz.mp3": {
+    "size": 1418394,
+    "sha256": "e957f79078f0f3837a35963f89701e96ec3488d111b50eb30c17224198ac22fa"
+  },
+  "assets/css/site.css": {
+    "size": 30689,
+    "sha256": "48bae1a82c8b6f6eed1f78fb00308d0ba361eed118fc27bfa5b9985a61e336e1"
+  },
+  "assets/fonts/OFL.txt": {
+    "size": 4397,
+    "sha256": "10947328199e369a3e6b4a67e8e5507ed99d5bbb264a1f156415aa9b665e4d15"
+  },
+  "assets/fonts/ZhiMangXing-Regular.ttf": {
+    "size": 4063532,
+    "sha256": "644e0cae9b40f0b10ab729a01bd32032e3973bac22be3dccae01bf6ae7fde969"
+  },
+  "assets/images/antonio-portrait.png": {
+    "size": 885459,
+    "sha256": "886327d16ffa666121e404e051fae8079c80755bb8151b9baa949addee63050e"
+  },
+  "assets/images/empty-room.svg": {
+    "size": 1076,
+    "sha256": "00c17c5301cc5320df21defd4f985289fc748b23ea01c051c9b481ca8eabfb51"
+  },
+  "assets/images/hero-devil.svg": {
+    "size": 1130,
+    "sha256": "3f6e30efc94700766594eb4253557730472a7b10b0835be3d317d620dad54224"
+  },
+  "assets/images/legacy/competition.jpg": {
+    "size": 17108,
+    "sha256": "4129e03a88f3accca43bd5c19867bb38b7638d304a116c49195b1821d3a82cc5"
+  },
+  "assets/images/legacy/competition2.jpg": {
+    "size": 106583,
+    "sha256": "3aa0cc3fe3ba79fb941104e86df6934eba6538f93d1de870dbe40df74119fc6f"
+  },
+  "assets/images/legacy/dianying.jpg": {
+    "size": 323645,
+    "sha256": "c5c1ce88199abdeafd517bc2355d7d6511d29620ade5c3301d7a19747132e5a5"
+  },
+  "assets/images/legacy/dianying2.jpg": {
+    "size": 63470,
+    "sha256": "d44867edb06ff1967cea0a8e0cb8858c9c167969db0ea39e5e935b5c60a63a83"
+  },
+  "assets/images/legacy/renayayinyuejie.jpeg": {
+    "size": 286478,
+    "sha256": "b12934fd00943b281b9eee01cc1e627ef0e9133b2ebd64db6ace72f7997c667f"
+  },
+  "assets/images/life/scene02.01.jpg": {
+    "size": 97178,
+    "sha256": "f1719589d2911cb7d47afe3dcc6e3e5e0107af9c65d139aae4b298c1fa14bd88"
+  },
+  "assets/images/life/scene02.02.jpg": {
+    "size": 119755,
+    "sha256": "551b4748f1997603aed16b23f52e55d719e8a5985d3011b3b3780a11c329bce3"
+  },
+  "assets/images/life/scene02.03.jpg": {
+    "size": 80218,
+    "sha256": "7d5885551226274d4d9209bec89b23429b560faae4e9cfe3bd7c2975a7bd50e8"
+  },
+  "assets/images/life/scene02.04.jpg": {
+    "size": 87889,
+    "sha256": "71a58c75ee6b690f24225751a17cd5274968509686b3293e75477d1d00be8091"
+  },
+  "assets/images/life/scene03.01.jpg": {
+    "size": 96884,
+    "sha256": "09b96ab777dca86257e5371116596ad991adf1fab9c7ac78007c803ccc5ecf6f"
+  },
+  "assets/images/life/scene03.02.jpg": {
+    "size": 98768,
+    "sha256": "a695cc73bc89093b3d035018fba653a7590ecb448820d4f3707fe6397205698a"
+  },
+  "assets/images/life/scene03.03.jpg": {
+    "size": 777191,
+    "sha256": "01244094fa5cffe5fa94dc400780f8a797a700fee7b56779c6749946508a939d"
+  },
+  "assets/images/life/scene03.04.jpg": {
+    "size": 453025,
+    "sha256": "45c9fe3bcc861943cc0ef303d852bba84961f4f305431666deccc650d9dddb4d"
+  },
+  "assets/images/life/scene03.05.jpg": {
+    "size": 521014,
+    "sha256": "368b3f0c021e2b64269b931b7b8b08a3b8efe5033d76bda18b09df5b74c48461"
+  },
+  "assets/images/life/scene04.01.jpg": {
+    "size": 113050,
+    "sha256": "d158016ece4d3b51cec48c2ed7a9e834be67b2f69923b648d51486c920606eec"
+  },
+  "assets/images/life/scene04.02.jpg": {
+    "size": 79171,
+    "sha256": "d41d366de5aed3a066e32279b8dad3c94712cf8909a850b146c24ea24365cebc"
+  },
+  "assets/images/life/scene04.03.jpg": {
+    "size": 152277,
+    "sha256": "319e9435b6cf9947797d01dd50fced130b297dbad7a55d699af711ed56b2ea41"
+  },
+  "assets/images/life/scene05.01.jpg": {
+    "size": 612467,
+    "sha256": "d886c2d718ec6794e8efbc29cc4b92b13b1150e155c2830c8854d2fa723dac7e"
+  },
+  "assets/images/life/scene05.02.jpg": {
+    "size": 667688,
+    "sha256": "dc79096fa9c070b1e34e0f57d4492daa438049cc6dc769bf7573ef8e4a57916c"
+  },
+  "assets/images/life/scene05.03.png": {
+    "size": 2126640,
+    "sha256": "cbf4f9572d4ee4b5204582ce2742212ab66ccc92ebfbfa508bf4b500e1594670"
+  },
+  "assets/images/life/scene05.04.png": {
+    "size": 2285599,
+    "sha256": "321b6cd2ca14ffbe2de1f9e6f7f290c3213692494ed0a7bb02df1272a44ed601"
+  },
+  "assets/images/life/scene05.05.jpg": {
+    "size": 524790,
+    "sha256": "d845a3983bf1ef36e7e0ce1519ccd44f05f88d5a248cf993ff2c1cc2ff2006e6"
+  },
+  "assets/images/life/scene06.01.jpg": {
+    "size": 158867,
+    "sha256": "26b79e623c180f39d434f8b77c5cd67d4f01f45d5307bc461405753c80fcf399"
+  },
+  "assets/images/life/scene06.02.jpg": {
+    "size": 634712,
+    "sha256": "2c64cacc83e3a411effb0706b13c282c357dde00be58031817747212d3686718"
+  },
+  "assets/images/life/scene06.03.jpg": {
+    "size": 89944,
+    "sha256": "fbec950a0c392ad98d8545df9843a02a667942d615c73d1ce58b102d4a774541"
+  },
+  "assets/images/life/scene07.01.jpg": {
+    "size": 603502,
+    "sha256": "6bc98e5ca11aeb3a1e489c5d2310e8f080c737c0bb0aad73247728f823625cd7"
+  },
+  "assets/images/life/scene07.02.jpg": {
+    "size": 717016,
+    "sha256": "cd9bca02b8b66c2db1720ea9e8cf549d3c25483abc978a99723dc436051207fb"
+  },
+  "assets/images/life/scene07.03.jpg": {
+    "size": 555262,
+    "sha256": "0ddde333f3ac1aa37f270260ee5c0564e34a85cc6bd91ee67459692d74e42091"
+  },
+  "assets/images/paganini-dark.jpg": {
+    "size": 17969,
+    "sha256": "3fce4b518b3c9d82db242196eacdf7579a603e37605ac5a75cc6a01c620db295"
+  },
+  "assets/images/paganini-portrait.jpg": {
+    "size": 100817,
+    "sha256": "39f8800e1176751fa4fdf6da6c3c24a550d0407e35175fc5667c9483d965a5d3"
+  },
+  "assets/js/instrument-engine.js": {
+    "size": 7532,
+    "sha256": "598140b25dd4a1ee72b446c0e8bc8df2035a6f29b8c79defad5e9e0b3ef359f7"
+  },
+  "assets/js/instrument.js": {
+    "size": 8676,
+    "sha256": "af42205dc11c688df0c6ef3c06b330928d8eaa34ae0346d795a25fce428c5c1e"
+  },
+  "assets/js/sample-bank.js": {
+    "size": 1079255,
+    "sha256": "d481ae228630c72b3ed56721efd6b0975d6d2e7266504f296a4f6484213f816e"
+  },
+  "assets/js/site.js": {
+    "size": 21746,
+    "sha256": "443f9c5858c128cce00c21b5488630cf509aab024a74b56e19593399e9dfa7cd"
+  },
+  "assets/video/README.md": {
+    "size": 1013,
+    "sha256": "dd9e031e56cd44d6b478a328cc1f0cd8276d351bbc0abf79858e38ca37470465"
+  },
+  "beihou/extra.html": {
+    "size": 10321,
+    "sha256": "10f0d041e7e767a2ec2b10bb9bf6ce931940bb2839758391bf39f7cf86426dc2"
+  },
+  "docs/ASSETS.md": {
+    "size": 9925,
+    "sha256": "8e19b14ab5baeb54720e4f3dce94734768a6091bb7640fa7daecfc32a221e54b"
+  },
+  "docs/CODE_REFERENCE.md": {
+    "size": 1270323,
+    "sha256": "83e28d8d7f2733ae7c9e11a717e06f8b9462d370e2da243e3f162ca85f54ed60"
+  },
+  "docs/SOURCES.md": {
+    "size": 3277,
+    "sha256": "06d0837177303cce3ccd4cb413303186514616608fa70f89a9c48ede10bf3e96"
+  },
+  "docs/VERIFICATION.md": {
+    "size": 5295,
+    "sha256": "6f5f9763947f0b9a67ecd86119a45a8e02793beb2e2361c67920aac4d24762d9"
+  },
+  "docs/asset-renames.json": {
+    "size": 2585,
+    "sha256": "b99fdfa890db77dd1694a2b5731ef55674a01b0d7e3c46a45b1327916b3153f4"
+  },
+  "docs/audio-renames.json": {
+    "size": 2186,
+    "sha256": "73de886d2c08b35e52cd18835aaf5d478549b4fceb770cef04693d5ee2e37f45"
+  },
+  "docs/dom-check.json": {
+    "size": 2614,
+    "sha256": "6f491ac1251c153aeaf18993628bdc051e15df002eee41007fb5de89decd89c2"
+  },
+  "docs/mandolin-processing.json": {
+    "size": 300,
+    "sha256": "65a58ca941fea68765be68e891fe4fb59812b51b329ef5180a1e7fec3d04fbb0"
+  },
+  "docs/rebuild-sample-bank.py": {
+    "size": 1298,
+    "sha256": "6b626b3ec263f7d57ae43090448bfa0e7444a9a89a9e3af484aee0d9ad43f23e"
+  },
+  "docs/static-check.json": {
+    "size": 2368,
+    "sha256": "2e031d2dc6f23893cdff4a61d21af0d4e5683990604be389168f5c69c7cf03ff"
+  },
+  "effects/effects.html": {
+    "size": 8537,
+    "sha256": "626363d6118afcb8c20e300fc3d57878a875061db9e126c7ffb204e8e9ce0b02"
+  },
+  "index.html": {
+    "size": 5252,
+    "sha256": "e0a598590a24a9b2bdcc0c369fb49bb67ad35a47bd350a04f2e6d333caf10640"
+  },
+  "instrument/instrument.html": {
+    "size": 12097,
+    "sha256": "6f06d09eb4c22c2a3cd9efd5554b04e13c2e32c6c60515b22256d5cddbd19897"
+  },
+  "life/begining.html": {
+    "size": 6730,
+    "sha256": "9659b4f7bd94ca2a7adc8d1ef3089a86ddd4f6133333be1c1e7b41bc521f0f08"
+  },
+  "life/scene02.html": {
+    "size": 8090,
+    "sha256": "d863a9709b35adf8983f3df0bedbb1cbe4bf975d0b13f8366cdc0cfd29861d7f"
+  },
+  "life/scene03.html": {
+    "size": 12150,
+    "sha256": "e272448101895a249d698295d0821dc42d5aa51aefe3c8043d6289e3efa75c1d"
+  },
+  "life/scene04.html": {
+    "size": 7127,
+    "sha256": "16d486c4d30d13c19ad83115552d624c38f851944a1f0b2b4cef9db61c916ed2"
+  },
+  "life/scene05.html": {
+    "size": 13755,
+    "sha256": "bd95eca2a8698d030213bf4c9dd069187ed913002b11430fec8a55d74957a7f0"
+  },
+  "life/scene06.html": {
+    "size": 7146,
+    "sha256": "7b131ab13c0f874c5d1373c5631745d5c4430a5cd31c7514b77e44c32c7d8d9d"
+  },
+  "life/scene07.html": {
+    "size": 7209,
+    "sha256": "f1f97ad5eebc15b51c119525f3decaa40155416820bca81d40cf37f65efad335"
+  },
+  "music/works.html": {
+    "size": 14203,
+    "sha256": "49d16b67e1a11e2921594a12724542e5abf7af7cc4f3cf7c8177f82559d8d8e4"
+  },
+  "reflection.sumber.html": {
+    "size": 8866,
+    "sha256": "c3c78ed29e02d176b3a48208255550a6bcd86c46a5cd4b407a8e12bbd3b41334"
+  }
+}

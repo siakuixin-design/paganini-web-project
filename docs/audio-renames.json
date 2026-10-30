@@ -1,0 +1,42 @@
+[
+  {
+    "original": "original/exam/music/24.Europeana.eu-937-Culturalia_955013f9_1e13_4391_8a34_adb0cb873039-981c81fd593d227e126831dee2d27bea.mpga",
+    "target": "assets/audio/works/caprices-excerpt.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/I Palpiti op. 13Europeana.eu-937-Culturalia_175cc3f3_0632_4467_a74d_1d89edace922-ef8f34e38d31e2ebdb861bd7cd501284.mpga",
+    "target": "assets/audio/works/i-palpiti.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/La Campanella - Romanian Radio Broadcasting Company, Romania - CC BY-SA.Europeana.eu-937-Culturalia_2b67e93b_885c_4c7f_abf9_004018a1a8b5-ae729cd6965b720610959fc141464f46.mpga",
+    "target": "assets/audio/works/la-campanella.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/Nel cor piu non mi sentoEuropeana.eu-937-Culturalia_6ff94f2e_8018_4390_b01d_c9466d5c5e02-426586296ebd242d03da7dabf37cbac1.mpga",
+    "target": "assets/audio/works/nel-cor.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/paganini ms043 43 ghiribizzi 01 gp[Free-scores.com]_paganini-niccolo-paganini-ms043-43-ghiribizzi-01-gp-28821 (1).mp3",
+    "target": "assets/audio/works/ghiribizzi-01.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/paganini ms084 37 sonatas 01 gp[Free-scores.com]_paganini-niccolo-paganini-ms084-37-sonatas-01-gp-26313.mp3",
+    "target": "assets/audio/works/sonata-01.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/paganini ms097 andantino gp[Free-scores.com]_paganini-niccolo-paganini-ms097-andantino-29354.mp3",
+    "target": "assets/audio/works/andantino.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  },
+  {
+    "original": "original/exam/music/vals[Free-scores.com]_paganini-niccolo-paganini-ms092-vals-29359.mp3",
+    "target": "assets/audio/works/waltz.mp3",
+    "change": "MP3 128kbps 统一压缩，原曲不裁剪"
+  }
+]

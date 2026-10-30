@@ -1,0 +1,98 @@
+{
+  "environment": "Node + LinkeDOM + 音频/语音接口模拟（不是实际浏览器试听）",
+  "results": [
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "index.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/begining.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene02.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene03.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene04.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene05.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene06.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "life/scene07.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "beihou/extra.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "music/works.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "effects/effects.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "instrument/instrument.html",
+      "ok": true
+    },
+    {
+      "test": "页面初始化、无自动音频、入场复位",
+      "page": "reflection.sumber.html",
+      "ok": true
+    },
+    {
+      "test": "开场用户点击后播放，暂停/恢复/静音",
+      "ok": true
+    },
+    {
+      "test": "练琴八次昼夜变化、重置、旁白开始/停止",
+      "ok": true
+    },
+    {
+      "test": "观众对白开关、巡演地点更新",
+      "ok": true
+    },
+    {
+      "test": "唱片互斥播放、再次暂停、静音停止、退出导航和缓存复位",
+      "ok": true
+    },
+    {
+      "test": "档案标签与注记展开",
+      "ok": true
+    },
+    {
+      "test": "三类采样载入、按下/松键、重复事件、切乐器、失焦、12声上限、静音及音阶结束",
+      "ok": true
+    },
+    {
+      "test": "预留视频启用后的播放互斥、静音保护、错误回到底图（模拟素材）",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>帕格尼尼的作曲风格｜帕格尼尼</title>
+  <meta name="description" content="分析帕格尼尼的作曲风格：炫技、歌唱性、变奏、戏剧化与吉他书写。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  <style>
+    @font-face {font-family:"Zhi Mang Xing";src:url("../assets/fonts/ZhiMangXing-Regular.ttf") format("truetype");font-display:swap}
+    :root{--bg:#0b0a09;--panel:#171410;--paper:#ebdfc6;--ink:#302719;--gold:#c6a66d;--red:#7b2634;--text:#eee5d5;--muted:#b1a797;color-scheme:dark}
+    *{box-sizing:border-box} body{margin:0;min-width:1024px;background:linear-gradient(180deg,#0b0a09,#140f0b 45%,#0b0a09);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.9}
+    a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
+    .site-header{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(11,10,9,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(198,166,109,.16)}
+    .wordmark{display:flex;gap:14px;align-items:center;font-weight:700;letter-spacing:.12em}.wordmark b{font-size:26px;color:var(--gold)}.wordmark small{display:block;color:var(--muted);font-weight:400;letter-spacing:.18em}
+    .btn{display:inline-flex;gap:8px;align-items:center;padding:11px 18px;border-radius:999px;border:1px solid rgba(198,166,109,.35);background:rgba(235,223,198,.05)}
+    .btn.primary{background:linear-gradient(135deg,rgba(198,166,109,.92),rgba(166,124,67,.92));color:#1c150d;border-color:transparent;font-weight:700}
+    .hero{padding:90px 48px 54px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+    h1,h2,h3{font-family:"Zhi Mang Xing","KaiTi",cursive;font-weight:400;line-height:1.2}.hero h1{font-size:88px;margin:10px 0 20px;letter-spacing:4px}.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}.intro{font-size:20px}
+    .hero-figure{padding:22px;border-radius:28px;background:linear-gradient(180deg,rgba(198,166,109,.08),rgba(23,20,16,.95));border:1px solid rgba(198,166,109,.22)}.hero-figure img{border-radius:20px;max-height:520px;object-fit:cover;width:100%}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:0 auto 34px}
+    .feature{padding:26px;border-radius:24px;background:rgba(23,20,16,.92);border:1px solid rgba(198,166,109,.2);box-shadow:0 18px 36px rgba(0,0,0,.2)}
+    .feature h2{font-size:42px;margin:6px 0 14px}.feature p{margin:0 0 12px}
+    .timeline-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:26px 0 40px}.timeline-strip div{padding:16px;border-radius:18px;background:rgba(235,223,198,.04);border:1px solid rgba(198,166,109,.14)}
+    .sample-panel{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin:40px auto}.sample-panel img{width:100%;border-radius:22px}.sample-panel .box{padding:24px;border-radius:24px;background:rgba(23,20,16,.9);border:1px solid rgba(198,166,109,.2)}
+    .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.chip{padding:8px 12px;border:1px solid rgba(198,166,109,.3);border-radius:999px;background:rgba(198,166,109,.08)}
+    .cta{padding:10px 0 70px}.cta-inner{padding:30px;border-radius:28px;background:linear-gradient(135deg,rgba(123,38,52,.18),rgba(23,20,16,.95));border:1px solid rgba(198,166,109,.22);display:flex;justify-content:space-between;gap:24px;align-items:center}
+    .site-footer{padding:20px 30px;border-top:1px solid rgba(198,166,109,.14);display:flex;justify-content:space-between;color:var(--muted)}
+  
+  .story-interlude,.style-break{position:relative;margin:40px auto;padding:26px 32px;border-left:3px solid rgba(229,197,138,.8);border-radius:0 22px 22px 0;background:linear-gradient(115deg,rgba(198,166,109,.11),rgba(23,20,16,.8));overflow:hidden}
+  .story-interlude::before,.style-break::before{content:'𝄞';position:absolute;right:10px;top:-35px;font:180px Georgia,serif;opacity:.07;pointer-events:none;color:#f2d5a3}
+  .story-interlude h3,.style-break h3{margin:0 0 12px;font:400 40px/1.3 'Zhi Mang Xing','KaiTi',serif;color:#ead4ae}
+  .story-interlude p,.style-break p{max-width:82ch}
+  .story-interlude .btn,.style-break .btn{margin-top:8px}
+ 
+
+
+/* ===== 全站精修：动态转场、章节漫游与响应式 ===== */
+:root{--cinema-gold:#e5c58a;--cinema-ink:#130e0b}
+html{scroll-padding-top:92px}
+button,a{transition:filter .24s ease,box-shadow .24s ease,transform .24s ease}
+a:hover,button:not(:disabled):hover{filter:brightness(1.12)}
+section[id]{scroll-margin-top:98px}
+.immersive-skip{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.immersive-skip:focus{left:16px;top:12px;width:auto;height:auto;z-index:100000;padding:10px;background:#fff;color:#000}
+.cinema-portal{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;pointer-events:none;opacity:0;visibility:hidden;background:#0c0908;overflow:hidden;transition:opacity .27s ease,visibility .27s ease}
+.cinema-portal.is-active{opacity:1;visibility:visible;pointer-events:all}
+.cinema-portal .portal-blur{position:absolute;inset:-10%;background:radial-gradient(circle at center,rgba(198,166,109,.16),transparent 38%),linear-gradient(45deg,#100b08,#241811,#100b08);animation:cinemaMist 1.8s ease-in-out infinite alternate}
+.cinema-portal .portal-symbol{position:absolute;font:400 clamp(110px,16vw,250px)/1 Georgia,serif;opacity:.22;color:var(--cinema-gold);filter:drop-shadow(0 0 26px rgba(198,166,109,.2));animation:cinemaSymbol .95s cubic-bezier(.1,.7,.3,1) both}
+.cinema-portal .portal-sheet{position:absolute;width:min(700px,72vw);height:55vh;border-left:2px solid rgba(198,166,109,.3);border-right:2px solid rgba(198,166,109,.3);opacity:.17;background:repeating-linear-gradient(transparent 0,transparent 20px,rgba(240,214,164,.4) 21px,transparent 22px);transform:rotate(-7deg)}
+.cinema-portal .portal-copy{position:relative;z-index:2;text-align:center;padding:36px;max-width:86vw}
+.cinema-portal .portal-small{display:block;font:600 12px/2 sans-serif;color:#c8ad81;letter-spacing:.35em}
+.cinema-portal .portal-title{font-family:'Zhi Mang Xing','KaiTi',serif;font-size:clamp(38px,5vw,82px);color:#f3e4c9;margin:6px 0 14px;line-height:1.25}
+.cinema-portal .portal-subtitle{font-size:15px;color:#c1ad90;letter-spacing:.12em}
+.cinema-portal[data-theme=stage] .portal-blur{background:radial-gradient(ellipse at center,rgba(208,163,79,.35),transparent 30%),linear-gradient(90deg,#370a16 0%,#130b0d 22%,#1a0e0d 50%,#130b0d 78%,#370a16 100%)}
+.cinema-portal[data-theme=manuscript] .portal-blur{background:linear-gradient(130deg,#2e241b,#110e0b),repeating-linear-gradient(0deg,transparent 0 24px,rgba(235,206,139,.05) 25px 26px)}
+.cinema-portal[data-theme=violin] .portal-blur{background:radial-gradient(ellipse at center,rgba(150,81,37,.32),transparent 33%),linear-gradient(140deg,#1d140d,#090809)}
+.cinema-portal[data-theme=legacy] .portal-blur{background:radial-gradient(circle at 50% 40%,rgba(82,72,101,.37),transparent 42%),linear-gradient(135deg,#11121c,#090909)}
+.cinema-portal[data-theme=instrument] .portal-blur{background:radial-gradient(circle at 50% 42%,rgba(152,106,43,.3),transparent 44%),linear-gradient(135deg,#2b2212,#080909)}
+.cinema-portal[data-theme=reflect] .portal-blur{background:radial-gradient(circle at 50% 30%,rgba(134,48,51,.21),transparent 42%),linear-gradient(135deg,#1c1116,#090909)}
+.cinema-portal[data-theme=score] .portal-sheet{opacity:.36;transform:rotate(-12deg)}
+.cinema-portal[data-theme=manuscript] .portal-sheet{opacity:.26;transform:rotate(5deg)}
+.cinema-portal[data-theme=legacy] .portal-symbol{animation:cinemaEcho 1s ease both}
+@keyframes cinemaSymbol{from{transform:scale(.3) rotate(-30deg);opacity:0}to{transform:scale(1) rotate(0deg);opacity:.22}}
+@keyframes cinemaEcho{from{transform:scale(2);opacity:0}to{transform:scale(1);opacity:.2}}
+@keyframes cinemaMist{from{transform:scale(1)}to{transform:scale(1.06)}}
+.cinema-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:2000;background:linear-gradient(90deg,#a56837,#e6c68b,#f5e1ba);pointer-events:none}
+.scroll-reveal-extra{opacity:0;transform:translateY(34px);filter:blur(6px);transition:opacity .85s ease,transform .85s ease,filter .85s ease}
+.scroll-reveal-extra.in-view{opacity:1;transform:none;filter:blur(0)}
+.cinema-menu{position:fixed;right:18px;bottom:22px;z-index:65;background:rgba(20,15,11,.9);color:#eddcc2;border:1px solid rgba(208,171,110,.5);border-radius:999px;padding:10px 17px;font-size:13px;backdrop-filter:blur(9px);box-shadow:0 10px 36px rgba(0,0,0,.38)}
+.cinema-menu:hover{transform:translateY(-2px);background:#2c2119}
+.cinema-menu-panel{position:fixed;right:18px;bottom:72px;width:min(360px,calc(100vw - 36px));max-height:72vh;overflow:auto;z-index:66;background:rgba(18,14,11,.97);border:1px solid rgba(198,166,109,.4);border-radius:22px;padding:20px;box-shadow:0 24px 55px rgba(0,0,0,.5)}
+.cinema-menu-panel[hidden]{display:none!important}
+.cinema-menu-panel h3{margin:0 0 12px;font:400 30px/1.2 'Zhi Mang Xing','KaiTi',serif}
+.cinema-menu-panel a{display:flex;align-items:center;justify-content:space-between;padding:11px 9px;border-bottom:1px solid rgba(198,166,109,.15);color:#eadbc2;text-decoration:none;font-size:14px}
+.cinema-menu-panel a[aria-current=page]{color:#f5d29b;background:rgba(198,166,109,.08)}
+.cinema-menu-panel a:hover{background:rgba(198,166,109,.13)}
+.immersive-note{display:block;font-size:13px;color:#b7a590;margin-top:14px}
+@media(max-width:950px){body{min-width:0!important}.wrap,.section{max-width:100%!important}.site-header{padding:12px 18px!important}.chapter-hero h1,.hero h1{font-size:clamp(40px,8vw,70px)!important}.period,.period:nth-child(even),.hero,.sample-panel,.scene-grid,.feature-grid{grid-template-columns:1fr!important}.period:nth-child(even) .photo{order:0!important}.period:nth-child(even) .copy{order:1!important}.chapter-hero{overflow:hidden}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.rg-canvas{height:300px}.cover-copy{max-width:100%}}
+@media(max-width:600px){.section{padding-inline:18px!important}.hero{padding:54px 20px!important}.hero h1{font-size:44px!important}.timeline{padding:0 16px}.period{padding:18px}.portal-grid{grid-template-columns:1fr}.rg-header{display:block}.rg-keys button{min-height:56px}.cinema-menu{bottom:12px;right:12px}.site-header .header-actions{gap:3px}.cover h1{font-size:clamp(48px,12vw,70px)!important}.cover-bottom{display:block!important}.cover-portrait{opacity:.6!important}}
+@media(prefers-reduced-motion:reduce){.cinema-portal .portal-blur,.cinema-portal .portal-symbol{animation:none!important}.scroll-reveal-extra{opacity:1!important;transform:none!important;filter:none!important}}
+
+
+/* 作曲风格页补齐与其他章节一致的右上控制器、鼠标音符特效 */
+.header-actions{display:flex;gap:12px;align-items:center;justify-content:flex-end}
+.header-actions button{display:grid;place-items:center;cursor:pointer;background:rgba(23,20,16,.66);color:#eee5d5;border:1px solid rgba(198,166,109,.32);box-shadow:0 5px 18px rgba(0,0,0,.22);transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.header-actions button:hover{border-color:rgba(198,166,109,.75);background:rgba(198,166,109,.15);transform:translateY(-2px)}
+.header-actions button[aria-pressed="true"]{background:rgba(198,166,109,.25);color:#e9c27e}
+.header-actions .icon-button{width:43px;height:43px;border-radius:50%;font-size:20px}
+.header-actions .journey-toggle{min-width:43px;height:43px;border-radius:50%;font-size:23px;line-height:1}
+.note-field{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.note-field .floating-note{position:absolute;bottom:-30px;color:rgba(198,166,109,.1);font-size:26px;animation:styleNoteRise 20s linear infinite;user-select:none}
+@keyframes styleNoteRise{0%{transform:translateY(0) rotate(-18deg);opacity:0}15%{opacity:.65}85%{opacity:.55}100%{transform:translateY(-110vh) rotate(20deg);opacity:0}}
+.cursor-dot{position:fixed;z-index:55;left:-50px;top:-50px;width:13px;height:13px;border:1px solid rgba(236,208,149,.85);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 15px rgba(236,208,149,.22);transition:opacity .2s ease}
+.cursor-note{position:fixed;z-index:56;pointer-events:none;color:#e4c58d;animation:styleCursorNote .85s ease-out forwards;text-shadow:0 0 10px rgba(198,166,109,.35);user-select:none}
+@keyframes styleCursorNote{0%{transform:translate(-50%,-50%) scale(.75);opacity:0}25%{opacity:.9}100%{transform:translate(-50%,-105%) scale(1.3) rotate(20deg);opacity:0}}
+.less-motion .floating-note,.less-motion .cursor-note{animation:none!important;display:none!important}
+.less-motion .scroll-reveal-extra,.less-motion .cinema-portal *{animation:none!important;transition:none!important;filter:none!important;transform:none!important;opacity:1!important}
+.less-motion .cursor-dot{display:none}
+@media(prefers-reduced-motion:reduce){.note-field,.cursor-dot,.cursor-note{display:none!important}}
+@media(max-width:650px){.header-actions{gap:6px}.header-actions .icon-button,.header-actions .journey-toggle{width:38px;height:38px;min-width:38px}}
+
+</style>
+</head>
+<body data-page="style" data-enter="score">
+  <header class="site-header">
+    <a class="wordmark" href="../index.html"><b>𝄞</b><span>PAGANINI <small>1782 — 1840</small></span></a>
+    <div class="header-actions" aria-label="页面控制">
+      <button class="icon-button" type="button" data-motion-toggle title="减少动态效果" aria-label="减少动态效果" aria-pressed="false">✦</button>
+      <button class="icon-button" type="button" data-mute-toggle title="静音" aria-label="静音" aria-pressed="false">♪</button>
+    </div>
+  </header>
+  <div class="note-field" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
+  <main id="main">
+    <section class="hero wrap">
+      <div>
+        <p class="eyebrow">03 / COMPOSITIONAL STYLE</p>
+        <h1>帕格尼尼的<br>作曲风格</h1>
+        <p class="intro">帕格尼尼不只是会演奏，他也通过作品重新定义了小提琴写作。若用一句话概括，他的风格就是：以惊人的技巧为外壳，以歌唱性旋律和戏剧化效果为核心，再辅以变奏与舞台感，形成高度个人化的声音世界。</p>
+        <p>先认识他的作曲风格，再进入下一页聆听具体作品，便更容易理解《24 首随想曲》《钟》或《我心惆怅》的特别之处。</p>
+      </div>
+      <div class="hero-figure"><img src="../assets/images/paganini-dark.jpg" alt="帕格尼尼暗色肖像"></div>
+    </section>
+
+    <section class="wrap">
+      <div class="timeline-strip">
+        <div><strong>技巧性</strong><p>高速音群、双音、泛音、左手拨弦、跳弓等。</p></div>
+        <div><strong>歌唱性</strong><p>把歌剧式旋律带入独奏小提琴。</p></div>
+        <div><strong>变奏</strong><p>善于围绕熟悉主题进行炫技变化。</p></div>
+        <div><strong>戏剧感</strong><p>像在舞台上“讲故事”，不是只堆难度。</p></div>
+        <div><strong>跨乐器思维</strong><p>吉他与室内乐经验让织体更灵活。</p></div>
+      </div>
+    </section>
+
+    <section class="wrap feature-grid">
+      <article class="feature">
+        <p class="eyebrow">01</p>
+        <h2>炫技不是目的，而是一种语言</h2>
+        <p>帕格尼尼最显眼的标签当然是“炫技”。但不同作品并不使用完全相同的技巧配置，例如《24 首随想曲》与他的其他独奏变奏作品在技巧选择上就有差别。但如果只把他理解成追求困难技巧，就会低估他的音乐智慧。他使用高难度技巧的目的，是制造超出常规的声音效果：例如泛音制造空灵感，左手拨弦让旋律与伴奏仿佛同时出现，高把位与快速换把则让旋律带有近乎飞行般的张力。</p>
+        <p>因此，这些技术并不是单独存在的“体操动作”，而是表现力的一部分。对演奏者来说，难点不是“把音拉出来”而已，而是要在困难动作之中仍保持音乐流线和句法。</p>
+      </article>
+      <article class="feature">
+        <p class="eyebrow">02</p>
+        <h2>歌唱性：像歌剧一样地写小提琴</h2>
+        <p>帕格尼尼生活在意大利歌剧文化浓厚的时代。许多作品都能听见“歌唱性”的痕迹：旋律线条长、装饰华丽、呼吸感明确，像在模仿人声。像《I palpiti》这样的作品，更直接以歌剧旋律为出发点，再进行变奏和技术扩展。</p>
+        <p>这使他的音乐不至于沦为纯炫技展示。观众会记得旋律，也会被旋律如何被改写、延长、翻转和加速所吸引。</p>
+      </article>
+      <article class="feature">
+        <p class="eyebrow">03</p>
+        <h2>变奏思维：同一个主题，多种面貌</h2>
+        <p>帕格尼尼非常擅长围绕一个鲜明的主题发展作品。主题之所以重要，是因为它让听众有“可以抓住的东西”；而变奏则让这个东西不断变化，展现演奏与作曲想象。技术上的炫目常常就包裹在变奏过程之中。</p>
+        <p>这也是为什么他的作品很适合课堂讲解：你可以先让同学听见主题，再指出后面哪些段落是在做变化，就能更直观地理解作品结构。</p>
+      </article>
+      <article class="feature">
+        <p class="eyebrow">04</p>
+        <h2>戏剧化与舞台感</h2>
+        <p>帕格尼尼并不是只在谱面上写音乐，他还在“想象观众会怎样看见这段音乐”。突然的强弱对比、突然冲上高音区、危险感十足的快速跑动、钟声般的动机反复，都容易在现场造成戏剧效果。这种写法和他的舞台形象相互加强，让“传奇”更加成立。</p>
+        <p>换句话说，他的作曲风格与演奏风格并没有分开，而是同一套艺术人格的两个面向。</p>
+      </article>
+    </section>
+
+    <section class="wrap sample-panel">
+      <img src="../assets/images/life/scene05.055.png" alt="舞台演奏示意图">
+      <div class="box">
+        <p class="eyebrow">ANALYSIS SUMMARY</p>
+        <h2 style="font-size:50px;margin:10px 0 14px">风格关键词</h2>
+        <div class="chip-row">
+          <span class="chip">高难技巧</span>
+          <span class="chip">歌剧式旋律</span>
+          <span class="chip">主题变奏</span>
+          <span class="chip">强烈舞台感</span>
+          <span class="chip">听觉惊奇</span>
+          <span class="chip">吉他式织体意识</span>
+        </div>
+        <p style="margin-top:16px">若把这些元素合并起来，就会发现帕格尼尼的作曲风格并不是单一标签，而是一种非常完整的“表演型写作”：他写音乐时，已经把演奏动作、观众反应与声音效果一起考虑进去了。</p>
+        <p>这也解释了为什么后来的李斯特、拉赫玛尼诺夫等人会从他那里获得灵感——他们继承的不是几个音符而已，而是一种把技术推向艺术戏剧化的思维。</p>
+      </div>
+    </section>
+
+    <section class="wrap cta">
+      <div class="cta-inner">
+        <div>
+          <p class="eyebrow">BACK TO THE WORKS</p>
+          <h2 style="font-size:52px;margin:8px 0 10px">带着风格线索，进入著名作品</h2>
+          <p>理解了这些风格特征之后，再听《钟》《24 首随想曲》或《我心惆怅》，会更容易听出技巧、旋律与舞台感是怎样彼此结合的。</p>
+        </div>
+        <a class="btn primary" href="works.html">继续下一部分 · 著名作品 →</a>
+      </div>
+    </section>
+  <section class="wrap cta"><div class="cta-inner"><div><h2 style="font-size:40px">资料与聆听提示</h2><p>风格分析参考帕格尼尼国际小提琴比赛官方介绍、Treccani 传记及音乐会节目注释。阅读本页时请特别区分：作曲作品中可见的谱面技巧，与当时观众对他演奏形成的“魔鬼”传闻，不应当被混为一谈。</p><p><a href="https://www.premiopaganini.it/history/niccolo-paganini" target="_blank" rel="noopener noreferrer"><u>Premio Paganini ↗</u></a>　<a href="https://www.treccani.it/enciclopedia/niccolo-paganini_%28Dizionario-Biografico%29/" target="_blank" rel="noopener noreferrer"><u>Treccani ↗</u></a></p></div></div></section>
+</main>
+  <footer class="site-footer"><span>NICCOLÒ PAGANINI · COMPOSITIONAL STYLE</span><a href="../index.html">返回封页 ↑</a></footer>
+
+<script>
+(() => {
+'use strict';
+const routes=[['封页','index.html','𝄞','score'],['人生·文字介绍','life/story.html','▤','manuscript'],['人生·沉浸体验','life/begining.html','♟','stage'],['背后','beihou/extra.html','◈','manuscript'],['音乐作品','music/works.html','♫','score'],['作曲风格','music/style.html','♬','violin'],['后世影响','effects/effects.html','✦','legacy'],['乐器体验','instrument/instrument.html','♩','instrument'],['资料与感想','reflection.sumber.html','✎','reflect']];
+const path = decodeURI(location.pathname), isSub=/(?:\/life\/|\/beihou\/|\/music\/|\/effects\/|\/instrument\/)/.test(path), prefix=isSub?'../':'';
+function ownRoute(href){try{const u=new URL(href,location.href);if(u.origin!==location.origin||u.hash && u.pathname===location.pathname)return null;if(!u.pathname.endsWith('.html'))return null;let p=u.pathname;let row=routes.find(r=>p.endsWith('/'+r[1]));if(!row){if(/\/life\/scene\d+\.html$/.test(p))return ['人生·沉浸体验',p,'♟','stage'];return ['下一章节',p,'♫','score'];}return row;}catch{return null}}
+const shell=document.createElement('div');shell.className='cinema-portal';shell.setAttribute('aria-live','polite');shell.setAttribute('aria-label','页面切换');shell.innerHTML='<div class="portal-blur"></div><div class="portal-sheet"></div><div class="portal-symbol"></div><div class="portal-copy"><span class="portal-small">PAGANINI · CHAPTER TRANSITION</span><div class="portal-title"></div><div class="portal-subtitle">请听见下一段旋律</div></div>';document.body.appendChild(shell);
+function activate(row){shell.dataset.theme=row[3];shell.querySelector('.portal-symbol').textContent=row[2];shell.querySelector('.portal-title').textContent=row[0];shell.classList.add('is-active');}
+let leaving=false;
+document.addEventListener('click',e=>{
+  if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+  const anchor=e.target.closest('a[href]');if(!anchor||anchor.target==='_blank'||anchor.hasAttribute('download'))return;
+  if(anchor.classList.contains('locked-link')||anchor.getAttribute('aria-disabled')==='true'){e.preventDefault();e.stopImmediatePropagation();return;}
+  const row=ownRoute(anchor.getAttribute('href'));
+  if(!row||leaving)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  e.preventDefault();e.stopImmediatePropagation();leaving=true;activate(row);
+  try{sessionStorage.setItem('pgn_transition',JSON.stringify({title:row[0],sym:row[2],theme:row[3]}))}catch{}
+  setTimeout(()=>{location.href=anchor.href;},700);
+},true);
+try{const pending=sessionStorage.getItem('pgn_transition');if(pending&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.removeItem('pgn_transition');const obj=JSON.parse(pending);activate([obj.title,'',obj.sym,obj.theme]);setTimeout(()=>shell.classList.remove('is-active'),550)}}catch{}
+const bar=document.createElement('div');bar.className='cinema-progress';document.body.appendChild(bar);
+let scrollPending=false;
+window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{let h=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);bar.style.width=Math.min(100,scrollY/h*100)+'%';scrollPending=false;});},{passive:true});
+const watch=document.querySelectorAll('.period,.feature,.track,.portal-card,.cta-inner,.story-interlude,.style-break');
+if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');obs.unobserve(entry.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});watch.forEach(el=>{el.classList.add('scroll-reveal-extra');obs.observe(el)})}
+})();
+</script>
+
+<script id="style-ambient-controls">
+(() => {
+  'use strict';
+  const motion=document.querySelector('[data-motion-toggle]');
+  const mute=document.querySelector('[data-mute-toggle]');
+  const menuBtn=document.querySelector('[data-style-menu]');
+  const menu=document.getElementById('cinema-menu-panel');
+  const floating=document.querySelector('.note-field');
+  const cursor=document.querySelector('.cursor-dot');
+  let reduced=false,lastTrail=0;
+  for(let i=0;i<12;i++){
+    const note=document.createElement('span');note.className='floating-note';note.setAttribute('aria-hidden','true');note.textContent=['♪','♫','♩','♬'][i%4];note.style.left=(i*8+2)+'%';note.style.animationDelay=-(i*2.5)+'s';note.style.animationDuration=(16+(i%4)*3)+'s';floating.appendChild(note);
+  }
+  motion?.addEventListener('click',()=>{
+    reduced=!reduced;document.documentElement.classList.toggle('less-motion',reduced);motion.setAttribute('aria-pressed',String(reduced));
+    motion.setAttribute('aria-label',reduced?'恢复动态效果':'减少动态效果');
+  });
+  mute?.addEventListener('click',()=>{
+    const isMuted=mute.getAttribute('aria-pressed')==='true';mute.setAttribute('aria-pressed',String(!isMuted));
+    mute.setAttribute('aria-label',isMuted?'静音':'取消静音');mute.textContent=isMuted?'♪':'♪̸';
+    document.querySelectorAll('audio,video').forEach(media=>media.muted=!isMuted);
+  });
+  menuBtn?.addEventListener('click',e=>{
+    e.stopPropagation();if(!menu)return;menu.hidden=!menu.hidden;menuBtn.setAttribute('aria-expanded',String(!menu.hidden));
+    const bottomButton=document.querySelector('.cinema-menu');if(bottomButton)bottomButton.setAttribute('aria-expanded',String(!menu.hidden));
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')menuBtn?.setAttribute('aria-expanded','false')});
+  document.addEventListener('pointermove',e=>{
+    if(e.pointerType==='touch'||reduced)return;
+    if(cursor){cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'}
+    if(e.timeStamp-lastTrail>110){createNote(e.clientX,e.clientY,false);lastTrail=e.timeStamp}
+  },{passive:true});
+  document.addEventListener('pointerdown',e=>{if(!reduced)createNote(e.clientX,e.clientY,true)},{passive:true});
+  function createNote(x,y,click){if(document.querySelectorAll('.cursor-note').length>20)return;
+    const note=document.createElement('span');note.className='cursor-note';note.setAttribute('aria-hidden','true');note.textContent=click?'♫':'♪';note.style.left=x+'px';note.style.top=y+'px';note.style.fontSize=click?'26px':'16px';document.body.appendChild(note);setTimeout(()=>note.remove(),870);
+  }
+})();
+</script>
+<script src="../assets/js/floating-directory.js"></script>
+</body>
+</html>

@@ -1,0 +1,3748 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>深入了解帕格尼尼｜帕格尼尼</title>
+    <meta name="description" content="化身帕格尼尼，以第一视角走过他的人生，聆听作品，并体验曼陀林、小提琴与吉他。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      /* 所有页面共用：古典剧场、旧乐谱与暗金色。电脑设计宽度 ≥ 1024px。 */
+      @font-face {
+        font-family:"Zhi Mang Xing";
+        src:url("../assets/fonts/ZhiMangXing-Regular.ttf") format("truetype");
+        font-display:swap
+      }
+
+      :root {
+        --bg:#0b0a09;
+        --panel:#171410;
+        --paper:#ebdfc6;
+        --ink:#302719;
+        --gold:#c6a66d;
+        --red:#7b2634;
+        --text:#eee5d5;
+        --muted:#b1a797;
+        --line:#c6a66d35;
+        --pointer-x:50%;
+        --pointer-y:30%;
+        color-scheme:dark
+      }
+
+      * {
+        box-sizing:border-box
+      }
+
+      html {
+        scroll-behavior:smooth;
+        scroll-padding-top:90px
+      }
+
+      body {
+        margin:0;
+        min-width:1024px;
+        background:var(--bg);
+        color:var(--text);
+        font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+        font-size:15px;
+        line-height:1.95
+      }
+
+      body::before {
+        content:"";
+        position:fixed;
+        inset:0;
+        z-index:-1;
+        background:radial-gradient(ellipse at var(--pointer-x) var(--pointer-y),#65322616,transparent 50%);
+        pointer-events:none
+      }
+
+      button,input,select {
+        font:inherit
+      }
+
+      button,a,input,select {
+        touch-action:manipulation
+      }
+
+      a {
+        color:inherit
+      }
+
+      button {
+        color:inherit;
+        background:none;
+        cursor:pointer
+      }
+
+      button:disabled {
+        cursor:default;
+        opacity:.55
+      }
+
+      a,button,input,select {
+        outline-offset:6px
+      }
+
+      a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
+        outline:2px solid var(--gold)
+      }
+
+      [hidden] {
+        display:none!important
+      }
+
+      img {
+        display:block;
+        max-width:100%
+      }
+
+      h1,h2,.chapter-title {
+        font-family:"Zhi Mang Xing", "KaiTi", "STKaiti", "DFKai-SB",cursive;
+        font-weight:400;
+        line-height:1.2
+      }
+
+      h1 {
+        font-size:82px;
+        letter-spacing:5px;
+        margin:18px 0 26px
+      }
+
+      h2 {
+        font-size:48px;
+        margin:12px 0 24px
+      }
+
+      h3 {
+        font-size:22px;
+        font-weight:500;
+        line-height:1.6
+      }
+
+      p {
+        margin:0 0 18px
+      }
+
+      .eyebrow {
+        font:11px/1.6 Georgia,serif;
+        letter-spacing:4px;
+        color:var(--gold);
+        text-transform:uppercase
+      }
+
+      .small {
+        font-size:12px;
+        color:var(--muted)
+      }
+
+      .gold {
+        color:var(--gold)
+      }
+
+      .muted {
+        color:var(--muted)
+      }
+
+      .wrap {
+        width:1120px;
+        max-width:calc(100% - 112px);
+        margin:auto
+      }
+
+      .skip {
+        position:fixed;
+        top:-90px;
+        left:30px;
+        z-index:200;
+        background:var(--paper);
+        color:var(--ink);
+        padding:12px
+      }
+
+      .skip:focus {
+        top:20px
+      }
+
+      .site-header {
+        height:78px;
+        position:fixed;
+        inset:0 0 auto;
+        z-index:50;
+        padding:0 42px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        background:linear-gradient(#0b0a09ee,#0b0a0966);
+        backdrop-filter:blur(12px);
+        border-bottom:1px solid #ffffff08
+      }
+
+      .wordmark {
+        text-decoration:none;
+        display:flex;
+        gap:14px;
+        align-items:center;
+        letter-spacing:4px;
+        font:16px Georgia,serif
+      }
+
+      .wordmark b {
+        font-size:34px;
+        color:var(--gold);
+        font-weight:400
+      }
+
+      .wordmark small {
+        font:9px/1.5 Arial,sans-serif;
+        letter-spacing:3px;
+        color:var(--muted)
+      }
+
+      .header-actions {
+        display:flex;
+        gap:12px;
+        align-items:center
+      }
+
+      .icon-button,.journey-toggle {
+        border:1px solid var(--line);
+        border-radius:50%;
+        width:42px;
+        height:42px;
+        display:grid;
+        place-items:center;
+        line-height:1;
+        color:var(--gold);
+        transition:background .2s
+      }
+
+      .icon-button:hover,.journey-toggle:hover {
+        background:#c6a66d20
+      }
+
+      .journey-toggle {
+        font-size:20px
+      }
+
+      .journey-panel {
+        position:fixed;
+        top:88px;
+        right:32px;
+        width:300px;
+        padding:24px;
+        background:#15120ff5;
+        border:1px solid var(--line);
+        box-shadow:0 20px 80px #0009;
+        z-index:60
+      }
+
+      .journey-panel h2 {
+        font-size:30px;
+        margin:0 0 18px
+      }
+
+      .journey-panel ol {
+        padding-left:26px;
+        margin:0
+      }
+
+      .journey-panel li {
+        font-size:13px;
+        padding:7px 0;
+        color:var(--muted)
+      }
+
+      .journey-panel li.current {
+        color:var(--paper)
+      }
+
+      .journey-panel li.current::after {
+        content:" · 当前";
+        color:var(--gold);
+        font-size:11px
+      }
+
+      .journey-panel .small {
+        margin:16px 0 0
+      }
+
+      .home-corner {
+        position:fixed;
+        bottom:24px;
+        left:26px;
+        z-index:45;
+        color:var(--paper);
+        text-decoration:none;
+        font-size:12px;
+        background:#0b0a09e8;
+        border:1px solid var(--line);
+        padding:9px 16px;
+        border-radius:30px
+      }
+
+      .home-corner:hover {
+        background:var(--red)
+      }
+
+      .read-progress {
+        height:2px;
+        position:fixed;
+        top:77px;
+        left:0;
+        background:var(--gold);
+        width:0;
+        z-index:55
+      }
+
+      .btn {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:18px;
+        min-height:50px;
+        padding:12px 25px;
+        border:1px solid var(--gold);
+        text-decoration:none;
+        font-size:14px;
+        letter-spacing:2px;
+        background:#c6a66d0c;
+        transition:background .25s,transform .25s
+      }
+
+      .btn:hover {
+        background:var(--gold);
+        color:var(--bg);
+        transform:translateY(-2px)
+      }
+
+      .btn.primary {
+        background:var(--gold);
+        color:var(--bg)
+      }
+
+      .btn.primary:hover {
+        background:#e2c997
+      }
+
+      .btn.subtle {
+        border-color:var(--line);
+        color:var(--muted)
+      }
+
+      .button-row {
+        display:flex;
+        gap:16px;
+        align-items:center;
+        flex-wrap:wrap
+      }
+
+      .chapter-hero {
+        padding:162px 0 80px;
+        border-bottom:1px solid var(--line);
+        position:relative;
+        overflow:hidden
+      }
+
+      .chapter-hero .intro {
+        max-width:690px;
+        color:var(--muted);
+        font-size:16px
+      }
+
+      .chapter-number {
+        position:absolute;
+        right:7%;
+        top:100px;
+        font:210px/1 Georgia,serif;
+        color:#c6a66d0c;
+        pointer-events:none
+      }
+
+      .chapter-hero .rule {
+        height:1px;
+        width:70px;
+        background:var(--gold);
+        margin:32px 0
+      }
+
+      .section {
+        padding:84px 0
+      }
+
+      .section+.section {
+        border-top:1px solid var(--line)
+      }
+
+      .two-col {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:64px;
+        align-items:center
+      }
+
+      .section-title {
+        max-width:650px
+      }
+
+      .section-lead {
+        color:var(--muted);
+        max-width:650px
+      }
+
+      .note-box {
+        padding:23px 27px;
+        border-left:2px solid var(--gold);
+        background:#c6a66d09;
+        color:var(--muted)
+      }
+
+      .source-note {
+        font-size:12px;
+        color:var(--muted);
+        margin-top:24px
+      }
+
+      .source-note a {
+        color:var(--gold);
+        text-underline-offset:4px
+      }
+
+      .next-part {
+        padding:95px 50px;
+        text-align:center;
+        border-top:1px solid var(--line);
+        background:radial-gradient(ellipse at center,#65212b20,transparent 70%)
+      }
+
+      .next-part h2 {
+        font-size:50px;
+        margin:20px 0 32px
+      }
+
+      .next-part p {
+        color:var(--muted)
+      }
+
+      .site-footer {
+        padding:24px 80px 85px;
+        border-top:1px solid var(--line);
+        display:flex;
+        justify-content:space-between;
+        color:var(--muted);
+        font:10px Georgia,serif;
+        letter-spacing:2px
+      }
+
+      .site-footer a {
+        letter-spacing:0;
+        font:12px "Microsoft YaHei",sans-serif
+      }
+
+      .motion-ready .reveal {
+        opacity:0;
+        transform:translateY(28px);
+        transition:opacity .85s,transform .85s
+      }
+
+      .motion-ready .reveal.visible {
+        opacity:1;
+        transform:none
+      }
+
+      .note-field {
+        position:fixed;
+        inset:0;
+        pointer-events:none;
+        z-index:-1;
+        overflow:hidden
+      }
+
+      .floating-note {
+        position:absolute;
+        bottom:-100px;
+        color:var(--gold);
+        opacity:0;
+        font:25px Georgia,serif;
+        animation:note-drift 22s linear infinite
+      }
+
+      .cursor-note {
+        position:fixed;
+        z-index:90;
+        pointer-events:none;
+        color:var(--gold);
+        font-size:20px;
+        animation:note-pop .8s ease-out forwards
+      }
+
+      .cursor-dot {
+        position:fixed;
+        pointer-events:none;
+        z-index:89;
+        border:1px solid #c6a66d70;
+        width:23px;
+        height:23px;
+        border-radius:50%;
+        transform:translate(-50%,-50%);
+        transition:width .2s,height .2s;
+        opacity:.65
+      }
+
+      .toast {
+        position:fixed;
+        right:30px;
+        bottom:28px;
+        z-index:100;
+        max-width:440px;
+        background:#201a13f5;
+        border:1px solid var(--gold);
+        padding:15px 22px;
+        font-size:13px;
+        box-shadow:0 12px 45px #0008
+      }
+
+      /* 封面：自由布局的肖像、恶魔剪影、流动琴弦。 */
+      .cover {
+        min-height:930px;
+        height:100vh;
+        position:relative;
+        overflow:hidden;
+        padding:190px 8% 130px
+      }
+
+      .cover::before {
+        content:"";
+        position:absolute;
+        inset:0;
+        background:linear-gradient(90deg,#0b0a09 2%,#0b0a09b0 55%,#39101820),url("../assets/images/hero-devil.svg") 70% 40%/cover no-repeat;
+        pointer-events:none
+      }
+
+      .cover-copy {
+        position:relative;
+        z-index:3;
+        width:57%
+      }
+
+      .cover h1 {
+        font-size:116px;
+        letter-spacing:8px;
+        line-height:1.13;
+        margin:24px 0 20px
+      }
+
+      .cover h1 span {
+        display:block;
+        font-size:48px;
+        color:var(--gold);
+        margin-bottom:10px
+      }
+
+      .cover .intro {
+        width:450px;
+        color:var(--muted);
+        font-size:16px
+      }
+
+      .cover-caption {
+        position:absolute;
+        left:8%;
+        top:110px;
+        z-index:3
+      }
+
+      .cover-portrait {
+        position:absolute;
+        right:12%;
+        top:23%;
+        width:29%;
+        height:55%;
+        transform:rotate(6deg);
+        border:1px solid #c6a66d66;
+        padding:9px;
+        background:#130f0a;
+        box-shadow:0 35px 100px #000c;
+        z-index:2;
+        animation:portrait-breathe 9s ease-in-out infinite
+      }
+
+      .cover-portrait img {
+        height:100%;
+        width:100%;
+        object-fit:cover;
+        filter:sepia(.25) contrast(1.08)
+      }
+
+      .cover-portrait::after {
+        content:"THE DEVIL’S VIOLINIST";
+        position:absolute;
+        bottom:-40px;
+        left:0;
+        letter-spacing:4px;
+        font:11px Georgia,serif;
+        color:var(--gold)
+      }
+
+      .cover-date {
+        position:absolute;
+        right:5%;
+        top:17%;
+        writing-mode:vertical-rl;
+        letter-spacing:6px;
+        font:12px Georgia,serif;
+        color:var(--muted);
+        z-index:3
+      }
+
+      .cover-string {
+        position:absolute;
+        height:1px;
+        width:65%;
+        background:linear-gradient(90deg,transparent,#c6a66d70,transparent);
+        transform:rotate(-26deg);
+        right:-5%;
+        top:30%;
+        pointer-events:none
+      }
+
+      .cover-string:nth-of-type(2) {
+        top:39%
+      }
+
+      .cover-string:nth-of-type(3) {
+        top:63%
+      }
+
+      .cover-tag {
+        font-size:12px;
+        letter-spacing:3px;
+        border-left:1px solid var(--red);
+        padding-left:18px;
+        color:var(--gold);
+        margin:30px 0
+      }
+
+      .cover-bottom {
+        position:absolute;
+        bottom:50px;
+        left:8%;
+        right:7%;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        border-top:1px solid var(--line);
+        padding-top:24px;
+        z-index:4
+      }
+
+      .cover-bottom span {
+        color:var(--muted);
+        font:10px Georgia,serif;
+        letter-spacing:3px
+      }
+
+      .cover-bottom .btn {
+        min-width:250px
+      }
+
+      .cover-after {
+        padding:65px 8%;
+        display:flex;
+        gap:70px;
+        color:var(--muted);
+        border-top:1px solid var(--line)
+      }
+
+      .cover-after .large-note {
+        font-size:70px;
+        color:var(--gold);
+        line-height:1
+      }
+
+      .cover-after h2 {
+        font-size:36px;
+        color:var(--paper);
+        margin:0 0 12px
+      }
+
+      .cover-after p {
+        max-width:800px
+      }
+
+      /* 用户点击后才解锁开场；无 JS 时此面板保持隐藏。 */
+      .opening-overlay {
+        position:fixed;
+        inset:0;
+        background:radial-gradient(ellipse,#36291c,#080706 70%);
+        z-index:110;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        overflow:hidden
+      }
+
+      .opening-overlay .eyebrow {
+        margin-bottom:25px
+      }
+
+      .opening-overlay h2 {
+        font-size:42px
+      }
+
+      .book {
+        width:440px;
+        height:285px;
+        position:relative;
+        perspective:1000px;
+        margin:16px 0 45px;
+        transform:rotate(-7deg)
+      }
+
+      .book-page {
+        position:absolute;
+        width:50%;
+        height:100%;
+        background:var(--paper);
+        color:var(--ink);
+        box-shadow:0 15px 70px #000a;
+        top:0;
+        padding:40px 23px
+      }
+
+      .book-page.left {
+        left:0;
+        transform-origin:right;
+        border-radius:4px 0 0 4px;
+        transform:rotateY(60deg)
+      }
+
+      .book-page.right {
+        right:0;
+        transform-origin:left;
+        transform:rotateY(-60deg);
+        border-radius:0 4px 4px 0
+      }
+
+      .book-page .staff {
+        height:60px;
+        margin:15px 0;
+        background:repeating-linear-gradient(transparent 0 8px,#705c4070 8px 9px,transparent 9px 12px);
+        font-size:27px;
+        line-height:60px;
+        letter-spacing:10px
+      }
+
+      .opening-overlay.opening-play .book-page.left {
+        animation:book-left 1.25s ease forwards
+      }
+
+      .opening-overlay.opening-play .book-page.right {
+        animation:book-right 1.25s ease forwards
+      }
+
+      .opening-overlay.dismiss {
+        animation:intro-away .5s ease forwards;
+        pointer-events:none
+      }
+
+      .opening-choice {
+        display:flex;
+        gap:14px;
+        align-items:center
+      }
+
+      .opening-overlay .small {
+        max-width:470px;
+        margin:18px 0 0
+      }
+
+      .opening-overlay button.subtle {
+        background:none
+      }
+
+      .opening-overlay .book-page p {
+        font:12px Georgia,serif;
+        letter-spacing:3px
+      }
+
+      /* 每页进出均使用同一覆盖层；默认不挡页面。 */
+      .transition {
+        position:fixed;
+        inset:0;
+        z-index:120;
+        visibility:hidden;
+        pointer-events:none;
+        overflow:hidden;
+        --shut:0
+      }
+
+      .transition.active {
+        visibility:visible
+      }
+
+      .transition .curtain {
+        position:absolute;
+        top:0;
+        bottom:0;
+        width:51%;
+        background:repeating-linear-gradient(90deg,#320c16 0,#741f32 7%,#330d18 16%);
+        box-shadow:inset 0 -18px 30px #0009;
+        transition:transform .6s cubic-bezier(.77,0,.18,1)
+      }
+
+      .transition .curtain.left {
+        left:0;
+        transform:translateX(-103%);
+        border-right:2px solid #c6a66d
+      }
+
+      .transition .curtain.right {
+        right:0;
+        transform:translateX(103%);
+        border-left:2px solid #c6a66d
+      }
+
+      .transition.closed .curtain {
+        transform:translateX(0)
+      }
+
+      .transition-badge {
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        opacity:0;
+        text-align:center;
+        transition:opacity .25s;
+        color:var(--paper);
+        font:28px Georgia,serif;
+        letter-spacing:5px
+      }
+
+      .transition.closed .transition-badge {
+        opacity:1
+      }
+
+      .transition[data-theme="score"] .curtain {
+        background:repeating-linear-gradient(0deg,transparent 0 28px,#67533544 28px 29px,transparent 29px 42px),var(--paper);
+        border-color:#766342
+      }
+
+      .transition[data-theme="score"] .transition-badge {
+        color:var(--ink)
+      }
+
+      .transition[data-theme="instrument"] .transition-badge {
+        font-size:52px
+      }
+
+      .transition[data-theme="reflection"] .transition-badge {
+        font-size:44px;
+        color:#e2bd92
+      }
+
+      /* 人生剧场：图片是底层，镜头与局部矢量动作分别控制。 */
+      .life-hero {
+        min-height:460px;
+        padding-bottom:65px
+      }
+
+      .life-hero h1 {
+        font-size:68px
+      }
+
+      .life-intro {
+        padding-top:130px
+      }
+
+      .scene-title {
+        display:flex;
+        align-items:baseline;
+        gap:28px;
+        margin-bottom:22px
+      }
+
+      .scene-title h2 {
+        font-size:40px;
+        margin:0
+      }
+
+      .scene-title .eyebrow {
+        min-width:115px
+      }
+
+      .life-scene {
+        padding:76px 0;
+        border-bottom:1px solid var(--line)
+      }
+
+      .scene-grid {
+        display:grid;
+        grid-template-columns:1fr 305px;
+        gap:32px;
+        align-items:center
+      }
+
+      .scene-frame {
+        position:relative;
+        height:520px;
+        overflow:hidden;
+        background:#19130c;
+        border:1px solid #c6a66d40;
+        isolation:isolate
+      }
+
+      .scene-frame .scene-photo {
+        position:absolute;
+        inset:0;
+        height:100%;
+        width:100%;
+        object-fit:cover;
+        transform:scale(1.03);
+        animation:camera-drift 18s ease-in-out infinite alternate
+      }
+
+      .scene-frame::after {
+        content:"";
+        position:absolute;
+        inset:0;
+        background:linear-gradient(0deg,#0009,transparent 45%);
+        z-index:4;
+        pointer-events:none
+      }
+
+      .scene-frame .film-grain {
+        position:absolute;
+        inset:0;
+        z-index:5;
+        pointer-events:none;
+        background:repeating-linear-gradient(0deg,#0000 0 3px,#0002 4px 4.4px);
+        opacity:.24
+      }
+
+      .scene-frame .scene-label {
+        position:absolute;
+        bottom:22px;
+        left:26px;
+        color:#ecdfc8;
+        font-size:11px;
+        letter-spacing:2px;
+        z-index:8
+      }
+
+      .scene-frame .scene-label span {
+        font:10px Georgia,serif;
+        letter-spacing:3px;
+        margin-right:18px;
+        color:var(--gold)
+      }
+
+      .scene-aside p {
+        font-size:16px;
+        color:#d3c8b7
+      }
+
+      .scene-aside .fact {
+        font-size:12px;
+        color:var(--gold);
+        border-top:1px solid var(--line);
+        padding-top:15px;
+        margin-top:20px
+      }
+
+      .narrate {
+        width:100%;
+        text-align:left;
+        border:1px solid var(--line);
+        padding:10px 16px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        font-size:13px;
+        margin-top:24px
+      }
+
+      .narrate.speaking {
+        border-color:var(--gold);
+        background:#c6a66d18
+      }
+
+      .voice-label {
+        font-size:10px;
+        color:var(--muted);
+        display:block;
+        margin:8px 0
+      }
+
+      .chapter-strip {
+        display:flex;
+        gap:8px;
+        margin:30px 0 0
+      }
+
+      .chapter-strip span {
+        flex:1;
+        height:3px;
+        background:var(--line)
+      }
+
+      .chapter-strip span.done {
+        background:var(--gold)
+      }
+
+      .prologue-stage {
+        position:relative;
+        height:580px;
+        background:radial-gradient(ellipse at 50% 35%,#e0c29135,transparent 60%),#100e0b;
+        border:1px solid var(--line);
+        overflow:hidden
+      }
+
+      .prologue-stage .stage-art {
+        height:100%;
+        width:100%
+      }
+
+      .prologue-stage .staff-lines {
+        position:absolute;
+        inset:18% 2%;
+        background:repeating-linear-gradient(0deg,transparent 0 37px,#c6a66d15 38px 39px);
+        transform:rotate(-10deg);
+        pointer-events:none
+      }
+
+      .prologue-stage iframe,.prologue-stage video {
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        border:0;
+        background:#000;
+        z-index:8
+      }
+
+      .performance-button {
+        position:absolute;
+        left:30px;
+        bottom:26px;
+        z-index:10
+      }
+
+      .prologue-aside {
+        padding:30px;
+        border-left:1px solid var(--line)
+      }
+
+      .prologue-layout {
+        display:grid;
+        grid-template-columns:2.2fr 1fr;
+        gap:30px
+      }
+
+      .prologue-notes {
+        font-size:30px;
+        color:var(--gold);
+        letter-spacing:12px;
+        animation:notation-sway 4s ease-in-out infinite
+      }
+
+      .side-quote {
+        font-family:"KaiTi",serif;
+        font-size:25px;
+        color:var(--paper);
+        margin:35px 0
+      }
+
+      .day-shade {
+        position:absolute;
+        inset:0;
+        z-index:3;
+        background:linear-gradient(90deg,#081b4077,#150a17a6);
+        opacity:var(--night,0);
+        transition:opacity 1s;
+        pointer-events:none
+      }
+
+      .window-sky {
+        position:absolute;
+        width:12%;
+        height:45%;
+        left:6%;
+        top:3%;
+        z-index:2;
+        background:#162849;
+        opacity:var(--night,0);
+        mix-blend-mode:multiply;
+        transition:opacity 1s;
+        pointer-events:none
+      }
+
+      .practice-sheet {
+        position:absolute;
+        z-index:6;
+        right:32%;
+        top:43%;
+        width:18%;
+        height:22%;
+        background:var(--paper);
+        border:1px solid #9c784d;
+        transform:rotate(-7deg);
+        color:#6c5739;
+        box-shadow:0 4px 20px #0008;
+        padding:14px;
+        font:26px Georgia,serif;
+        line-height:1.35
+      }
+
+      .practice-sheet.flipping {
+        animation:sheet-flip .55s ease
+      }
+
+      .practice-sheet::before {
+        content:"";
+        position:absolute;
+        inset:14px;
+        background:repeating-linear-gradient(transparent 0 12px,#8e795f77 13px 14px);
+        pointer-events:none
+      }
+
+      .practice-sheet span {
+        position:relative
+      }
+
+      .practice-controls {
+        background:#15110d;
+        border:1px solid var(--line);
+        margin-top:25px;
+        padding:22px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:24px
+      }
+
+      .practice-meter {
+        display:flex;
+        align-items:center;
+        gap:18px
+      }
+
+      .practice-meter strong {
+        font:38px Georgia,serif;
+        color:var(--gold)
+      }
+
+      .practice-meter label {
+        font-size:12px;
+        color:var(--muted)
+      }
+
+      .practice-meter progress {
+        width:140px;
+        height:5px;
+        accent-color:var(--gold)
+      }
+
+      .practice-caption {
+        font-size:13px;
+        color:var(--muted);
+        min-width:245px
+      }
+
+      .performer-layer {
+        position:absolute;
+        z-index:6;
+        bottom:0;
+        right:0;
+        width:52%;
+        height:95%;
+        pointer-events:none;
+        filter:drop-shadow(0 7px 12px #0007)
+      }
+
+      .performer-layer .torso {
+        transform-origin:55% 65%;
+        animation:body-breathe 5.5s ease-in-out infinite
+      }
+
+      .performer-layer .bow-arm {
+        transform-box:fill-box;
+        transform-origin:20% 80%;
+        animation:bow-play 2.2s ease-in-out infinite alternate;
+        animation-play-state:paused
+      }
+
+      .performer-layer .finger {
+        transform-box:fill-box;
+        transform-origin:center;
+        animation:finger-move .45s ease-in-out infinite alternate;
+        animation-play-state:paused
+      }
+
+      .performer-layer.playing .bow-arm,.performer-layer.playing .finger {
+        animation-play-state:running
+      }
+
+      .performer-layer.practice-playing .bow-arm {
+        animation:practice-bow .8s ease-in-out
+      }
+
+      .performer-layer.practice-playing .finger {
+        animation:finger-move .18s ease-in-out 4 alternate
+      }
+
+      .stage-glow {
+        position:absolute;
+        z-index:2;
+        inset:-40% 10% -20%;
+        background:conic-gradient(from 155deg at 50% 0%,transparent, #f1d29322 10deg,transparent 40deg);
+        transform-origin:top;
+        animation:light-sweep 12s ease-in-out infinite alternate;
+        pointer-events:none
+      }
+
+      .whisper-trigger {
+        position:absolute;
+        z-index:9;
+        border:1px solid #c6a66daa;
+        border-radius:50%;
+        width:42px;
+        height:42px;
+        background:#15110eda;
+        color:var(--paper);
+        font-size:20px;
+        box-shadow:0 0 30px #c6a66d30;
+        animation:whisper-pulse 3s ease-in-out infinite
+      }
+
+      .whisper-trigger:nth-of-type(1) {
+        left:19%;
+        top:43%
+      }
+
+      .whisper-trigger:nth-of-type(2) {
+        left:53%;
+        top:34%
+      }
+
+      .whisper-trigger:nth-of-type(3) {
+        left:78%;
+        top:49%
+      }
+
+      .whisper-popup {
+        position:absolute;
+        z-index:10;
+        left:15%;
+        right:15%;
+        top:12%;
+        padding:20px 24px;
+        background:#0f0c09f5;
+        border:1px solid var(--gold);
+        text-align:center;
+        font-size:18px;
+        box-shadow:0 15px 50px #0008
+      }
+
+      .whisper-popup button {
+        float:right;
+        border:0;
+        font-size:20px
+      }
+
+      .whisper-popup small {
+        display:block;
+        font-size:10px;
+        color:var(--muted);
+        margin-top:8px
+      }
+
+      .tour-stops {
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        margin:24px 0
+      }
+
+      .tour-stops button {
+        padding:8px 11px;
+        border:1px solid var(--line);
+        font:10px Georgia,serif;
+        letter-spacing:1px
+      }
+
+      .tour-stops button[aria-pressed="true"] {
+        background:var(--gold);
+        color:var(--bg)
+      }
+
+      .tour-caption {
+        position:absolute;
+        left:30px;
+        top:25px;
+        z-index:7;
+        display:flex;
+        flex-direction:column;
+        background:#0b0a09b0;
+        padding:15px 20px;
+        border-left:2px solid var(--gold)
+      }
+
+      .tour-caption strong {
+        font:26px Georgia,serif;
+        letter-spacing:3px
+      }
+
+      .tour-caption span {
+        font-size:12px;
+        color:var(--gold)
+      }
+
+      .end-string {
+        height:150px;
+        display:grid;
+        place-items:center;
+        position:relative;
+        font:32px Georgia,serif;
+        letter-spacing:15px
+      }
+
+      .end-string::before {
+        content:"";
+        height:1px;
+        position:absolute;
+        left:0;
+        right:0;
+        top:50%;
+        background:linear-gradient(90deg,transparent,var(--gold),transparent);
+        z-index:-1
+      }
+
+      .end-string span {
+        background:var(--bg);
+        padding:0 30px
+      }
+
+      .memory-frame {
+        animation:memory-light 15s ease-in-out infinite alternate
+      }
+
+      /* 历史档案、作品与影响采用各自独立的阅读布局。 */
+      .archive-image {
+        position:relative;
+        padding:16px;
+        border:1px solid var(--line);
+        transform:rotate(-3deg);
+        background:#17110c
+      }
+
+      .archive-image img {
+        width:100%;
+        max-height:510px;
+        object-fit:cover;
+        filter:sepia(.1)
+      }
+
+      .archive-image figcaption {
+        font-size:11px;
+        color:var(--muted);
+        margin-top:12px;
+        letter-spacing:2px
+      }
+
+      .archive-tabs {
+        display:flex;
+        border-bottom:1px solid var(--line);
+        gap:25px;
+        margin:30px 0
+      }
+
+      .archive-tabs button {
+        border:0;
+        color:var(--muted);
+        padding:10px 0;
+        border-bottom:2px solid transparent
+      }
+
+      .archive-tabs button[aria-selected="true"] {
+        border-color:var(--gold);
+        color:var(--paper)
+      }
+
+      .archive-paper {
+        padding:35px;
+        background:var(--paper);
+        color:var(--ink);
+        position:relative;
+        box-shadow:0 18px 50px #0005
+      }
+
+      .archive-paper .eyebrow {
+        color:#876331
+      }
+
+      .archive-paper p {
+        color:#4f4535
+      }
+
+      .archive-paper h3 {
+        font-family:"KaiTi",serif;
+        font-size:28px;
+        margin-top:0
+      }
+
+      .evidence {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:25px;
+        margin:35px 0
+      }
+
+      .evidence article {
+        border:1px solid var(--line);
+        padding:28px
+      }
+
+      .evidence .legend {
+        border-left:2px solid var(--red)
+      }
+
+      .evidence .document {
+        border-left:2px solid var(--gold)
+      }
+
+      details {
+        border-bottom:1px solid var(--line);
+        padding:20px 0
+      }
+
+      summary {
+        cursor:pointer;
+        color:var(--paper);
+        font-size:18px;
+        list-style:none;
+        display:flex;
+        justify-content:space-between;
+        align-items:center
+      }
+
+      summary::after {
+        content:"＋";
+        color:var(--gold)
+      }
+
+      details[open] summary::after {
+        content:"−"
+      }
+
+      details p {
+        color:var(--muted);
+        padding-top:18px;
+        margin-bottom:0
+      }
+
+      .music-section-label {
+        font:70px Georgia,serif;
+        color:#c6a66d3d;
+        margin-right:25px
+      }
+
+      .track {
+        display:grid;
+        grid-template-columns:175px 1fr;
+        gap:38px;
+        align-items:center;
+        padding:45px 0;
+        border-bottom:1px solid var(--line)
+      }
+
+      .record-button {
+        position:relative;
+        width:172px;
+        height:172px;
+        border:1px solid #a5956d;
+        border-radius:50%;
+        background:repeating-radial-gradient(circle,#181818 0 1px,#242321 2px 3px,#111 4px 5px);
+        box-shadow:0 14px 45px #0009;
+        display:grid;
+        place-items:center;
+        transition:transform .3s
+      }
+
+      .record-button:hover {
+        transform:scale(1.04)
+      }
+
+      .record-disc {
+        position:absolute;
+        inset:0;
+        border-radius:50%;
+        animation:record-spin 4s linear infinite;
+        animation-play-state:paused;
+        background:conic-gradient(transparent,#ffffff10,transparent 30%,#ffffff12,transparent);
+        pointer-events:none
+      }
+
+      .record-button .label {
+        position:relative;
+        width:68px;
+        height:68px;
+        border-radius:50%;
+        background:var(--red);
+        display:grid;
+        place-items:center;
+        font:22px Georgia,serif;
+        border:1px solid var(--gold);
+        box-shadow:inset 0 0 0 6px #0002;
+        z-index:2
+      }
+
+      .track.playing .record-disc {
+        animation-play-state:running
+      }
+
+      .record-button .play-symbol {
+        position:absolute;
+        bottom:-34px;
+        font-size:12px;
+        color:var(--gold);
+        width:170px
+      }
+
+      .track h2 {
+        font-size:36px;
+        margin:8px 0 12px
+      }
+
+      .track p {
+        color:var(--muted);
+        max-width:740px;
+        font-size:14px
+      }
+
+      .track .eyebrow {
+        font-size:10px
+      }
+
+      .track-controls {
+        display:flex;
+        gap:18px;
+        align-items:center;
+        font-size:12px;
+        color:var(--gold);
+        margin-top:18px
+      }
+
+      .track-progress {
+        height:4px;
+        flex:1;
+        accent-color:var(--gold);
+        max-width:400px
+      }
+
+      .track-time {
+        min-width:95px;
+        letter-spacing:1px
+      }
+
+      .track-info {
+        min-width:0
+      }
+
+      .track-status {
+        font-size:11px;
+        color:var(--muted);
+        margin-top:10px
+      }
+
+      .track.unavailable .record-button {
+        filter:grayscale(1);
+        opacity:.5
+      }
+
+      .listening-hint {
+        border-top:1px solid var(--line);
+        border-bottom:1px solid var(--line);
+        display:flex;
+        align-items:center;
+        gap:24px;
+        padding:23px 0;
+        font-size:13px;
+        color:var(--muted)
+      }
+
+      .listening-hint b {
+        color:var(--gold);
+        font-size:28px
+      }
+
+      .audio-credit {
+        font-size:11px;
+        color:var(--muted)
+      }
+
+      .timeline {
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        margin:50px 0;
+        border-top:1px solid var(--gold)
+      }
+
+      .timeline-item {
+        padding:30px 25px 0 0;
+        position:relative
+      }
+
+      .timeline-item::before {
+        content:"";
+        position:absolute;
+        top:-5px;
+        left:0;
+        width:9px;
+        height:9px;
+        border-radius:50%;
+        background:var(--gold)
+      }
+
+      .timeline-item strong {
+        font:32px Georgia,serif;
+        color:var(--gold)
+      }
+
+      .timeline-item p {
+        font-size:13px;
+        color:var(--muted);
+        margin-top:12px
+      }
+
+      .legacy-gallery {
+        display:grid;
+        grid-template-columns:1.3fr 1fr;
+        gap:25px;
+        margin-top:35px
+      }
+
+      .legacy-gallery figure {
+        margin:0
+      }
+
+      .legacy-gallery img {
+        height:270px;
+        width:100%;
+        object-fit:cover;
+        border:1px solid var(--line)
+      }
+
+      .legacy-gallery figcaption {
+        font-size:11px;
+        color:var(--muted);
+        margin-top:10px
+      }
+
+      .influence-notes {
+        display:grid;
+        grid-template-columns:1fr 1fr 1fr;
+        gap:30px
+      }
+
+      .influence-notes article {
+        padding:30px 0;
+        border-top:1px solid var(--gold)
+      }
+
+      .influence-notes .big {
+        font:42px Georgia,serif;
+        color:var(--gold)
+      }
+
+      .film-pair {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:40px
+      }
+
+      .film-pair article {
+        display:grid;
+        grid-template-columns:140px 1fr;
+        gap:25px
+      }
+
+      .film-pair img {
+        width:140px;
+        height:210px;
+        object-fit:cover
+      }
+
+      .film-pair p {
+        font-size:13px;
+        color:var(--muted)
+      }
+
+      .legacy-question {
+        border:1px solid var(--line);
+        padding:25px;
+        margin-top:40px
+      }
+
+      .legacy-question button {
+        margin:12px 12px 0 0
+      }
+
+      /* 乐器控制台。实际发声由 instrument-engine.js 管理。 */
+      .instrument-workbench {
+        background:radial-gradient(ellipse at 70% 30%,#4e352c40,transparent),#15120f;
+        border:1px solid var(--line);
+        padding:36px
+      }
+
+      .instrument-tabs {
+        display:flex;
+        gap:14px;
+        margin-bottom:28px
+      }
+
+      .instrument-tabs button {
+        border:1px solid var(--line);
+        padding:13px 24px;
+        flex:1;
+        display:flex;
+        justify-content:space-between
+      }
+
+      .instrument-tabs button[aria-selected="true"] {
+        background:var(--gold);
+        color:var(--bg)
+      }
+
+      .instrument-overview {
+        display:grid;
+        grid-template-columns:1.5fr 1fr;
+        gap:50px;
+        align-items:center;
+        min-height:260px
+      }
+
+      .instrument-art {
+        height:260px;
+        position:relative;
+        display:grid;
+        place-items:center
+      }
+
+      .instrument-art svg {
+        height:245px;
+        width:100%;
+        overflow:visible;
+        filter:drop-shadow(0 15px 22px #0009)
+      }
+
+      .instrument-art .string {
+        stroke:var(--paper);
+        stroke-width:1
+      }
+
+      .instrument-art.sounding .string {
+        animation:string-vibrate .12s linear infinite alternate
+      }
+
+      .instrument-description h2 {
+        font-size:40px;
+        margin-top:0
+      }
+
+      .instrument-description p {
+        font-size:13px;
+        color:var(--muted)
+      }
+
+      .sample-badge {
+        display:inline-flex;
+        color:var(--gold);
+        background:#c6a66d12;
+        border:1px solid var(--line);
+        padding:7px 12px;
+        font-size:12px
+      }
+
+      .synth-badge {
+        color:#e3bba0;
+        border-color:#b38163
+      }
+
+      .instrument-toolbar {
+        padding:24px 0;
+        border-top:1px solid var(--line);
+        display:flex;
+        gap:26px;
+        align-items:center;
+        flex-wrap:wrap
+      }
+
+      .instrument-toolbar label {
+        font-size:12px;
+        color:var(--muted);
+        display:flex;
+        align-items:center;
+        gap:10px
+      }
+
+      .instrument-toolbar input {
+        width:120px;
+        accent-color:var(--gold)
+      }
+
+      .instrument-toolbar select {
+        background:#100e0b;
+        border:1px solid var(--line);
+        color:var(--paper);
+        padding:6px
+      }
+
+      .piano-keys {
+        position:relative;
+        display:flex;
+        height:175px;
+        margin:16px 0 20px;
+        gap:5px
+      }
+
+      .note-key {
+        height:175px;
+        flex:1;
+        background:var(--paper);
+        color:var(--ink);
+        border:0;
+        border-bottom:6px solid #af9d7d;
+        border-radius:0 0 6px 6px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-end;
+        padding-bottom:20px;
+        transition:background .08s,transform .08s
+      }
+
+      .note-key.black {
+        height:112px;
+        background:#171310;
+        color:var(--paper);
+        border:1px solid #8c7550;
+        position:absolute;
+        z-index:3;
+        width:6.8%;
+        top:0;
+        padding-bottom:13px;
+        border-bottom:5px solid #020202
+      }
+
+      .note-key.active {
+        background:var(--gold);
+        transform:translateY(3px);
+        border-bottom-width:3px;
+        box-shadow:0 0 25px #c6a66d50
+      }
+
+      .note-key kbd {
+        font:19px Georgia,serif
+      }
+
+      .note-key small {
+        font:10px Arial,sans-serif;
+        margin-top:8px;
+        letter-spacing:1px
+      }
+
+      .key-guide {
+        display:flex;
+        justify-content:space-between;
+        color:var(--muted);
+        font-size:12px
+      }
+
+      .instrument-log {
+        font:12px Georgia,serif;
+        letter-spacing:2px;
+        color:var(--gold);
+        height:30px;
+        padding-top:8px
+      }
+
+      .sample-upload {
+        margin-top:36px;
+        border-top:1px solid var(--line);
+        padding-top:22px
+      }
+
+      .sample-upload input {
+        font-size:12px;
+        max-width:330px
+      }
+
+      .sample-upload .small {
+        margin-top:10px
+      }
+
+      .signal-meter {
+        display:flex;
+        gap:3px;
+        height:22px;
+        align-items:flex-end;
+        min-width:75px
+      }
+
+      .signal-meter i {
+        display:block;
+        width:4px;
+        background:var(--gold);
+        height:4px;
+        transition:height .2s
+      }
+
+      .signal-meter.sounding i {
+        animation:signal .5s ease-in-out infinite alternate
+      }
+
+      .signal-meter i:nth-child(2n) {
+        animation-delay:.2s!important
+      }
+
+      .signal-meter i:nth-child(3n) {
+        animation-delay:.1s!important
+      }
+
+      /* 原感想与资料段落保持内容不变，只重新排版。 */
+      .reflection-symbols {
+        position:absolute;
+        right:12%;
+        top:130px;
+        font-size:115px;
+        color:#c6a66d22;
+        display:flex;
+        align-items:center;
+        gap:30px
+      }
+
+      .reflection-symbols .heart {
+        color:#7b263480;
+        animation:heart-pulse 2.8s ease-in-out infinite
+      }
+
+      .reflection-symbols .source-paper {
+        font-size:80px;
+        transform:rotate(14deg)
+      }
+
+      .reflection-card {
+        max-width:850px;
+        margin:auto;
+        padding:55px 62px;
+        border:1px solid var(--line);
+        background:#17130f;
+        position:relative
+      }
+
+      .reflection-card::before {
+        content:"“";
+        position:absolute;
+        right:35px;
+        top:5px;
+        font:110px Georgia,serif;
+        color:#c6a66d20
+      }
+
+      .reflection-card p {
+        font-size:15px;
+        color:#d8cebd;
+        margin-bottom:26px;
+        line-height:2.15
+      }
+
+      .reflection-card .opening {
+        font-size:23px;
+        color:var(--paper)
+      }
+
+      .reflection-card .ending {
+        font-size:18px;
+        text-align:center;
+        color:var(--gold)
+      }
+
+      .source-list {
+        display:flex;
+        flex-direction:column;
+        gap:16px
+      }
+
+      .source-item {
+        display:flex;
+        gap:24px;
+        align-items:flex-start;
+        padding:25px;
+        background:#15110e;
+        border:1px solid var(--line)
+      }
+
+      .source-number {
+        color:var(--gold);
+        font:32px Georgia,serif;
+        min-width:45px
+      }
+
+      .source-content {
+        flex:1;
+        min-width:0
+      }
+
+      .source-label {
+        font-size:14px;
+        margin-bottom:7px
+      }
+
+      .source-item a {
+        font:12px/1.8 Arial,sans-serif;
+        color:var(--muted);
+        overflow-wrap:anywhere
+      }
+
+      .reflection-nav {
+        display:flex;
+        gap:30px;
+        padding:25px 0;
+        border-bottom:1px solid var(--line)
+      }
+
+      .reflection-nav a {
+        color:var(--gold);
+        font-size:13px;
+        text-underline-offset:8px
+      }
+
+      .reflection-lamp {
+        position:absolute;
+        left:-12px;
+        top:0;
+        width:2px;
+        height:0;
+        background:var(--gold);
+        transition:height .3s
+      }
+
+      .transition[data-theme="score"] {
+        perspective:1200px
+      }
+
+      .transition[data-theme="score"] .curtain.left {
+        transform-origin:right center;
+        transform:translateX(-103%) rotateY(58deg)
+      }
+
+      .transition[data-theme="score"] .curtain.right {
+        transform-origin:left center;
+        transform:translateX(103%) rotateY(-58deg)
+      }
+
+      .transition[data-theme="score"].closed .curtain {
+        transform:translateX(0) rotateY(0)
+      }
+
+      .scene-frame video {
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        z-index:11
+      }
+
+      .scene-frame .performance-button {
+        z-index:12
+      }
+
+      .source-paper {
+        animation:notation-sway 6s ease-in-out infinite
+      }
+
+      .hero-heart {
+        display:inline-block;
+        animation:heart-pulse 2s ease-in-out infinite
+      }
+
+      @keyframes note-drift {
+        0% {
+          transform:translateY(0) rotate(-20deg);
+          opacity:0
+        }
+        15% {
+          opacity:.1
+        }
+        85% {
+          opacity:.1
+        }
+        100% {
+          transform:translateY(-115vh) rotate(40deg);
+          opacity:0
+        }
+      }
+
+      @keyframes note-pop {
+        from {
+          opacity:.8;
+          transform:translate(-50%,-50%) scale(.6)
+        }
+        to {
+          opacity:0;
+          transform:translate(-50%,-110px) scale(1.4) rotate(20deg)
+        }
+      }
+
+      @keyframes record-spin {
+        to {
+          transform:rotate(360deg)
+        }
+      }
+
+      @keyframes portrait-breathe {
+        50% {
+          transform:rotate(4deg) translateY(-8px)
+        }
+      }
+
+      @keyframes book-left {
+        to {
+          transform:rotateY(0)
+        }
+      }
+
+      @keyframes book-right {
+        to {
+          transform:rotateY(0)
+        }
+      }
+
+      @keyframes intro-away {
+        to {
+          opacity:0;
+          transform:scale(1.07)
+        }
+      }
+
+      @keyframes camera-drift {
+        to {
+          transform:scale(1.09) translate(-1%,-.5%)
+        }
+      }
+
+      @keyframes body-breathe {
+        50% {
+          transform:translateY(-2px) rotate(.25deg)
+        }
+      }
+
+      @keyframes bow-play {
+        to {
+          transform:translateX(24px) rotate(-7deg)
+        }
+      }
+
+      @keyframes practice-bow {
+        50% {
+          transform:translateX(35px) rotate(-9deg)
+        }
+      }
+
+      @keyframes finger-move {
+        to {
+          transform:translateY(2px) rotate(4deg)
+        }
+      }
+
+      @keyframes sheet-flip {
+        50% {
+          transform:rotate(-7deg) rotateY(-90deg)
+        }
+        100% {
+          transform:rotate(-7deg)
+        }
+      }
+
+      @keyframes light-sweep {
+        to {
+          transform:rotate(8deg);
+          opacity:.7
+        }
+      }
+
+      @keyframes notation-sway {
+        50% {
+          transform:translateY(-7px);
+          opacity:.65
+        }
+      }
+
+      @keyframes whisper-pulse {
+        50% {
+          box-shadow:0 0 28px #c6a66d55
+        }
+      }
+
+      @keyframes memory-light {
+        to {
+          filter:sepia(.2) brightness(.85)
+        }
+      }
+
+      @keyframes string-vibrate {
+        to {
+          transform:translateX(1px)
+        }
+      }
+
+      @keyframes signal {
+        to {
+          height:22px
+        }
+      }
+
+      @keyframes heart-pulse {
+        15% {
+          transform:scale(1.1)
+        }
+        30% {
+          transform:scale(1)
+        }
+        45% {
+          transform:scale(1.06)
+        }
+      }
+
+      /* 减少动态同时控制 CSS 与 JS 粒子，内容永远可读。 */
+      html.reduce-motion {
+        scroll-behavior:auto
+      }
+
+      html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after {
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important
+      }
+
+      html.reduce-motion .floating-note,html.reduce-motion .cursor-dot {
+        display:none
+      }
+
+      html.reduce-motion .reveal {
+        opacity:1!important;
+        transform:none!important
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        html {
+          scroll-behavior:auto
+        }
+        *,*::before,*::after {
+          animation-duration:.01ms!important;
+          animation-iteration-count:1!important;
+          transition-duration:.01ms!important
+        }
+        .floating-note,.cursor-dot {
+          display:none
+        }
+        .reveal {
+          opacity:1!important;
+          transform:none!important
+        }
+      }
+
+      /* 本次新增效果只作用于指定三页，不修改原共用 CSS。 */
+      body[data-page="extra"],body[data-page="works"],body[data-page="effects"] {
+        background-image:radial-gradient(ellipse at 80% 16%,#63352324,transparent 43%),radial-gradient(ellipse at 8% 73%,#70263719,transparent 42%);
+        background-attachment:fixed
+      }
+
+      .chapter-hero::after {
+        content:"";
+        position:absolute;
+        right:-7%;
+        top:21%;
+        width:61%;
+        height:170px;
+        background:repeating-linear-gradient(transparent 0 22px,#c6a66d22 23px 24px,transparent 25px 34px);
+        transform:rotate(-13deg);
+        pointer-events:none;
+        opacity:.55
+      }
+
+      .chapter-hero .wrap {
+        position:relative;
+        z-index:1
+      }
+
+      .section {
+        position:relative
+      }
+
+      .section::before {
+        content:"";
+        position:absolute;
+        top:35px;
+        left:-25px;
+        width:110px;
+        height:110px;
+        border-top:1px solid #c6a66d22;
+        border-left:1px solid #c6a66d22;
+        pointer-events:none
+      }
+
+      .family-lead {
+        max-width:790px;
+        font-size:16px;
+        color:#cfc2ad;
+        line-height:2.1
+      }
+
+      .family-opening {
+        display:grid;
+        grid-template-columns:1.12fr 1fr;
+        gap:48px;
+        align-items:center;
+        margin:42px 0 54px
+      }
+
+      .family-opening figure {
+        margin:0;
+        padding:12px;
+        border:1px solid var(--line);
+        transform:rotate(-2deg);
+        background:#17120e
+      }
+
+      .family-opening img {
+        height:285px;
+        width:100%;
+        object-fit:cover
+      }
+
+      .family-opening figcaption {
+        font-size:11px;
+        color:var(--muted);
+        padding:9px 4px 0
+      }
+
+      .family-tree {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:26px;
+        position:relative;
+        padding:14px 0
+      }
+
+      .family-tree::before {
+        content:"";
+        position:absolute;
+        left:24%;
+        right:24%;
+        top:62%;
+        height:1px;
+        background:var(--gold);
+        opacity:.45
+      }
+
+      .family-tree::after {
+        content:"";
+        position:absolute;
+        top:62%;
+        bottom:23%;
+        left:50%;
+        width:1px;
+        background:var(--gold);
+        opacity:.45
+      }
+
+      .family-person {
+        border:1px solid var(--line);
+        padding:23px 14px;
+        text-align:center;
+        background:#19140f;
+        z-index:1
+      }
+
+      .family-person:last-child {
+        grid-column:1 / -1;
+        width:70%;
+        justify-self:center;
+        margin-top:20px;
+        background:#20170f
+      }
+
+      .family-person strong {
+        font-size:17px;
+        font-weight:500;
+        color:var(--paper);
+        display:block
+      }
+
+      .family-person small {
+        font:10px/1.7 Georgia,serif;
+        letter-spacing:1px;
+        color:var(--gold)
+      }
+
+      .family-person span {
+        font-size:11px;
+        color:var(--muted);
+        display:block;
+        margin-top:6px
+      }
+
+      .family-tab-area .archive-tabs {
+        margin-top:0
+      }
+
+      .family-tab-area .archive-paper {
+        min-height:310px;
+        line-height:2.1;
+        padding:38px 45px
+      }
+
+      .family-tab-area .archive-paper p {
+
+        max-width:940px;
+        margin-bottom:17px
+      }
+
+      .family-tab-area .archive-paper h3 {
+        margin-bottom:20px
+      }
+
+      .family-time-label {
+        display:flex;
+        gap:18px;
+        align-items:center;
+        margin-top:50px
+      }
+
+      .family-time-label h3 {
+        margin:0;
+        font-family:"Zhi Mang Xing","KaiTi",cursive;
+        font-size:31px
+      }
+
+      .family-years {
+        display:flex;
+        gap:12px;
+        margin:24px 0
+      }
+
+      .family-years button {
+        flex:1;
+        border:1px solid var(--line);
+        padding:15px 12px;
+        font:22px Georgia,serif;
+        color:var(--gold);
+        background:#19130e;
+        transition:background .2s,transform .2s
+      }
+
+      .family-years button:hover {
+        transform:translateY(-3px)
+      }
+
+      .family-years button[aria-pressed="true"] {
+        background:var(--gold);
+        color:var(--bg)
+      }
+
+      .family-year-detail {
+        display:grid;
+        grid-template-columns:150px 1fr;
+        gap:32px;
+        padding:30px 36px;
+        border:1px solid var(--line);
+        background:linear-gradient(130deg,#39231460,#14110e);
+        min-height:155px;
+        align-items:center
+      }
+
+      .family-year-detail strong {
+        font:44px Georgia,serif;
+        color:var(--gold)
+      }
+
+      .family-year-detail h3 {
+        margin:0 0 8px;
+        color:var(--paper);
+        font-size:18px
+      }
+
+      .family-year-detail p {
+        color:var(--muted);
+        margin:0;
+        font-size:14px
+      }
+
+      .archive-turn {
+        animation:archive-turn .45s ease both
+      }
+
+      .family-postscript {
+        border-left:2px solid var(--gold);
+        padding:0 24px;
+        margin-top:36px;
+        color:var(--muted)
+      }
+
+      /* 保留原播放器，在唱片之外添加唱针和可展开的聆听注记。 */
+      .music-now {
+        display:flex;
+        align-items:center;
+        gap:15px;
+        padding:17px 0;
+        border-bottom:1px solid var(--line);
+        font-size:12px;
+        color:var(--muted)
+      }
+
+      .music-now .now-dot {
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#9a8870;
+        box-shadow:none;
+        transition:box-shadow .3s,background .3s
+      }
+
+      body.work-is-playing .music-now .now-dot {
+        background:var(--gold);
+        box-shadow:0 0 20px #c6a66d99
+      }
+
+      .record-button {
+        transform:perspective(700px) rotateY(var(--record-tilt,0deg));
+        transition:transform .25s,box-shadow .25s
+      }
+
+      .record-button:hover {
+        transform:perspective(700px) rotateY(var(--record-tilt,0deg)) scale(1.035);
+        box-shadow:0 18px 50px #c6a66d18
+      }
+
+      .vinyl-needle {
+        position:absolute;
+        top:-21px;
+        right:-13px;
+        width:5px;
+        height:100px;
+        background:linear-gradient(90deg,#89775d,#e5ce9a);
+        border-radius:3px;
+        transform-origin:50% 8px;
+        transform:rotate(-25deg);
+        transition:transform .6s;
+        z-index:4;
+        pointer-events:none;
+        box-shadow:2px 3px 5px #0008
+      }
+
+      .vinyl-needle::before {
+        content:"";
+        position:absolute;
+        top:2px;
+        left:-7px;
+        width:19px;
+        height:19px;
+        border-radius:50%;
+        background:#74634a;
+        border:2px solid #c6a66d
+      }
+
+      .vinyl-needle::after {
+        content:"";
+        position:absolute;
+        bottom:-8px;
+        left:-4px;
+        width:12px;
+        height:25px;
+        background:#ae9873;
+        transform:rotate(-17deg);
+        border-radius:3px
+      }
+
+      .track.playing .vinyl-needle {
+        transform:rotate(15deg)
+      }
+
+      .play-indicator {
+        display:flex;
+        gap:4px;
+        align-items:center;
+        height:28px;
+        margin-left:auto;
+        min-width:86px
+      }
+
+      .play-indicator i {
+        width:4px;
+        height:4px;
+        background:var(--gold);
+        opacity:.4;
+        transition:opacity .2s
+      }
+
+      .track.playing .play-indicator i {
+        opacity:.85;
+        animation:music-bar .65s ease-in-out infinite alternate;
+        animation-delay:calc(var(--bar-index) * -.08s)
+      }
+
+      .listen-toggle {
+        border:0;
+        border-bottom:1px solid var(--line);
+        padding:9px 0;
+        margin-top:15px;
+        font-size:12px;
+        color:var(--gold);
+        letter-spacing:1px;
+        text-align:left
+      }
+
+      .listen-toggle[aria-expanded="true"] {
+        color:var(--paper);
+        border-color:var(--gold)
+      }
+
+      .work-listen-sheet {
+        margin-top:18px;
+        padding:24px 29px;
+        border:1px solid #d4b78050;
+        color:#e2d4bd;
+        background:repeating-linear-gradient(0deg,transparent 0 32px,#c6a66d0c 33px 34px),#21180f
+      }
+
+      .work-listen-sheet p {
+        font-size:13px;
+        margin:0;
+        color:#e2d4bd;
+        max-width:100%
+      }
+
+      .work-listen-sheet .eyebrow {
+        margin:0 0 8px;
+        color:var(--gold)
+      }
+
+      .track-info>p:not(.eyebrow) {
+        line-height:2.05
+      }
+
+      .track-status {
+        margin-top:12px
+      }
+
+      /* 标志完整呈现：contain 禁止裁切；可再点击查看原比例大图。 */
+      body[data-page="effects"] .legacy-gallery {
+        grid-template-columns:.9fr 1.1fr;
+        gap:38px;
+        align-items:start
+      }
+
+      .competition-logo-frame {
+        position:relative;
+        display:grid;
+        place-items:center;
+        width:100%;
+        padding:28px;
+        background:#efebdf;
+        border:1px solid var(--line);
+        min-height:365px;
+        cursor:zoom-in
+      }
+
+      .legacy-gallery .competition-logo-frame img {
+        width:100%;
+        height:310px;
+        object-fit:contain;
+        object-position:center;
+        border:0;
+        filter:none
+      }
+
+      .competition-logo-frame .logo-caption {
+        display:block;
+        position:absolute;
+        bottom:8px;
+        right:14px;
+        color:#695a40;
+        font-size:10px;
+        letter-spacing:1px
+      }
+
+      body[data-page="effects"] .legacy-gallery .sculpture-figure img {
+        height:365px;
+        object-fit:cover
+      }
+
+      .logo-modal {
+        border:1px solid var(--gold);
+        background:#12100d;
+        color:var(--paper);
+        padding:30px;
+        max-width:740px;
+        max-height:88vh;
+        box-shadow:0 30px 120px #000b
+      }
+
+      .logo-modal::backdrop {
+        background:#050403df;
+        backdrop-filter:blur(8px)
+      }
+
+      .logo-modal img {
+        max-width:620px;
+        width:100%;
+        height:68vh;
+        object-fit:contain;
+        background:#efebdf
+      }
+
+      .logo-modal button {
+        display:block;
+        margin:0 0 18px auto;
+        border:1px solid var(--line);
+        padding:6px 16px;
+        font-size:13px
+      }
+
+      .logo-modal p {
+        margin:14px 0 0;
+        font-size:11px;
+        color:var(--muted)
+      }
+
+      .legacy-year-button {
+        border:0;
+        padding:0 0 5px;
+        text-align:left;
+        color:var(--gold);
+        border-bottom:1px solid transparent
+      }
+
+      .legacy-year-button:hover,.legacy-year-button[aria-pressed="true"] {
+        border-color:var(--gold)
+      }
+
+      .legacy-year-button strong {
+        pointer-events:none
+      }
+
+      .heritage-note {
+        padding:24px 29px;
+        border-left:2px solid var(--gold);
+        background:#c6a66d07;
+        min-height:140px;
+        margin:14px 0 35px
+      }
+
+      .heritage-note h3 {
+        font-family:"Zhi Mang Xing","KaiTi",cursive;
+        font-size:28px;
+        margin:0 0 12px
+      }
+
+      .heritage-note p {
+        margin:0;
+        color:var(--muted);
+        font-size:14px;
+        max-width:900px
+      }
+
+      .influence-notes article {
+        transition:background .25s,transform .25s;
+        padding-left:15px;
+        padding-right:15px
+      }
+
+      .influence-notes article:hover {
+        background:#c6a66d06;
+        transform:translateY(-5px)
+      }
+
+      .film-pair p {
+        line-height:2.05
+      }
+
+      @keyframes archive-turn {
+        from {
+          opacity:.35;
+          transform:translateY(7px) rotateX(-5deg)
+        }
+        to {
+          opacity:1;
+          transform:none
+        }
+      }
+
+      @keyframes music-bar {
+        to {
+          height:25px
+        }
+      }
+
+      .journey-panel {
+        width:340px;
+        padding:25px
+      }
+
+      .journey-panel ol {
+        list-style:none;
+        padding:0
+      }
+
+      .journey-panel li {
+        padding:0;
+        margin:5px 0
+      }
+
+      .journey-panel li.current::after {
+        display:none
+      }
+
+      .journey-panel a {
+        display:grid;
+        grid-template-columns:25px 1fr 14px;
+        gap:12px;
+        align-items:center;
+        padding:10px 12px;
+        text-decoration:none;
+        border:1px solid transparent;
+        transition:background .2s,transform .2s
+      }
+
+      .journey-panel a:hover,.journey-panel a:focus-visible {
+        background:#c6a66d15;
+        border-color:#c6a66d65;
+        transform:translateX(3px)
+      }
+
+      .journey-panel a[aria-current] {
+        color:#eee5d5;
+        border-color:#c6a66d55;
+        background:#c6a66d09
+      }
+
+      .directory-number {
+        font:11px Georgia,serif;
+        color:#c6a66d
+      }
+
+      .note-field .floating-note {
+        font-size:56px
+      }
+
+      .transition.active.closed {
+        pointer-events:auto
+      }
+    
+  .story-interlude,.style-break{position:relative;margin:40px auto;padding:26px 32px;border-left:3px solid rgba(229,197,138,.8);border-radius:0 22px 22px 0;background:linear-gradient(115deg,rgba(198,166,109,.11),rgba(23,20,16,.8));overflow:hidden}
+  .story-interlude::before,.style-break::before{content:'𝄞';position:absolute;right:10px;top:-35px;font:180px Georgia,serif;opacity:.07;pointer-events:none;color:#f2d5a3}
+  .story-interlude h3,.style-break h3{margin:0 0 12px;font:400 40px/1.3 'Zhi Mang Xing','KaiTi',serif;color:#ead4ae}
+  .story-interlude p,.style-break p{max-width:82ch}
+  .story-interlude .btn,.style-break .btn{margin-top:8px}
+ 
+
+
+/* ===== 全站精修：动态转场、章节漫游与响应式 ===== */
+:root{--cinema-gold:#e5c58a;--cinema-ink:#130e0b}
+html{scroll-padding-top:92px}
+button,a{transition:filter .24s ease,box-shadow .24s ease,transform .24s ease}
+a:hover,button:not(:disabled):hover{filter:brightness(1.12)}
+section[id]{scroll-margin-top:98px}
+.immersive-skip{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.immersive-skip:focus{left:16px;top:12px;width:auto;height:auto;z-index:100000;padding:10px;background:#fff;color:#000}
+.cinema-portal{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;pointer-events:none;opacity:0;visibility:hidden;background:#0c0908;overflow:hidden;transition:opacity .27s ease,visibility .27s ease}
+.cinema-portal.is-active{opacity:1;visibility:visible;pointer-events:all}
+.cinema-portal .portal-blur{position:absolute;inset:-10%;background:radial-gradient(circle at center,rgba(198,166,109,.16),transparent 38%),linear-gradient(45deg,#100b08,#241811,#100b08);animation:cinemaMist 1.8s ease-in-out infinite alternate}
+.cinema-portal .portal-symbol{position:absolute;font:400 clamp(110px,16vw,250px)/1 Georgia,serif;opacity:.22;color:var(--cinema-gold);filter:drop-shadow(0 0 26px rgba(198,166,109,.2));animation:cinemaSymbol .95s cubic-bezier(.1,.7,.3,1) both}
+.cinema-portal .portal-sheet{position:absolute;width:min(700px,72vw);height:55vh;border-left:2px solid rgba(198,166,109,.3);border-right:2px solid rgba(198,166,109,.3);opacity:.17;background:repeating-linear-gradient(transparent 0,transparent 20px,rgba(240,214,164,.4) 21px,transparent 22px);transform:rotate(-7deg)}
+.cinema-portal .portal-copy{position:relative;z-index:2;text-align:center;padding:36px;max-width:86vw}
+.cinema-portal .portal-small{display:block;font:600 12px/2 sans-serif;color:#c8ad81;letter-spacing:.35em}
+.cinema-portal .portal-title{font-family:'Zhi Mang Xing','KaiTi',serif;font-size:clamp(38px,5vw,82px);color:#f3e4c9;margin:6px 0 14px;line-height:1.25}
+.cinema-portal .portal-subtitle{font-size:15px;color:#c1ad90;letter-spacing:.12em}
+.cinema-portal[data-theme=stage] .portal-blur{background:radial-gradient(ellipse at center,rgba(208,163,79,.35),transparent 30%),linear-gradient(90deg,#370a16 0%,#130b0d 22%,#1a0e0d 50%,#130b0d 78%,#370a16 100%)}
+.cinema-portal[data-theme=manuscript] .portal-blur{background:linear-gradient(130deg,#2e241b,#110e0b),repeating-linear-gradient(0deg,transparent 0 24px,rgba(235,206,139,.05) 25px 26px)}
+.cinema-portal[data-theme=violin] .portal-blur{background:radial-gradient(ellipse at center,rgba(150,81,37,.32),transparent 33%),linear-gradient(140deg,#1d140d,#090809)}
+.cinema-portal[data-theme=legacy] .portal-blur{background:radial-gradient(circle at 50% 40%,rgba(82,72,101,.37),transparent 42%),linear-gradient(135deg,#11121c,#090909)}
+.cinema-portal[data-theme=instrument] .portal-blur{background:radial-gradient(circle at 50% 42%,rgba(152,106,43,.3),transparent 44%),linear-gradient(135deg,#2b2212,#080909)}
+.cinema-portal[data-theme=reflect] .portal-blur{background:radial-gradient(circle at 50% 30%,rgba(134,48,51,.21),transparent 42%),linear-gradient(135deg,#1c1116,#090909)}
+.cinema-portal[data-theme=score] .portal-sheet{opacity:.36;transform:rotate(-12deg)}
+.cinema-portal[data-theme=manuscript] .portal-sheet{opacity:.26;transform:rotate(5deg)}
+.cinema-portal[data-theme=legacy] .portal-symbol{animation:cinemaEcho 1s ease both}
+@keyframes cinemaSymbol{from{transform:scale(.3) rotate(-30deg);opacity:0}to{transform:scale(1) rotate(0deg);opacity:.22}}
+@keyframes cinemaEcho{from{transform:scale(2);opacity:0}to{transform:scale(1);opacity:.2}}
+@keyframes cinemaMist{from{transform:scale(1)}to{transform:scale(1.06)}}
+.cinema-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:2000;background:linear-gradient(90deg,#a56837,#e6c68b,#f5e1ba);pointer-events:none}
+.scroll-reveal-extra{opacity:0;transform:translateY(34px);filter:blur(6px);transition:opacity .85s ease,transform .85s ease,filter .85s ease}
+.scroll-reveal-extra.in-view{opacity:1;transform:none;filter:blur(0)}
+.cinema-menu{position:fixed;right:18px;bottom:22px;z-index:65;background:rgba(20,15,11,.9);color:#eddcc2;border:1px solid rgba(208,171,110,.5);border-radius:999px;padding:10px 17px;font-size:13px;backdrop-filter:blur(9px);box-shadow:0 10px 36px rgba(0,0,0,.38)}
+.cinema-menu:hover{transform:translateY(-2px);background:#2c2119}
+.cinema-menu-panel{position:fixed;right:18px;bottom:72px;width:min(360px,calc(100vw - 36px));max-height:72vh;overflow:auto;z-index:66;background:rgba(18,14,11,.97);border:1px solid rgba(198,166,109,.4);border-radius:22px;padding:20px;box-shadow:0 24px 55px rgba(0,0,0,.5)}
+.cinema-menu-panel[hidden]{display:none!important}
+.cinema-menu-panel h3{margin:0 0 12px;font:400 30px/1.2 'Zhi Mang Xing','KaiTi',serif}
+.cinema-menu-panel a{display:flex;align-items:center;justify-content:space-between;padding:11px 9px;border-bottom:1px solid rgba(198,166,109,.15);color:#eadbc2;text-decoration:none;font-size:14px}
+.cinema-menu-panel a[aria-current=page]{color:#f5d29b;background:rgba(198,166,109,.08)}
+.cinema-menu-panel a:hover{background:rgba(198,166,109,.13)}
+.immersive-note{display:block;font-size:13px;color:#b7a590;margin-top:14px}
+@media(max-width:950px){body{min-width:0!important}.wrap,.section{max-width:100%!important}.site-header{padding:12px 18px!important}.chapter-hero h1,.hero h1{font-size:clamp(40px,8vw,70px)!important}.period,.period:nth-child(even),.hero,.sample-panel,.scene-grid,.feature-grid{grid-template-columns:1fr!important}.period:nth-child(even) .photo{order:0!important}.period:nth-child(even) .copy{order:1!important}.chapter-hero{overflow:hidden}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.rg-canvas{height:300px}.cover-copy{max-width:100%}}
+@media(max-width:600px){.section{padding-inline:18px!important}.hero{padding:54px 20px!important}.hero h1{font-size:44px!important}.timeline{padding:0 16px}.period{padding:18px}.portal-grid{grid-template-columns:1fr}.rg-header{display:block}.rg-keys button{min-height:56px}.cinema-menu{bottom:12px;right:12px}.site-header .header-actions{gap:3px}.cover h1{font-size:clamp(48px,12vw,70px)!important}.cover-bottom{display:block!important}.cover-portrait{opacity:.6!important}}
+@media(prefers-reduced-motion:reduce){.cinema-portal .portal-blur,.cinema-portal .portal-symbol{animation:none!important}.scroll-reveal-extra{opacity:1!important;transform:none!important;filter:none!important}}
+
+</style>
+  </head>
+  <body data-page="extra" data-enter="curtain">
+    <a class="skip" href="#main">跳到主要内容</a>
+    <header class="site-header">
+      <a
+        class="wordmark"
+        href="../index.html"
+        data-transition="score"
+        aria-label="关于帕格尼尼，返回封页"
+      >
+        <b aria-hidden="true">𝄞</b>
+        <span>PAGANINI <small>1782 — 1840</small></span>
+      </a>
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          type="button"
+          data-motion-toggle
+          aria-label="减少动态效果"
+          aria-pressed="false"
+        >✦</button>
+        <button
+          class="icon-button"
+          type="button"
+          data-mute-toggle
+          aria-label="静音并停止声音"
+          aria-pressed="false"
+        >♪</button>
+      </div>
+    </header>
+    <div class="read-progress" aria-hidden="true"></div>
+    <aside id="journey-panel" class="journey-panel" hidden>
+      <h2>这一段旅程</h2>
+      <ol>
+        <li class="">关于帕格尼尼</li>
+        <li class="">人生体验</li>
+        <li class="current">深入了解帕格尼尼</li>
+        <li class="">著名作品</li>
+        <li class="">对后世的影响</li>
+        <li class="">乐器体验平台</li>
+        <li class="">感想与资料来源</li>
+      </ol>
+      <p class="small">每页下方继续下一部分。<br>♪ 声音控制　✦ 减少动态效果</p>
+    </aside>
+    <div class="note-field" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <main id="main" tabindex="-1">
+      <section class="chapter-hero">
+        <div class="chapter-number" aria-hidden="true">02</div>
+        <div class="wrap">
+          <p class="eyebrow">02 / BEHIND THE LEGEND</p>
+          <h1>深入了解帕格尼尼</h1>
+          <div class="rule"></div>
+          <p class="intro">当舞台的灯光熄灭，我们才有机会重新认识那个真实的帕格尼尼。</p>
+        </div>
+      </section>
+      <section class="section wrap two-col reveal">
+        <figure class="archive-image">
+          <img src="../assets/images/antonio-portrait.png" alt="原包提供的安东尼奥人物示意图">
+          <figcaption>父亲形象示意 · 不当作有鉴定的历史肖像</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">01 / A FATHER’S AMBITION</p>
+          <h2>父亲的执着</h2>
+          <p>安东尼奥希望儿子成为出色的音乐家。音乐启蒙既带来机会，也伴随着严苛的训练。官方生平提到，年幼的帕格尼尼经历了长时间学习与生活上的艰难。</p>
+          <p class="muted">后世传记中还有不给食物等惩罚的描述。这些叙述的来源和可信程度并不相同，不能把每一段故事都视作完整的事实。我们可以承认训练对技巧的影响，也不必把苛刻的教育美化成成功的必要条件。</p>
+          <p class="muted">这一段成长也提醒我们，训练不只是重复动作。年幼的音乐家还需要理解音准、节奏与声音的变化，并在不同老师的指导下逐渐建立自己的判断。父亲为他打开了音乐世界的大门，后来属于他的探索，则让这扇门不断向外延伸。</p>
+          <div class="note-box">天赋、老师的指导、个人探索和长期实践，都参与了他的成长。一个“严父培养天才”的故事，并不能解释他的全部人生。</div>
+        </div>
+      </section>
+      <section class="section wrap reveal">
+        <p class="eyebrow">02 / MORE THAN A VIOLINIST</p>
+        <h2>不只有小提琴</h2>
+        <p class="section-lead">点开三份乐器档案，看看舞台之外的音乐经验。</p>
+        <div data-tabs>
+          <div class="archive-tabs" role="tablist" aria-label="乐器历史">
+            <button
+              id="archive-mandolin-tab"
+              type="button"
+              role="tab"
+              data-archive-tab
+              aria-controls="archive-mandolin"
+              aria-selected="true"
+            >曼陀林</button>
+            <button
+              id="archive-violin-tab"
+              type="button"
+              role="tab"
+              data-archive-tab
+              aria-controls="archive-violin"
+              aria-selected="false"
+              tabindex="-1"
+            >小提琴</button>
+            <button
+              id="archive-guitar-tab"
+              type="button"
+              role="tab"
+              data-archive-tab
+              aria-controls="archive-guitar"
+              aria-selected="false"
+              tabindex="-1"
+            >吉他</button>
+          </div>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="archive-mandolin"
+            aria-labelledby="archive-mandolin-tab"
+          >
+            <p class="eyebrow">THE FIRST STRING</p>
+            <h3>曼陀林：最早的启蒙</h3>
+            <p>根据 Premio Paganini，他最早在父亲指导下接触曼陀林，之后继续学习小提琴和吉他。曼陀林的成对琴弦与拨弦声音，让这段音乐启蒙有了具体的触感。</p>
+            <p>从短促的拨弦声开始，他接触了旋律、节拍与音高。曼陀林在这里并不是一个与小提琴无关的插曲，而是他早期音乐经验的一部分，也让我们看见家庭环境怎样影响一个孩子接近音乐的方式。</p>
+          </article>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="archive-violin"
+            aria-labelledby="archive-violin-tab"
+            hidden
+          >
+            <p class="eyebrow">THE PUBLIC STAGE</p>
+            <h3>小提琴：探索表现的边界</h3>
+            <p>速度、双音、泛音、左手拨弦与惊人的弓法，为小提琴带来了新的想象。他不仅是一位技巧出众的演奏者，也用作品让后来的音乐家继续练习、研究与创造。</p>
+            <p>他的演奏让人重新思考独奏乐器能做到什么：同一把琴可以发出歌唱般的旋律，也可以交织快速音型和多个声部。技术的意义不仅在于“难”，还在于让声音有更多层次，让听众在惊讶之后仍然愿意继续聆听。</p>
+          </article>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="archive-guitar"
+            aria-labelledby="archive-guitar-tab"
+            hidden
+          >
+            <p class="eyebrow">THE PRIVATE ROOM</p>
+            <h3>吉他：安静而细腻的一面</h3>
+            <p>他深入学习吉他并留下不少独奏与室内乐作品。官方生平称，他掌握这件乐器，却没有像小提琴那样把它作为公开演出的主角。聆听这些作品，会遇见一个比较亲密的音乐世界。</p>
+            <p>吉他短小的乐曲、柔和的拨弦和清楚的伴奏，提供了另一种观看帕格尼尼的角度。他并非只会在大型舞台上追求轰动，也能够用较简洁的音乐材料表现旋律的亲切与细腻。不同乐器，让同一位音乐家拥有不同的表达空间。</p>
+          </article>
+        </div>
+        <p class="source-note">生平档案：<a href="https://www.premiopaganini.it/history/niccolo-paganini" target="_blank" rel="noopener noreferrer">Premio Paganini · Niccolò Paganini</a></p>
+      </section>
+      <section class="section wrap reveal">
+        <p class="eyebrow">03 / MYTH & EVIDENCE</p>
+        <h2>与恶魔交易的传说</h2>
+        <p class="section-lead">惊人的技巧与消瘦的外形，加上舞台表演和传闻的传播，逐渐形成“魔鬼小提琴手”的形象。背景中的恶魔，是传说的象征。</p>
+        <p class="section-lead">当一种声音超出了听众熟悉的经验，人们往往需要一个容易记住的解释。传闻被反复讲述之后，便可能比音乐家本人更加醒目。理解这段历史，需要同时看到当时观众的惊奇，以及舞台背后可以研究的技巧与训练。</p>
+        <div class="evidence">
+          <article class="legend">
+            <p class="eyebrow">THE LEGEND</p>
+            <h3>“只有恶魔能做到？”</h3>
+            <p class="muted">这是观众用神秘故事解释陌生技巧的一种方式。戏剧与电影后来也不断使用这份想象。</p>
+          </article>
+          <article class="document">
+            <p class="eyebrow">THE EVIDENCE</p>
+            <h3>技巧可以学习与研究</h3>
+            <p class="muted">他的演奏涉及训练、技巧组合、身体条件与舞台表达。没有可靠证据证明所谓的恶魔交易。</p>
+            <p class="muted">今天留下来的作品和演奏研究，让我们可以分析音型、弓法与手指配合。越具体地理解音乐，就越能把神秘标签背后的艺术工作重新看清楚。</p>
+          </article>
+        </div>
+        <details>
+          <summary>现代医学提出过什么猜测？</summary>
+          <p>研究者曾依据历史文字和身体外观，讨论马凡氏综合征（Marfan syndrome）或埃勒斯－当洛斯综合征（Ehlers-Danlos syndromes）的可能性。这是对历史人物的回顾性假说，不是经过现代检查的确诊；也不能用它来解释全部艺术成就。</p>
+        </details>
+        <details>
+          <summary>这两类疾病为什么会被提及？</summary>
+          <p>它们都与结缔组织有关，但不是同一种疾病。马凡氏综合征常涉及骨骼、眼睛与心血管；某些埃勒斯－当洛斯综合征类型可有较明显的关节活动过度。长手指或灵活关节本身不足以诊断任何一种。不同类型的特征也不能简单合并成一张“天才特征表”。</p>
+          <p>讨论历史人物的身体状况，还需要考虑材料的限制：画像可能经过艺术处理，传记可能带有夸张，而现代检查资料并不存在。因此，描述身体特征、提出一种可能性与确诊疾病，是三种不同层次的说法。</p>
+        </details>
+        <p class="source-note">医学史：<a href="https://pubmed.ncbi.nlm.nih.gov/18949172/" target="_blank" rel="noopener noreferrer">Miranda 等（2008）研究摘要</a> · 医学背景：<a href="https://medlineplus.gov/genetics/condition/marfan-syndrome/" target="_blank" rel="noopener noreferrer">MedlinePlus：Marfan syndrome</a> / <a href="https://medlineplus.gov/genetics/condition/ehlers-danlos-syndrome/" target="_blank" rel="noopener noreferrer">Ehlers-Danlos syndrome</a></p>
+      </section>
+      <section class="section wrap reveal">
+        <p class="eyebrow">04 / THE LAST ARCHIVE</p>
+        <h2>他究竟死于什么？</h2>
+        <div class="two-col">
+          <div>
+            <p>帕格尼尼晚年健康恶化，严重的喉部问题让他说话困难。他于 1840 年 5 月 27 日在尼斯去世，享年 57 岁。</p>
+            <p class="muted">历史与医学史研究曾讨论肺结核、梅毒、治疗造成的汞暴露等解释。证据并不一致，现有资料无法让我们把一个简单的死因写成确定答案。</p>
+            <p class="muted">阅读这些解释时，可以先问三个问题：资料由谁记录？记录发生在什么时候？它描述的是当时观察到的症状，还是后来研究者作出的推断？这些问题能帮助我们尊重证据，也保留历史中尚未被填补的空白。</p>
+            <p class="muted">部分研究报告提及头发样本的汞含量。检测结果不等于已经证明汞中毒致死，也不能单凭它确定暴露来源、时间与影响。</p>
+          </div>
+          <div class="archive-paper">
+            <p class="eyebrow">THE ARCHIVE REMAINS OPEN</p>
+            <h3>哪些内容可以确定？</h3>
+            <p>死亡日期、地点和晚年失声有历史记载。具体疾病、身体条件的解释与单一死因，则需要保留疑问。</p>
+            <button
+              class="btn"
+              type="button"
+              data-reveal-answer="death-answer"
+              aria-expanded="false"
+            >翻开最后的注记</button>
+            <p id="death-answer" hidden style="margin-top:20px">传奇留下了音乐，历史也留下了空白。认识一个人，有时也意味着承认我们还不知道。</p>
+          </div>
+        </div>
+        <p class="source-note">延伸阅读：<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2639882/" target="_blank" rel="noopener noreferrer">《Nicolò Paganini (1782–1840)》医学史文章</a>。该文章个别日期与官方生平不一致，本项目的逝世日期采用官方的 5 月 27 日。</p>
+      </section>
+      <section class="section wrap reveal" id="family-archive">
+        <p class="eyebrow">05 / LOVE, FAMILY &amp; INHERITANCE</p>
+        <h2>帕格尼尼的伴侣与后代</h2>
+        <p class="family-lead">舞台上的帕格尼尼被无数目光注视，舞台之外，他也有亲密关系、父亲的责任，以及对身后安排的考虑。沿着伴侣、儿子与遗产这三条线索，传奇逐渐成为一段可以触摸的家庭故事。</p>
+        <div class="family-opening">
+          <figure>
+            <img src="../assets/images/life/scene06.02.jpg" alt="两人交谈的艺术化场景">
+            <figcaption>舞台之外的关系 · 情境示意，并非历史人物照片</figcaption>
+          </figure>
+          <div>
+            <p class="eyebrow">A FAMILY BEHIND THE NAME</p>
+            <div class="family-tree" aria-label="帕格尼尼与比安奇育有儿子阿基莱">
+              <div class="family-person">
+                <strong>尼科洛·帕格尼尼</strong>
+                <small>NICCOLÒ PAGANINI</small>
+                <span>小提琴家 · 父亲</span>
+              </div>
+              <div class="family-person">
+                <strong>安东尼娅·比安奇</strong>
+                <small>ANTONIA BIANCHI</small>
+                <span>女歌手 · 伴侣</span>
+              </div>
+              <div class="family-person">
+                <strong>阿基莱·西罗·亚历山大·帕格尼尼</strong>
+                <small>ACHILLE CIRO ALESSANDRO PAGANINI</small>
+                <span>1825—1895 · 儿子与遗产继承人</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="family-tab-area" data-tabs>
+          <div class="archive-tabs" role="tablist" aria-label="伴侣与后代资料">
+            <button
+              id="family-partner-tab"
+              role="tab"
+              type="button"
+              data-archive-tab
+              aria-selected="true"
+              aria-controls="family-partner"
+            >伴侣</button>
+            <button
+              id="family-son-tab"
+              role="tab"
+              type="button"
+              data-archive-tab
+              aria-selected="false"
+              aria-controls="family-son"
+              tabindex="-1"
+            >儿子</button>
+            <button
+              id="family-legacy-tab"
+              role="tab"
+              type="button"
+              data-archive-tab
+              aria-selected="false"
+              aria-controls="family-legacy"
+              tabindex="-1"
+            >后代与遗产</button>
+          </div>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="family-partner"
+            aria-labelledby="family-partner-tab"
+          >
+            <p class="eyebrow">ANTONIA BIANCHI / A SHARED CHAPTER</p>
+            <h3>一段亲密关系，也是一段人生变化</h3>
+            <p>1824 年，帕格尼尼与女歌手安东尼娅·比安奇相识并开始共同生活；中文资料亦见安德莉亚等译名，本页统一采用 Antonia Bianchi。两人的关系发生在他音乐事业持续发展的时期，使舞台之外的生活也有了新的重心。</p>
+            <p>两人并未正式结婚，约在 1828 年分离。帕格尼尼取得儿子阿基莱的抚养权，随后带着孩子进行欧洲巡演。关系的结束并没有让这段经历从他的生命中消失，因为共同的孩子仍然把音乐家与一份长期的家庭责任连接起来。</p>
+            <p>认识这段关系，不必把它简化成电影中的浪漫桥段。艺术家的生活同样需要面对相处、分离、照顾孩子与安排生活等具体问题；这些事情，也构成了帕格尼尼不常被舞台传说提及的一面。</p>
+          </article>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="family-son"
+            aria-labelledby="family-son-tab"
+            hidden
+          >
+            <p class="eyebrow">ACHILLE / 1825—1895</p>
+            <h3>巡演路上的孩子，晚年身边的陪伴</h3>
+            <p>阿基莱·西罗·亚历山大·帕格尼尼于 1825 年出生，1895 年去世，是帕格尼尼与比安奇的儿子。父亲非常疼爱他，并把他带在身边，使他的童年与音乐家的欧洲旅途紧密相连。</p>
+            <p>写给多尼采蒂的书信中，帕格尼尼谈到儿子给自己带来的快乐，也提及孩子会说德语、能够帮助翻译。从这些生活细节，可以看见舞台上的演奏者在孩子面前成为一位关心成长、珍惜亲情的父亲。</p>
+            <p>在帕格尼尼健康恶化、说话困难的晚年，阿基莱仍然陪在身边。1837 年，帕格尼尼为他办妥合法化身份；这里的“合法化”指确认亲生儿子的法律身份，与父子关系及身后继承安排有关。</p>
+          </article>
+          <article
+            class="archive-paper"
+            role="tabpanel"
+            id="family-legacy"
+            aria-labelledby="family-legacy-tab"
+            hidden
+          >
+            <p class="eyebrow">INHERITANCE / THE STORY AFTER 1840</p>
+            <h3>继承的不只有财富，还有记忆</h3>
+            <p>帕格尼尼在遗嘱中指定阿基莱为全权继承人，同时对姐妹以及孩子的母亲等人作出财产安排。这些安排显示，他关心的不只是艺术声望，也包括亲属在自己离世后的生活。</p>
+            <p>1840 年父亲逝世后，阿基莱承担了保存家族与艺术遗产的责任。书信、手稿与个人物品帮助后来的人认识音乐家的生活；保留这些材料，也让帕格尼尼的故事能够超越传闻，被继续研究和理解。</p>
+            <p>1876 年，阿基莱推动在帕尔马的维莱塔墓地（Villetta cemetery）建立父亲的纪念墓。墓地与纪念碑为这段经历留下了可以访问的地点，而作品、文献与后人的保存工作，则使音乐家的影响继续走向更长的时间。</p>
+          </article>
+        </div>
+        <div class="family-time-label">
+          <p class="eyebrow">FOLLOW THE YEARS</p>
+          <h3>点开一年的家庭记忆</h3>
+        </div>
+        <div class="family-years" aria-label="家庭时间线">
+          <button
+            type="button"
+            data-family-year="1824"
+            data-family-title="伴侣相识"
+            data-family-text="帕格尼尼与女歌手安东尼娅·比安奇开始共同生活。音乐事业之外，一段亲密关系进入了他的日常。"
+            aria-pressed="true"
+          >1824</button>
+          <button
+            type="button"
+            data-family-year="1825"
+            data-family-title="儿子阿基莱出生"
+            data-family-text="阿基莱的出生让帕格尼尼成为父亲。这个孩子后来随父亲巡演，也陪伴他走过生命最后的岁月。"
+            aria-pressed="false"
+          >1825</button>
+          <button
+            type="button"
+            data-family-year="1828"
+            data-family-title="分离与抚养安排"
+            data-family-text="两人约在这一年分离，帕格尼尼取得孩子的抚养权。欧洲巡演与照顾儿子的责任，此后同时进入他的生活。"
+            aria-pressed="false"
+          >1828</button>
+          <button
+            type="button"
+            data-family-year="1837"
+            data-family-title="身份合法化与身后安排"
+            data-family-text="帕格尼尼为亲生儿子办妥合法化身份，并留下最终遗嘱。这些事务让父亲的关怀成为明确的安排。"
+            aria-pressed="false"
+          >1837</button>
+          <button
+            type="button"
+            data-family-year="1876"
+            data-family-title="纪念墓建立"
+            data-family-text="阿基莱推动在帕尔马维莱塔墓地建立父亲的纪念墓。保存遗物与建立纪念之地，都是让记忆延续的方式。"
+            aria-pressed="false"
+          >1876</button>
+        </div>
+        <div
+          class="family-year-detail"
+          id="family-year-detail"
+          role="status"
+          aria-live="polite"
+        >
+          <strong id="family-year">1824</strong>
+          <div>
+            <h3 id="family-year-title">伴侣相识</h3>
+            <p id="family-year-text">帕格尼尼与女歌手安东尼娅·比安奇开始共同生活。音乐事业之外，一段亲密关系进入了他的日常。</p>
+          </div>
+        </div>
+        <p class="family-postscript">作品让世界记住他的声音，家人的保存工作则让后人看见声音背后的生活。讨论“遗产”时，财富、乐谱、书信、纪念地点与人与人之间的照顾，都值得被放在同一张历史地图上。</p>
+        <p class="source-note">资料：<a href="https://www.treccani.it/enciclopedia/niccolo-paganini_%28Dizionario-Biografico%29/" target="_blank" rel="noopener noreferrer">Treccani 生平</a> · <a href="https://www.premiopaganini.it/history/niccolo-paganini" target="_blank" rel="noopener noreferrer">Premio Paganini 书信与生平</a> · <a href="https://paganini.com/legend/" target="_blank" rel="noopener noreferrer">身份与遗嘱线索</a> · <a href="https://www.adespa.it/servizi-per-i-cittadini/valorizzazione-culturale-cimiteri/cimitero-monumentale-percorso-6-gli-stili/monumento-a-niccolo-paganini-1876/" target="_blank" rel="noopener noreferrer">帕尔马墓地管理方：1876 年纪念墓</a></p>
+      </section>
+      <section class="next-part">
+        <p class="eyebrow">THE NEXT MOVEMENT</p>
+        <h2>作曲风格</h2>
+        <p>把传说暂时放下，听见音乐本身。</p>
+        <a class="btn primary" href="../music/style.html" data-transition="score">继续下一部分 · 作曲风格 <span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span>NICCOLÒ PAGANINI · HIS MUSIC LIVES ON</span>
+      <a href="../index.html" data-transition="score">返回封页 ↑</a>
+    </footer>
+    <div class="transition" aria-hidden="true">
+      <div class="curtain left"></div>
+      <div class="curtain right"></div>
+      <div class="transition-badge">𝄞<br><small>LA MUSIQUE CONTINUE</small></div>
+    </div>
+    <div class="toast" role="status" aria-live="polite" hidden></div>
+    <noscript>
+      <p class="note-box wrap">此浏览器未启用 JavaScript。你仍可阅读文字并使用下一页链接；互动、合成旁白与键盘演奏需要启用 JavaScript。</p>
+    </noscript>
+    <script id="paganini-combined-script">
+      (() => {
+        if (window.paganiniDirectoryReady) return;
+        const panel = document.getElementById("journey-panel");
+        const home = document.querySelector(".wordmark[href]");
+        if (!panel || !home) return;
+        window.paganiniDirectoryReady = true;
+
+        // 从已有的返回封页链接判断根目录，根页面和子文件夹都能使用。
+        const root = new URL(home.getAttribute("href"), window.location.href);
+        const routes = [
+          ["关于帕格尼尼", "index.html"],
+          ["人生体验", "life/begining.html"],
+          ["深入了解帕格尼尼", "beihou/extra.html"],
+          ["著名作品", "music/works.html"],
+          ["对后世的影响", "effects/effects.html"],
+          ["乐器体验平台", "instrument/instrument.html"],
+          ["感想与资料来源", "reflection.sumber.html"]
+        ];
+        panel.querySelectorAll("ol > li").forEach((item, i) => {
+          if (!routes[i]) return;
+          const link = document.createElement("a");
+          link.href = new URL(routes[i][1], root).href;
+          link.dataset.directoryRoute = "true";
+          link.innerHTML = `<span class="directory-number">0${i + 1}</span><span>${routes[i][0]}</span><span aria-hidden="true">↗</span>`;
+          if (item.classList.contains("current")) link.setAttribute("aria-current", "location");
+          item.replaceChildren(link);
+        });
+        const hint = panel.querySelector(".small");
+        if (hint) hint.innerHTML = "点击目录即可进入对应部分。<br>♪ 声音控制　✦ 减少动态效果";
+
+        
+
+        // 目录使用自己的导航事件，复用原来的幕布与音频总线。
+        let leaving = false;
+        panel.addEventListener("click", event => {
+          const link = event.target.closest("a[data-directory-route]");
+          if (!link || event.defaultPrevented || event.button > 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          if (leaving) return;
+          leaving = true;
+          window.Paganini?.audio.stopAll();
+          panel.hidden = true;
+          document.querySelector(".journey-toggle")?.setAttribute("aria-expanded", "false");
+          const curtain = document.querySelector(".transition");
+          if (curtain) {
+            curtain.dataset.theme = "curtain";
+            curtain.classList.add("active");
+            void curtain.offsetWidth;
+            curtain.classList.add("closed");
+          }
+          const reduced = window.Paganini?.isReduced() || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          setTimeout(() => window.location.assign(link.href), reduced ? 30 : 650);
+        });
+        window.addEventListener("pageshow", event => {
+          leaving = false;
+          if (event.persisted) document.querySelector(".transition")?.classList.remove("active", "closed");
+        });
+      })();
+
+      /* 不创建新的音频播放器；沿用原来的互斥播放与停止逻辑。 */
+      (() => {
+        function initPageEffects() {
+          const $ = s => document.querySelector(s);
+          const $$ = s => [...document.querySelectorAll(s)];
+          const turn = element => {
+            if (!element) return;
+            element.classList.remove("archive-turn"); void element.offsetWidth;
+            element.classList.add("archive-turn");
+          };
+          $$('[data-family-year]').forEach(button => button.addEventListener('click', () => {
+            $$('[data-family-year]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+            $('#family-year').textContent = button.dataset.familyYear;
+            $('#family-year-title').textContent = button.dataset.familyTitle;
+            $('#family-year-text').textContent = button.dataset.familyText;
+            turn($('#family-year-detail'));
+          }));
+          $$('[data-listen-toggle]').forEach(button => button.addEventListener('click', () => {
+            const sheet = document.getElementById(button.getAttribute('aria-controls'));
+            const opening = sheet.hidden; sheet.hidden = !opening;
+            button.setAttribute('aria-expanded', String(opening));
+            button.textContent = opening ? '收起聆听注记 −' : '展开聆听注记 ＋';
+            if (opening) turn(sheet);
+          }));
+          $$('.record-button').forEach(record => {
+            record.addEventListener('pointermove', event => {
+              if (window.Paganini?.isReduced()) return;
+              const rect = record.getBoundingClientRect();
+              record.style.setProperty('--record-tilt', ((event.clientX - rect.left) / rect.width * 10 - 5).toFixed(1) + 'deg');
+            }, { passive:true });
+            record.addEventListener('pointerleave', () => record.style.setProperty('--record-tilt', '0deg'));
+          });
+          const now = $('[data-now-playing]');
+          if (now) {
+            const update = () => {
+              const playing = $('.track.playing');
+              now.textContent = playing ? '此刻聆听 · ' + playing.querySelector('h2').textContent : '音乐暂歇 · 选择一张唱片开始聆听';
+              document.body.classList.toggle('work-is-playing', Boolean(playing));
+            };
+            const observer = new MutationObserver(update);
+            $$('.track').forEach(track => observer.observe(track, { attributes:true, attributeFilter:['class'] }));
+            update();
+          }
+          $$('[data-legacy-year]').forEach(button => button.addEventListener('click', () => {
+            $$('[data-legacy-year]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+            $('#heritage-year-title').textContent = button.dataset.legacyYear;
+            $('#heritage-year-text').textContent = button.dataset.legacyText;
+            turn($('#heritage-year-note'));
+          }));
+          const modal = $('#competition-logo-modal');
+          const opener = $('[data-open-logo]');
+          if (modal && opener) {
+            const close = () => {
+              if (typeof modal.close === 'function') modal.close(); else modal.removeAttribute('open');
+              opener.focus();
+            };
+            opener.addEventListener('click', () => {
+              if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
+            });
+            $('[data-close-logo]').addEventListener('click', close);
+            modal.addEventListener('click', event => {
+              const r = modal.getBoundingClientRect();
+              if (event.target === modal && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) close();
+            });
+            document.addEventListener('keydown', event => { if (event.key === 'Escape' && modal.hasAttribute('open')) close(); });
+          }
+          // 大音符以不同速度飘动；没有增加自动播放音效。
+          $$('.note-field .floating-note').forEach((note, index) => {
+            note.style.fontSize = (42 + index % 4 * 12) + 'px';
+            note.style.animationDuration = (25 + index % 5 * 4) + 's';
+            note.style.color = index % 3 === 0 ? '#ac6f69' : '#c6a66d';
+          });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPageEffects, { once:true });
+        else initPageEffects();
+      })();
+
+      /* 公共交互。没有音频会自动播放；所有发声始于用户点击。 */
+      (() => {
+        'use strict';
+        const $ = (s, root = document) => root.querySelector(s);
+        const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+        const saved = (key, fallback = '') => { try { return sessionStorage.getItem('paganini-' + key) ?? fallback; } catch { return fallback; } };
+        const save = (key, value) => { try { sessionStorage.setItem('paganini-' + key, value); } catch { /* file:// 私密窗口可能禁用储存 */ } };
+        let toastTimer;
+        function toast(message) {
+          const box = $('.toast'); if (!box) return;
+          box.textContent = message; box.hidden = false;
+          clearTimeout(toastTimer); toastTimer = setTimeout(() => { box.hidden = true; }, 4200);
+        }
+        let reduced = saved('motion') === 'reduced' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        const motionButton = $('[data-motion-toggle]');
+        function updateMotion() {
+          document.documentElement.classList.toggle('reduce-motion', reduced);
+          if (motionButton) { motionButton.setAttribute('aria-pressed', String(reduced)); motionButton.title = reduced ? '恢复动态效果' : '减少动态效果'; }
+        }
+        updateMotion();
+        motionButton?.addEventListener('click', () => { reduced = !reduced; save('motion', reduced ? 'reduced' : 'full'); updateMotion(); });
+
+        /* 唯一音频总线：音乐、旁白、影片和键盘乐器互相让出声音。 */
+        const media = new Set(); let active = null; let playbackToken = 0; let muted = saved('mute') === '1';
+        const muteButton = $('[data-mute-toggle]');
+        function updateMute() {
+          if (!muteButton) return;
+          muteButton.textContent = muted ? '◌' : '♪';
+          muteButton.title = muted ? '解除静音（不会自动恢复播放）' : '静音并停止声音';
+          muteButton.setAttribute('aria-label', muteButton.title);
+          muteButton.setAttribute('aria-pressed', String(muted));
+        }
+        function stopAll({ keep = null } = {}) {
+          playbackToken++;
+          media.forEach(audio => {
+            if (audio === keep) return;
+            audio.pause(); try { audio.currentTime = 0; } catch { /* 未载入时允许 currentTime 失败 */ }
+          });
+          if (active !== keep) active = null;
+          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+          $$('[data-narrate]').forEach(b => { b.classList.remove('speaking'); b.setAttribute('aria-pressed', 'false'); b.querySelector('.voice-action').textContent = '听我的旁白 ▷'; });
+          $$('iframe[data-film]').forEach(frame => { frame.remove(); });
+          $$('[data-local-video]').forEach(video => { if (video !== keep) video.pause(); });
+          window.dispatchEvent(new CustomEvent('paganini:audio-stop'));
+          refreshTracks();
+        }
+        function register(audio) {
+          media.add(audio); audio.volume = .55;
+          ['pause', 'play', 'ended', 'error'].forEach(e => audio.addEventListener(e, refreshTracks));
+          audio.addEventListener('error', () => toast('这段音频未能载入，请检查文件是否完整。'));
+          return audio;
+        }
+        async function play(audio) {
+          if (muted) { toast('目前已静音。请先点击右上角的声音按钮解除静音。'); return false; }
+          stopAll({ keep: audio }); active = audio;
+          const token = playbackToken;
+          try {
+            await audio.play();
+            if (token !== playbackToken) { if (active !== audio) audio.pause(); return false; }
+            refreshTracks(); return true;
+          } catch (error) {
+            if (token === playbackToken && error.name !== 'AbortError') { active = null; toast('浏览器未能播放音频，请再次点击播放按钮。'); }
+            return false;
+          }
+        }
+        window.Paganini = { toast, audio: { stopAll, play, register, isMuted: () => muted }, isReduced: () => reduced };
+        muteButton?.addEventListener('click', () => { muted = !muted; save('mute', muted ? '1' : '0'); if (muted) stopAll(); updateMute(); });
+        updateMute();
+
+        /* 右上角是旅程说明，不提供跳章入口，保留连续浏览。 */
+        const menu = $('.journey-panel'); const menuButton = $('.journey-toggle');
+        function closeMenu() { if (menu) menu.hidden = true; menuButton?.setAttribute('aria-expanded', 'false'); }
+        menuButton?.addEventListener('click', () => { const opening = menu.hidden; menu.hidden = !opening; menuButton.setAttribute('aria-expanded', String(opening)); });
+        document.addEventListener('click', e => { if (menu && !menu.hidden && !menu.contains(e.target) && !menuButton.contains(e.target)) closeMenu(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+        /* 正常进入 → 展开；退出 → 关闭 → 导航。超时与 bfcache 会恢复状态。 */
+        const transition = $('.transition'); let navigating = false; let transitionTimer;
+        function resetTransition() {
+          navigating = false; clearTimeout(transitionTimer);
+          transition?.classList.remove('closed', 'active'); document.body.removeAttribute('aria-busy');
+        }
+        function enterTransition() {
+          if (!transition) return;
+          transition.dataset.theme = document.body.dataset.enter || 'curtain';
+          updateTransitionBadge(transition.dataset.theme);
+          transition.classList.add('active', 'closed');
+          requestAnimationFrame(() => requestAnimationFrame(() => { transition.classList.remove('closed'); }));
+          transitionTimer = setTimeout(resetTransition, reduced ? 100 : 850);
+        }
+        function navigate(url, theme) {
+          if (navigating) return;
+          navigating = true; clearTimeout(transitionTimer); closeMenu(); stopAll();
+          document.body.setAttribute('aria-busy', 'true');
+          if (transition) { transition.dataset.theme = theme || 'curtain'; updateTransitionBadge(transition.dataset.theme); transition.classList.add('active'); void transition.offsetWidth; transition.classList.add('closed'); }
+          transitionTimer = setTimeout(() => { window.location.assign(url); setTimeout(resetTransition, 1500); }, reduced ? 30 : 640);
+        }
+        function updateTransitionBadge(theme) {
+          const badge = $('.transition-badge'); if (!badge) return;
+          badge.innerHTML = theme === 'reflection' ? '<span class="hero-heart">♥</span>　▤<br><small>心中所想 · 纸上所记</small>' : theme === 'instrument' ? '♬<br><small>下一幕 · 亲手演奏</small>' : theme === 'score' ? '♩　♫<br><small>翻开下一页乐谱</small>' : '𝄞<br><small>下一幕即将开始</small>';
+        }
+        $$('a[data-transition]').forEach(link => link.addEventListener('click', e => {
+          if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === '_blank') return;
+          const url = new URL(link.href, window.location.href);
+          if (url.hash && url.pathname === window.location.pathname) return;
+          e.preventDefault(); navigate(url.href, link.dataset.transition);
+        }));
+        window.addEventListener('pageshow', e => { resetTransition(); if (!e.persisted && document.body.dataset.page !== 'cover') enterTransition(); });
+        window.addEventListener('pagehide', () => { stopAll(); resetTransition(); });
+        window.addEventListener('beforeunload', () => { stopAll(); });
+        document.addEventListener('visibilitychange', () => { if (document.hidden) stopAll(); });
+
+        /* 封页前的翻谱开场：点击后播放原包音乐；无声进入始终可用。 */
+        const intro = $('.opening-overlay'); const openingAudio = $('[data-opening-audio]');
+        if (openingAudio) register(openingAudio);
+        if (intro) {
+          intro.hidden = false; document.body.style.overflow = 'hidden';
+          function dismissIntro(sound) {
+            const start = $('[data-opening-start]'); const silent = $('[data-opening-silent]');
+            start.disabled = true; silent.disabled = true;
+            if (sound && openingAudio) { play(openingAudio); } else { stopAll(); }
+            intro.classList.add('opening-play');
+            setTimeout(() => {
+              intro.classList.add('dismiss');
+              setTimeout(() => { intro.hidden = true; document.body.style.overflow = ''; $('#main').focus({ preventScroll: true }); }, reduced ? 30 : 520);
+            }, reduced ? 40 : 1500);
+          }
+          $('[data-opening-start]').addEventListener('click', () => dismissIntro(true));
+          $('[data-opening-silent]').addEventListener('click', () => dismissIntro(false));
+          document.addEventListener('keydown', e => {
+            if (intro.hidden || e.key !== 'Tab') return;
+            const focusables = $$('button:not(:disabled)', intro);
+            if (!focusables.length) return;
+            if (e.shiftKey && document.activeElement === focusables[0]) { e.preventDefault(); focusables.at(-1).focus(); }
+            else if (!e.shiftKey && document.activeElement === focusables.at(-1)) { e.preventDefault(); focusables[0].focus(); }
+          });
+          $('[data-opening-start]').focus({ preventScroll: true });
+        }
+        $('[data-opening-toggle]')?.addEventListener('click', () => { if (!openingAudio) return; if (openingAudio.paused) play(openingAudio); else openingAudio.pause(); });
+
+        /* 唱片按钮与原生进度条；同一时间只有一首曲子。 */
+        const tracks = $$('[data-track]');
+        function refreshTracks() {
+          tracks.forEach(track => {
+            const audio = track._audio; const playing = audio && !audio.paused && !audio.ended;
+            track.classList.toggle('playing', Boolean(playing));
+            const button = $('.record-button', track); button?.setAttribute('aria-pressed', String(Boolean(playing)));
+            const symbol = $('.play-symbol', track); if (symbol && !track.classList.contains('unavailable')) symbol.textContent = playing ? 'Ⅱ 再点暂停' : '▷ 点击聆听';
+          });
+          const toggle = $('[data-opening-toggle]'); if (toggle && openingAudio) toggle.textContent = openingAudio.paused ? '▷ 开场音乐' : 'Ⅱ 暂停开场音乐';
+        }
+        const formatTime = t => Number.isFinite(t) ? `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}` : '0:00';
+        tracks.forEach(track => {
+          const button = $('.record-button', track);
+          if (!track.dataset.src) { button.disabled = true; return; }
+          const audio = register(new Audio()); audio.preload = 'none'; track._audio = audio;
+          button.addEventListener('click', () => {
+            if (!audio.src) audio.src = track.dataset.src;
+            if (!audio.paused) { audio.pause(); return; }
+            play(audio);
+          });
+          const range = $('.track-progress', track); const time = $('.track-time', track);
+          function updateTime() { time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`; range.value = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.currentTime / audio.duration * 1000 : 0; }
+          ['timeupdate', 'loadedmetadata', 'ended'].forEach(e => audio.addEventListener(e, updateTime));
+          range.addEventListener('input', () => { if (Number.isFinite(audio.duration) && audio.duration > 0) audio.currentTime = Number(range.value) / 1000 * audio.duration; });
+          audio.addEventListener('ended', () => { audio.currentTime = 0; updateTime(); });
+        });
+
+        /* 合成旁白，不模仿也不声称是帕格尼尼的真实声音。 */
+        let speechToken = 0;
+        const voiceProfile = { child: { pitch: 1.3, rate: .95 }, young: { pitch: 1.13, rate: .94 }, adult: { pitch: .9, rate: .9 }, old: { pitch: .72, rate: .78 } };
+        $$('[data-narrate]').forEach(button => button.addEventListener('click', () => {
+          if (!('speechSynthesis' in window)) { toast('这个浏览器没有语音合成功能，你可以阅读画面旁的完整旁白。'); return; }
+          if (button.classList.contains('speaking')) { stopAll(); return; }
+          if (muted) { toast('请先解除右上角的静音，再播放合成旁白。'); return; }
+          const text = document.getElementById(button.dataset.narrate)?.textContent;
+          if (!text) return;
+          stopAll(); const token = ++speechToken;
+          const utterance = new SpeechSynthesisUtterance(text.trim());
+          const voices = window.speechSynthesis.getVoices();
+          const voice = voices.find(v => /^zh/.test(v.lang) && /male|男|yunxi|yunyang|kang/i.test(v.name)) || voices.find(v => /^zh/.test(v.lang));
+          if (voice) utterance.voice = voice;
+          utterance.lang = voice?.lang || 'zh-CN';
+          Object.assign(utterance, voiceProfile[button.dataset.age] || voiceProfile.adult);
+          utterance.volume = .8;
+          button.classList.add('speaking'); button.setAttribute('aria-pressed', 'true'); $('.voice-action', button).textContent = '停止旁白 ■';
+          utterance.onend = () => { if (token !== speechToken) return; button.classList.remove('speaking'); button.setAttribute('aria-pressed', 'false'); $('.voice-action', button).textContent = '听我的旁白 ▷'; };
+          utterance.onerror = e => { utterance.onend(); if (!['canceled', 'interrupted'].includes(e.error)) toast('未能调用语音，请检查电脑是否安装中文语音。文字旁白仍可阅读。'); };
+          window.speechSynthesis.speak(utterance);
+        }));
+
+        /* 全页淡入、阅读进度、背景音符、鼠标拖尾与点击音符。 */
+        if ('IntersectionObserver' in window) {
+          document.documentElement.classList.add('motion-ready');
+          const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }), { threshold: .1 });
+          $$('.reveal').forEach(e => observer.observe(e));
+        }
+        let ticking = false;
+        const progress = $('.read-progress');
+        function readPosition() {
+          const height = document.documentElement.scrollHeight - window.innerHeight;
+          const fraction = height > 0 ? Math.min(1, window.scrollY / height) : 0;
+          if (progress) progress.style.width = fraction * 100 + '%';
+          const lamp = $('.reflection-lamp'); if (lamp) lamp.style.height = fraction * 100 + '%';
+          ticking = false;
+        }
+        window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(readPosition); } }, { passive: true }); readPosition();
+        const field = $('.note-field');
+        if (field) for (let i = 0; i < 12; i++) { const note = document.createElement('span'); note.className = 'floating-note'; note.textContent = ['♪','♫','♩','♬'][i % 4]; note.style.left = (i * 8 + 2) + '%'; note.style.animationDelay = -i * 1.9 + 's'; note.style.animationDuration = 18 + i % 5 * 3 + 's'; field.appendChild(note); }
+        const cursor = $('.cursor-dot'); let lastTrail = 0;
+        function noteAt(x, y, click = false) {
+          if (reduced || $$('.cursor-note').length >= 22) return;
+          const note = document.createElement('span'); note.className = 'cursor-note'; note.textContent = click ? '♫' : '♪'; note.setAttribute('aria-hidden', 'true');
+          note.style.left = x + 'px'; note.style.top = y + 'px'; note.style.fontSize = click ? '26px' : '15px'; document.body.appendChild(note); setTimeout(() => note.remove(), 850);
+        }
+        document.addEventListener('pointermove', e => {
+          if (e.pointerType === 'touch') return;
+          if (cursor && !reduced) { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
+          document.documentElement.style.setProperty('--pointer-x', e.clientX / window.innerWidth * 100 + '%');
+          document.documentElement.style.setProperty('--pointer-y', e.clientY / window.innerHeight * 100 + '%');
+          if (e.timeStamp - lastTrail > 100) { noteAt(e.clientX, e.clientY); lastTrail = e.timeStamp; }
+        }, { passive: true });
+        document.addEventListener('pointerdown', e => noteAt(e.clientX, e.clientY, true), { passive: true });
+
+        /* scene03.03：同一张底图，天色、琴弓、手指及谱页分层改变。 */
+        const practice = $('[data-practice]'); let practiceTimer; let practiceBusy = false; let practices = 0;
+        practice?.addEventListener('click', () => {
+          if (practiceBusy) return; practiceBusy = true;
+          practices = Math.min(8, practices + 1);
+          const frame = $('#practice-frame'); frame.style.setProperty('--night', String(Math.min(.83, practices / 9)));
+          $('#practice-count').textContent = String(practices).padStart(2, '0'); $('#practice-progress').value = practices;
+          $('#practice-caption').textContent = practices < 3 ? '白昼 · 再试一次，我要把这个音拉稳。' : practices < 6 ? '黄昏 · 乐谱翻过一页，时间继续流动。' : '深夜 · 我已练了很久，也需要休息。';
+          const sheet = $('.practice-sheet', frame); sheet.classList.remove('flipping'); void sheet.offsetWidth; sheet.classList.add('flipping');
+          sheet.querySelector('span').textContent = practices % 2 ? '♩ ♫\n♪ ♬' : '♫ ♪\n♬ ♩';
+          const figure = $('.performer-layer', frame); figure.classList.add('practice-playing');
+          practiceTimer = setTimeout(() => { figure.classList.remove('practice-playing'); sheet.classList.remove('flipping'); practiceBusy = false; }, reduced ? 40 : 850);
+          if (practices === 8) { practice.textContent = '练习完成 · 休息片刻'; practice.disabled = true; }
+        });
+        $('[data-practice-reset]')?.addEventListener('click', () => {
+          clearTimeout(practiceTimer); practiceBusy = false; practices = 0; $('#practice-frame').style.setProperty('--night', '0');
+          $('#practice-count').textContent = '00'; $('#practice-progress').value = 0; $('#practice-caption').textContent = '白昼 · 试着拉响第一个音。';
+          $('#practice-frame .performer-layer').classList.remove('practice-playing'); $('#practice-frame .practice-sheet').classList.remove('flipping');
+          practice.disabled = false; practice.textContent = '继续练习 ＋';
+        });
+
+        /* scene05.04 的议论均是情境对白，而非引用原始历史记录。 */
+        $$('[data-whisper]').forEach(button => button.addEventListener('click', () => {
+          const panel = $('#whisper-panel'); $('#whisper-text').textContent = button.dataset.whisper; panel.hidden = false;
+          $$('[data-whisper]').forEach(b => b.setAttribute('aria-expanded', String(b === button)));
+        }));
+        $('[data-whisper-close]')?.addEventListener('click', () => { $('#whisper-panel').hidden = true; $$('[data-whisper]').forEach(b => b.setAttribute('aria-expanded', 'false')); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#whisper-panel')) { $('#whisper-panel').hidden = true; $$('[data-whisper]').forEach(b => b.setAttribute('aria-expanded', 'false')); } });
+
+        /* 巡演地点不切换人物图片，只改变地名、光影和舞台氛围。 */
+        $$('[data-tour-city]').forEach(button => button.addEventListener('click', () => {
+          $$('[data-tour-city]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+          $('#tour-city').textContent = button.dataset.tourCity; $('#tour-year').textContent = button.dataset.tourYear;
+          $('#tour-context').textContent = button.dataset.tourContext;
+          $('#tour-frame').style.setProperty('filter', `sepia(${button.dataset.warmth})`);
+        }));
+        $$('[data-archive-tab]').forEach(button => button.addEventListener('click', () => {
+          const root = button.closest('[data-tabs]');
+          $$('[data-archive-tab]', root).forEach(b => { b.setAttribute('aria-selected', String(b === button)); b.tabIndex = b === button ? 0 : -1; });
+          $$('[role="tabpanel"]', root).forEach(panel => { panel.hidden = panel.id !== button.getAttribute('aria-controls'); });
+        }));
+        $$('[role="tablist"]').forEach(list => list.addEventListener('keydown', e => {
+          if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+          const tabs = $$('[role="tab"]', list); const current = tabs.indexOf(document.activeElement); if (current < 0) return;
+          e.preventDefault(); const index = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : (current + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+          tabs[index].focus(); tabs[index].click();
+        }));
+        $$('[data-reveal-answer]').forEach(button => button.addEventListener('click', () => { document.getElementById(button.dataset.revealAnswer).hidden = false; button.setAttribute('aria-expanded', 'true'); }));
+
+        /* 可替换的短视频：未提供文件时不设 src，因此不会产生假视频或 404。 */
+        $$('[data-local-video]').forEach(video => {
+          const available = video.dataset.available === 'true';
+          const button = document.querySelector(`[data-video-target="${video.id}"]`);
+          if (!available || !button) return;
+          video.src = video.dataset.videoSrc; button.hidden = false;
+          const filmButton = $('[data-film-open]');
+          if (video.id === 'prologue-video' && filmButton) filmButton.hidden = true;
+          button.addEventListener('click', async () => {
+            if (muted && !video.muted) { toast('请先解除静音再播放影片。'); return; }
+            if (!video.paused) { video.pause(); button.textContent = '▷ 播放人物短片'; return; }
+            stopAll(); video.hidden = false;
+            try { await video.play(); button.textContent = 'Ⅱ 暂停人物短片'; } catch { video.hidden = true; toast('本地短片未能播放，已保留静态画面。'); }
+          });
+          video.addEventListener('play', () => {
+            if (muted && !video.muted) { video.pause(); toast('请先解除静音再播放影片。'); return; }
+            stopAll({ keep: video });
+          });
+          video.addEventListener('error', () => { video.hidden = true; button.hidden = true; if (video.id === 'prologue-video' && filmButton) filmButton.hidden = false; });
+          video.addEventListener('pause', () => { button.textContent = '▷ 播放人物短片'; });
+        });
+        $('[data-film-open]')?.addEventListener('click', () => {
+          if (muted) { toast('请先解除静音再打开电影片段。'); return; }
+          stopAll(); const stage = $('#prologue-stage');
+          const frame = document.createElement('iframe'); frame.dataset.film = ''; frame.title = '电影演奏片段（艺术改编，非历史影像）';
+          frame.src = 'https://www.youtube.com/embed/vK47Ygt3jv4?start=4229&end=4269&controls=1&rel=0';
+          frame.allow = 'encrypted-media; picture-in-picture'; frame.allowFullscreen = true; stage.appendChild(frame);
+          toast('电影片段需要联网；请在播放器内点击播放。');
+        });
+      })();
+    </script>
+  
+<script>
+(() => {
+'use strict';
+const routes=[['封页','index.html','𝄞','score'],['人生·文字介绍','life/story.html','▤','manuscript'],['人生·沉浸体验','life/begining.html','♟','stage'],['背后','beihou/extra.html','◈','manuscript'],['音乐作品','music/works.html','♫','score'],['作曲风格','music/style.html','♬','violin'],['后世影响','effects/effects.html','✦','legacy'],['乐器体验','instrument/instrument.html','♩','instrument'],['资料与感想','reflection.sumber.html','✎','reflect']];
+const path = decodeURI(location.pathname), isSub=/(?:\/life\/|\/beihou\/|\/music\/|\/effects\/|\/instrument\/)/.test(path), prefix=isSub?'../':'';
+function ownRoute(href){try{const u=new URL(href,location.href);if(u.origin!==location.origin||u.hash && u.pathname===location.pathname)return null;if(!u.pathname.endsWith('.html'))return null;let p=u.pathname;let row=routes.find(r=>p.endsWith('/'+r[1]));if(!row){if(/\/life\/scene\d+\.html$/.test(p))return ['人生·沉浸体验',p,'♟','stage'];return ['下一章节',p,'♫','score'];}return row;}catch{return null}}
+const shell=document.createElement('div');shell.className='cinema-portal';shell.setAttribute('aria-live','polite');shell.setAttribute('aria-label','页面切换');shell.innerHTML='<div class="portal-blur"></div><div class="portal-sheet"></div><div class="portal-symbol"></div><div class="portal-copy"><span class="portal-small">PAGANINI · CHAPTER TRANSITION</span><div class="portal-title"></div><div class="portal-subtitle">请听见下一段旋律</div></div>';document.body.appendChild(shell);
+function activate(row){shell.dataset.theme=row[3];shell.querySelector('.portal-symbol').textContent=row[2];shell.querySelector('.portal-title').textContent=row[0];shell.classList.add('is-active');}
+let leaving=false;
+document.addEventListener('click',e=>{
+  if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+  const anchor=e.target.closest('a[href]');if(!anchor||anchor.target==='_blank'||anchor.hasAttribute('download'))return;
+  if(anchor.classList.contains('locked-link')||anchor.getAttribute('aria-disabled')==='true'){e.preventDefault();e.stopImmediatePropagation();return;}
+  const row=ownRoute(anchor.getAttribute('href'));
+  if(!row||leaving)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  e.preventDefault();e.stopImmediatePropagation();leaving=true;activate(row);
+  try{sessionStorage.setItem('pgn_transition',JSON.stringify({title:row[0],sym:row[2],theme:row[3]}))}catch{}
+  setTimeout(()=>{location.href=anchor.href;},700);
+},true);
+try{const pending=sessionStorage.getItem('pgn_transition');if(pending&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.removeItem('pgn_transition');const obj=JSON.parse(pending);activate([obj.title,'',obj.sym,obj.theme]);setTimeout(()=>shell.classList.remove('is-active'),550)}}catch{}
+const bar=document.createElement('div');bar.className='cinema-progress';document.body.appendChild(bar);
+let scrollPending=false;
+window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{let h=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);bar.style.width=Math.min(100,scrollY/h*100)+'%';scrollPending=false;});},{passive:true});
+const watch=document.querySelectorAll('.period,.feature,.track,.portal-card,.cta-inner,.story-interlude,.style-break');
+if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');obs.unobserve(entry.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});watch.forEach(el=>{el.classList.add('scroll-reveal-extra');obs.observe(el)})}
+})();
+</script>
+<script src="../assets/js/floating-directory.js"></script>
+</body>
+</html>

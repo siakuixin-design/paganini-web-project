@@ -1,0 +1,95 @@
+{
+  "pages": 13,
+  "local_references_checked": 140,
+  "flow": [
+    "index.html",
+    "life/begining.html",
+    "life/scene02.html",
+    "life/scene03.html",
+    "life/scene04.html",
+    "life/scene05.html",
+    "life/scene06.html",
+    "life/scene07.html",
+    "beihou/extra.html",
+    "music/works.html",
+    "effects/effects.html",
+    "instrument/instrument.html",
+    "reflection.sumber.html"
+  ],
+  "audio_files": [
+    {
+      "file": "assets/audio/works/i-palpiti.mp3",
+      "seconds": 601.872,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/caprices-excerpt.mp3",
+      "seconds": 290.011,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/andantino.mp3",
+      "seconds": 121.287,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/waltz.mp3",
+      "seconds": 72.176,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/la-campanella.mp3",
+      "seconds": 417.071,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/nel-cor.mp3",
+      "seconds": 437.448,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/sonata-01.mp3",
+      "seconds": 180.01,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/works/ghiribizzi-01.mp3",
+      "seconds": 22.439,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/samples/mandolin/C4.wav",
+      "seconds": 0.222,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/samples/mandolin/C5.wav",
+      "seconds": 0.53,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/samples/guitar/C4.mp3",
+      "seconds": 3.495,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/samples/violin/A4.mp3",
+      "seconds": 14.163,
+      "decode_ok": true
+    },
+    {
+      "file": "assets/audio/samples/violin/C4.mp3",
+      "seconds": 13.276,
+      "decode_ok": true
+    }
+  ],
+  "reflection_content": "逐段原样保留",
+  "optional_unprovided": [
+    "../assets/audio/works/caprice-13.mp3",
+    "../assets/video/european-performance.mp4",
+    "../assets/video/practice-bowing.mp4",
+    "../assets/video/prologue-performance.mp4"
+  ],
+  "errors": [],
+  "verification_limit": "静态路径、语法、音频解码与 DOM/引擎状态检查不等于实际浏览器视觉或听觉验收。当前缺少受支持的浏览器控制能力。"
+}

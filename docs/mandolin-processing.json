@@ -1,0 +1,20 @@
+{
+  "C4": {
+    "segment": [
+      0.98,
+      1.2
+    ],
+    "original_frequency": 263.99,
+    "target_frequency": 261.63,
+    "duration": 0.222
+  },
+  "C5": {
+    "segment": [
+      4.12,
+      4.64
+    ],
+    "original_frequency": 533.44,
+    "target_frequency": 523.25,
+    "duration": 0.53
+  }
+}
