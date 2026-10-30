@@ -65,7 +65,7 @@
   if(d[5]==='ending'){section.querySelector('.pg-3d-cinema-title').hidden=false;section.classList.add('pg-3d-ending');}
  }
  section.querySelector('.pg-3d-continue').addEventListener('click',()=>select((index+1)%def.length));skip.addEventListener('click',()=>{host?.skip();narrative.textContent='镜头已就位。点击物品或下方按钮开始探索。';});
- function fallback(reason){if(dead)return;loading.textContent='三维显示暂不可用。你仍可用下方物品按钮探索，并阅读原有图文。';viewport.classList.add('pg-3d-fallback');skip.hidden=true;section.dataset.renderState='fallback';section.dataset.fallbackReason=reason;}
+ function fallback(reason){if(dead)return;loading.textContent=location.protocol==='file:'?'当前使用直接双击文件的方式打开。请回到网站根目录双击 START-WEBSITE.bat，通过浏览器中的本地服务器地址进入三维场景。下方按钮和原图文仍可使用。':'三维显示暂不可用。请检查浏览器 WebGL 与硬件加速设置，或换用新版 Chrome/Edge。下方物品按钮与原有图文仍可使用。';viewport.classList.add('pg-3d-fallback');skip.hidden=true;section.dataset.renderState='fallback';section.dataset.fallbackReason=reason;}
  viewport.addEventListener('paganini:webgl-lost',()=>fallback('context-lost'));
  async function load(){if(loaded||dead)return;loaded=true;try{
   module=await import(new URL('./three-scenes-shared.js',source));if(dead)return;const {THREE,SceneHost,addRoom,box,sphere,material,createInstrument}=module;
@@ -97,6 +97,11 @@
    let dayProgress=0;host.callbacks.push((t,dt)=>{if(model)module.animateInstrument(model,t,dt);if(room&&passed&&cfg.kind==='practice'){dayProgress=Math.min(1,dayProgress+dt*.15);room.key.intensity=3-dayProgress*2.3;room.ambient.intensity=2-dayProgress*1.1;room.key.color.lerp(new THREE.Color(0x6e81aa),dt*.25);}if(room&&passed&&cfg.kind==='concert'){room.key.intensity+=(6-room.key.intensity)*Math.min(1,dt*.7);room.ambient.intensity+=(3-room.ambient.intensity)*Math.min(1,dt*.7);}if(room&&!module.reduced())room.candle.intensity=13+Math.sin(t*4)*.5;});
   }
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();host.renderer.domElement.addEventListener('click',e=>{const r=host.renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);raycaster.setFromCamera(pointer,host.camera);const hits=raycaster.intersectObjects(hotspots,true);if(!hits.length)return;let object=hits[0].object;while(object&&object.userData.hotspot===undefined)object=object.parent;if(object?.userData.hotspot>=0)select(object.userData.hotspot);});
+  const home=cfg.kind==='tour'?{position:[0,8,7],target:[0,1,-1]}:cfg.kind==='birth'?{position:[0,2.4,5.5],target:[0,.9,-.4]}:cfg.kind==='concert'?{position:[0,3.1,7],target:[0,1.5,-1]}:cfg.kind==='late'||cfg.kind==='ending'?{position:[0,2.6,6.5],target:[0,1,-1]}:{position:[0,2.5,5.8],target:[-1.2,1.3,-1.4]};
+  const obstacles=cfg.kind==='tour'?[]:[{minX:-3.3,maxX:-.3,minZ:-2.5,maxZ:-.9},{minX:2,maxX:3.2,minZ:.55,maxZ:1.7},{minX:.45,maxX:1.55,minZ:-1.3,maxZ:-.7},{minX:-3.6,maxX:-1.8,minZ:-4,maxZ:-3.1}];
+  if(cfg.kind==='birth')obstacles.push({minX:-.85,maxX:.85,minZ:-.95,maxZ:.15});
+  if(cfg.kind==='concert')for(let row=0;row<4;row++)obstacles.push({minX:-2.9,maxX:2.9,minZ:1.82+row*.7,maxZ:2.18+row*.7});
+  host.enableExploration({home,obstacles,bounds:cfg.kind==='tour'?{minX:-6,maxX:6,minY:3,maxY:12,minZ:-5,maxZ:8}:undefined});
   loading.hidden=true;section.dataset.renderState='ready';viewport.dataset.webgl='true';
  }catch(error){host?.destroy();fallback(error?.message||'renderer-unavailable');}}
  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();load();}},{rootMargin:'180px'});observer.observe(section);

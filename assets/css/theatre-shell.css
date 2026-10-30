@@ -28,3 +28,5 @@
  .practice-caption{min-width:0;flex-basis:100%;order:1}
  .practice-controls .btn{flex:1;white-space:normal}
 }
+
+.pg-local-launch-notice{max-width:1040px;margin:110px auto 24px;padding:22px 26px;border:1px solid #c6a66d;background:#261c11;color:#ead8b6;font:14px/1.9 sans-serif}.pg-local-launch-notice strong{color:#f2d398;font-size:17px}.pg-local-launch-notice p{margin:10px 0}.pg-local-launch-notice code{white-space:normal;overflow-wrap:anywhere}@media(max-width:650px){.pg-local-launch-notice{margin:95px 18px 20px;padding:18px}}

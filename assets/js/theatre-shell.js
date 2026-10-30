@@ -99,6 +99,11 @@
       if(e.target.closest?.('[data-mute-toggle]')){e.stopImmediatePropagation();silent=!silent;set('paganini-mute',silent?'1':'0');document.querySelectorAll('audio,video').forEach(media=>{media.muted=silent;if(silent)media.pause()});if(silent){window.speechSynthesis?.cancel();window.dispatchEvent(new CustomEvent('paganini:audio-stop'));}refresh();}
     },true);
   }
+  if(location.protocol==='file:'){
+    const notice=document.createElement('aside');notice.className='pg-local-launch-notice';notice.setAttribute('role','status');
+    notice.innerHTML='<strong>请通过本地服务器打开网站，才能使用三维场景与音乐挑战。</strong><p>Windows：关闭本页，回到解压后的项目根目录，双击 <b>START-WEBSITE.bat</b>；浏览器会自动打开正确地址。保留启动窗口。</p><p>其他系统：在项目目录执行 <code>python3 tools/serve.py --port 8000 --open</code>。需要 Python 3。直接双击 HTML 会被浏览器限制，无法载入三维模块和谱面。</p>';
+    const main=$('main');if(main)main.before(notice);else document.body.prepend(notice);
+  }
   // First-visit opening: explicit user choice, no audible autoplay.
   async function opening() {
     if(!document.body.matches('[data-page="cover"]')||get('pg-intro-v3')==='seen')return;

@@ -7,6 +7,8 @@ No third-party dependencies. Uses SimpleHTTPRequestHandler's URL/path handling.
 import argparse
 import os
 import re
+import threading
+import webbrowser
 from http import HTTPStatus
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -92,12 +94,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8000)
     parser.add_argument('--bind', default='127.0.0.1')
+    parser.add_argument('--open', action='store_true', help='Open the site in the default browser after starting')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     def handler(*handler_args, **kwargs):
         return RangeRequestHandler(*handler_args, directory=str(root), **kwargs)
     with ThreadingHTTPServer((args.bind, args.port), handler) as server:
         print(f'Serving {root.name} on {args.bind}:{server.server_port} with HTTP byte ranges', flush=True)
+        browser_host = '127.0.0.1' if args.bind in ('0.0.0.0', '127.0.0.1') else args.bind
+        url = f'http://{browser_host}:{server.server_port}/index.html'
+        print(f'Open: {url}\nKeep this window open while using the website. Press Ctrl+C to stop.', flush=True)
+        if args.open:
+            opener = threading.Timer(.3, webbrowser.open, args=(url,))
+            opener.daemon = True
+            opener.start()
         try:
             server.serve_forever()
         except KeyboardInterrupt:

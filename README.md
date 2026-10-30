@@ -6,7 +6,9 @@ Paganini Interactive Music Website — **PAGANINI · THE DEVIL'S VIOLINIST**
 
 ## 本地运行
 
-需要 Python 3（网站运行无需 npm、数据库、API 密钥或打包工具）。在项目根目录执行：
+**Windows 推荐：完整解压后，在项目根目录双击 `START-WEBSITE.bat`。它会使用已安装的 Python 3 启动本地服务器，并自动打开浏览器；使用网站时保留命令窗口。请不要直接双击 `index.html`，那样浏览器会阻止三维模块和谱面载入。** 启动器自动选择空闲端口，地址以自动打开的浏览器为准。
+
+需要 Python 3（网站运行无需 npm、数据库、API 密钥或打包工具；启动器不会自动安装软件）。也可在项目根目录手动执行：
 
 ```sh
 python3 tools/serve.py --port 8000
@@ -18,7 +20,7 @@ python3 tools/serve.py --port 8000
 
 ## 操作与内容
 
-- **人生体验**：点击三维场景物品或下方同名按钮，镜头移动并显示叙述；可以跳过镜头。练习室点击小提琴后进入音乐挑战，通过后返回房间，继续下方完整剧情。
+- **人生体验**：点击三维场景物品或下方同名按钮，镜头移动并显示叙述；可以跳过镜头。点击「自由探索」后可拖动画面环顾，画面获得焦点时使用 W/A/S/D 或方向键移动，滚轮靠近／远离；触屏也可使用方向按钮。点击「返回剧情视角」或 Esc 复位。Tab 离开画面后不接管移动按键。练习室点击小提琴后进入音乐挑战，通过后返回房间，继续下方完整剧情。
 - **音乐挑战**：默认 Medium，按 J/K/L 或屏幕琴弦。PERFECT/GREAT/GOOD/MISS = 100/80/50/0 分；通关线自动计算为本谱音符数 × 100 × 80%。完整播放结束后结算。暂停/继续共用音频时钟；未通关可重试。人生练习及少年舞台通过后才解锁下一阶段。浏览器本地储存记录新版通关状态。
 - **乐器**：曼陀林、小提琴、吉他保留自由演奏；点击「启用演奏」，使用屏幕琴键或对应电脑键盘；松键收音，Esc 停止。三维琴弦与实际发声反馈联动。吉他挑战的 J/K/L 分别用真实 C4 采样移调为 E3/A3/D4，不使用保音高的媒体 playbackRate。小提琴／吉他挑战分别放在对应选项；切换会停止上一个挑战。可上传以 C4、A4 等音名命名的个人采样。
 - **音乐作品**：保留 12 首可播放录音，包括 Cantabile、第一协奏曲终乐章、Moses Fantasy、Le streghe。每首的唱片、拖动进度、介绍和聆听注记都保留。播放后显示真实录音波形／频谱；一次只播放一首。
@@ -73,6 +75,7 @@ python3 tests/header-controls-browser.py
 python3 tests/server-range-test.py
 python3 tests/mobile-browser.py
 python3 tests/rhythm-loading-browser.py
+python3 tests/exploration-browser.py
 ```
 
 测试记录见 [实际升级验证](docs/UPGRADE-VALIDATION.md)。`docs/VERIFICATION.md`、`static-check.json`、`dom-check.json` 是原作品的历史记录，不等于本次测试结果。自动化不能代替扬声器／耳机试听、手动谱面对拍、历史资料复核及学校展示电脑的性能测试。

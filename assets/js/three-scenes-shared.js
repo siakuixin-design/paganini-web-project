@@ -1,4 +1,5 @@
 import * as THREE from '../vendor/three.module.min.js';
+import {SceneControls} from './scene-controls.js';
 export {THREE};
 export const reduced = () => document.documentElement.classList.contains('reduce-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 export function material(color, roughness=.68, metalness=0) { return new THREE.MeshStandardMaterial({color,roughness,metalness}); }
@@ -59,8 +60,9 @@ export class SceneHost {
   this.pagehide=()=>this.destroy();window.addEventListener('pagehide',this.pagehide,{once:true});this.start();
  }
  resize(){const r=this.viewport.getBoundingClientRect();this.renderer.setSize(Math.max(r.width,1),Math.max(r.height,1),false);this.camera.aspect=Math.max(r.width,1)/Math.max(r.height,1);this.camera.updateProjectionMatrix();}
- move(position,target,duration=2.4){this.motion={from:this.camera.position.clone(),to:new THREE.Vector3(...position),lookFrom:this.look.clone(),lookTo:new THREE.Vector3(...target),time:0,duration:reduced()?0:duration};this.start();}
+ enableExploration(options={}){this.controls?.destroy();this.controls=new SceneControls(this,options);return this.controls;}
+ move(position,target,duration=2.4){this.controls?.suspend();this.motion={from:this.camera.position.clone(),to:new THREE.Vector3(...position),lookFrom:this.look.clone(),lookTo:new THREE.Vector3(...target),time:0,duration:reduced()?0:duration};this.start();}
  skip(){if(this.motion){this.camera.position.copy(this.motion.to);this.look.copy(this.motion.lookTo);this.camera.lookAt(this.look);this.motion=null;}this.renderer.render(this.scene,this.camera);}
  start(){if(!this.alive||this.frame||!this.visible||document.hidden)return;this.last=performance.now();const frame=now=>{this.frame=0;if(!this.alive||!this.visible||document.hidden)return;const dt=Math.min((now-this.last)/1000,.05);this.last=now;this.elapsed+=dt;if(this.motion){const m=this.motion;m.time+=dt;const p=m.duration?Math.min(1,m.time/m.duration):1,t=p*p*(3-2*p);this.camera.position.lerpVectors(m.from,m.to,t);this.look.lerpVectors(m.lookFrom,m.lookTo,t);if(p===1)this.motion=null;}this.camera.lookAt(this.look);this.callbacks.forEach(f=>f(this.elapsed,dt));this.renderer.render(this.scene,this.camera);this.frame=requestAnimationFrame(frame);};this.frame=requestAnimationFrame(frame);}
- destroy(){if(!this.alive)return;this.alive=false;cancelAnimationFrame(this.frame);this.frame=0;this.resizeObserver.disconnect();this.intersection.disconnect();this.motionObserver.disconnect();document.removeEventListener('visibilitychange',this.visibility);window.removeEventListener('pagehide',this.pagehide);this.renderer.domElement.removeEventListener('webglcontextlost',this.contextLost);disposeObject(this.scene);this.renderer.dispose();this.renderer.domElement.remove();}
+ destroy(){if(!this.alive)return;this.controls?.destroy();this.controls=null;this.alive=false;cancelAnimationFrame(this.frame);this.frame=0;this.resizeObserver.disconnect();this.intersection.disconnect();this.motionObserver.disconnect();document.removeEventListener('visibilitychange',this.visibility);window.removeEventListener('pagehide',this.pagehide);this.renderer.domElement.removeEventListener('webglcontextlost',this.contextLost);disposeObject(this.scene);this.renderer.dispose();this.renderer.domElement.remove();}
 }

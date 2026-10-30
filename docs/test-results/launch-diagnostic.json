@@ -1,0 +1,11 @@
+{
+  "automatic_free_port_http": true,
+  "files_served": [
+    "index.html",
+    "assets/js/three-scenes-shared.js",
+    "assets/vendor/three.module.min.js"
+  ],
+  "direct_file_browser_test": "unrun: Chromium managed policy returns ERR_BLOCKED_BY_ADMINISTRATOR for file URLs",
+  "windows_batch_execution": "unrun: no Windows executor",
+  "browser_auto_open": "not exercised in container"
+}

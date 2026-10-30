@@ -1,0 +1,19 @@
+{
+  "focused_w_moves_camera": true,
+  "drag_changes_look_without_hotspot_click": true,
+  "unfocused_keys_do_not_move_camera": true,
+  "table_collision_position": [
+    -0.7531,
+    2.5,
+    -0.6402
+  ],
+  "room_bounds_position": [
+    -0.0959,
+    2.5,
+    3.508
+  ],
+  "accessible_direction_button_moves": true,
+  "reset_restores_story_camera": true,
+  "hotspot_still_opens_game": true,
+  "errors": []
+}
